@@ -20,12 +20,12 @@ configuration {
 /*****----- Global Properties -----*****/
 * {
     font:                        "CaskaydiaCove Nerd Font 10";
-    background:                  #1e1e2e;
-    background-alt:              #45475a;
-    foreground:                  #cdd6f4;
-    selected:                    #b4befe;
-    active:                      #b4befe;
-    urgent:                      #585b70;
+    background:                  #1E2326;
+    background-alt:              #2E383C;
+    foreground:                  #D3C6AA;
+    selected:                    #A7C080;
+    active:                      #A7C080;
+    urgent:                      #374145;
 }
 
 /*****----- Main Window -----*****/
@@ -58,7 +58,7 @@ mainbox {
 imagebox {
     padding:                     20px;
     background-color:            transparent;
-    background-image:            url("~/.config/rofi/ArchMochaLavenderSmall.png", height);
+    background-image:            url("~/.config/rofi/Garden.png", height);
     orientation:                 vertical;
     children:                    [ "inputbar", "dummy", "mode-switcher" ];
 }
