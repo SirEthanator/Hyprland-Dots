@@ -58,7 +58,7 @@
     "custom/suspend": {
       "format": "  ",
       "tooltip": false,
-      "on-click": "swaylock & sleep 1; systemctl suspend"
+      "on-click": "hyprlock & sleep 1; systemctl suspend"
     },
 
     "custom/divider": {
@@ -96,7 +96,7 @@
       "tooltip": false,
       "all-outputs": true,
       "format-icons": {
-        "active": "",
+        "active": "",
         "default": "<span color='#3C4841'></span>"
       }
     },
