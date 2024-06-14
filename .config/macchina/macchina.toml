@@ -1,0 +1,46 @@
+# Set theme
+theme = "Everforest"
+
+# Specifies the network interface to use for the LocalIP readout
+interface = "wlan0"
+
+# Lengthen uptime output
+long_uptime = true
+
+# Lengthen shell output
+long_shell = false
+
+# Lengthen kernel output
+long_kernel = false
+
+# Toggle between displaying the current shell or your user's default one.
+current_shell = true
+
+# Toggle between displaying the number of physical or logical cores of your
+# processor.
+physical_cores = true
+
+# Displays only the specified readouts.
+# Accepted values (case-sensitive):
+#   - Host
+#   - Machine
+#   - Kernel
+#   - Distribution
+#   - OperatingSystem
+#   - DesktopEnvironment
+#   - WindowManager
+#   - Resolution
+#   - Backlight
+#   - Packages
+#   - LocalIP
+#   - Terminal
+#   - Shell
+#   - Uptime
+#   - Processor
+#   - ProcessorLoad
+#   - Memory
+#   - Battery
+#   - GPU
+#   - DiskSpace
+# Example:
+#   show = ["Battery", "Memory", ...]

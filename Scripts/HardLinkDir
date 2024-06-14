@@ -1,0 +1,32 @@
+#!/bin/sh
+
+if [ ! -d "$1" ]; then
+    echo "Invalid directory: $1"
+    exit 1
+fi
+
+if [ -e "$2" ] && [ ! -d "$2" ]; then
+    echo "Invalid Directory: $2"
+    exit 1
+fi
+
+if [ "$#" -ne 2 ]; then
+    echo "Invalid number of arguments."
+    exit 1
+fi
+
+echo "Linking contents of: $1 to: $2"
+read -p 'Continue? (y/n) ' confirmation
+
+
+if [ $confirmation == "y" ] || [ $confirmation == "Y" ]; then
+    rsync -a --link-dest="$(readlink -f "$1")" -- "$1/" "$2"
+    exit 0
+elif [ $confirmation == "n" ] || [ $confirmation == "N" ]; then
+    echo 'Exiting...'
+    exit 130
+else
+    echo 'Invalid option'
+    exit 1
+fi
+

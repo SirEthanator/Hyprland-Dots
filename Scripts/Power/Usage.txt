@@ -1,0 +1,7 @@
+/path/to/Power <OPTION>
+
+Options:
+-s, --shutdown
+-r, --reboot
+-l, --logout
+-f, --firmware

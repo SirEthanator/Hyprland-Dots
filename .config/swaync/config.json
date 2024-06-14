@@ -1,0 +1,16 @@
+{
+    "scripts": {
+        "soundsLow": {
+            "exec": "play /usr/share/sounds/ocean/stereo/desktop-login.oga",
+            "urgency": "Low"
+        },
+        "soundsNorm": {
+            "exec": "play /usr/share/sounds/ocean/stereo/desktop-login.oga",
+            "urgency": "Normal"
+        },
+        "soundsCrit": {
+            "exec": "play /usr/share/sounds/ocean/stereo/dialog-question.oga",
+            "urgency": "Critical"
+        }
+    }
+}

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+randNum=$(echo $(( $RANDOM % 8 )))
+
+if [ $randNum -eq 0 ]; then
+    text="\" Everforest! \""
+elif [ $randNum -eq 1 ]; then
+    text="\" Hyprland on top \""
+elif [ $randNum -eq 2 ]; then
+    text="\" Hyprland.exe \""
+elif [ $randNum -eq 3 ]; then
+    text="\" Everforest is the best! \""
+elif [ $randNum -eq 4 ]; then
+    text="\" Everforest forever! \""
+elif [ $randNum -eq 5 ]; then
+    text="\" Hello World! \""
+elif [ $randNum -eq 6 ]; then
+    text="\" WHY IS THERE CODE??? MAKE A FUCKING .EXE FILE AND GIVE IT TO ME. \""
+elif [ $randNum -eq 7 ]; then
+    text="\" tf is grass \""
+else
+    text="\" Something's wrong with your script \""
+fi
+
+if [ ! -e $HOME/.config/macchina/themes/Everforest-No-Title.toml ]; then
+
+    echo "Config for macchina not found. Quitting..."
+    exit 1
+
+else
+    if [ ! -e $HOME/.config/macchina/themes/Everforest.toml ]; then
+        touch $HOME/.config/macchina/themes/Everforest.toml
+    fi
+
+    rm $HOME/.config/macchina/themes/Everforest.toml
+
+    cp $HOME/.config/macchina/themes/Everforest-No-Title.toml $HOME/.config/macchina/themes/Everforest.toml
+
+    sed "s/title =/& $text/" $HOME/.config/macchina/themes/Everforest.toml -i
+
+fi
+
+# The second to last entry a reference to this reddit post that I found amusing:
+# https://www.reddit.com/r/github/comments/1at9br4/i_am_new_to_github_and_i_have_lots_to_say/

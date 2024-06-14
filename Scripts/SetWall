@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+	echo "Invalid number of arguments."
+	exit 1
+fi
+
+if [ ! -f "$1" ]; then
+    echo "File does not exsist at: $1"
+    exit 1
+fi
+
+if [ -f $HOME/.config/hypr/hyprpaper.conf ]; then
+	rm $HOME/.config/hypr/hyprpaper.conf
+fi
+
+echo "preload = $1" >> $HOME/.config/hypr/hyprpaper.conf
+echo "wallpaper = DP-3,$1" >> $HOME/.config/hypr/hyprpaper.conf
+echo "splash = false" >> $HOME/.config/hypr/hyprpaper.conf
+
+killall hyprpaper
+
+nohup hyprpaper -c $HOME/.config/hypr/hyprpaper.conf > /dev/null &!

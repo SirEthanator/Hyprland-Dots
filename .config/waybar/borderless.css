@@ -1,0 +1,99 @@
+* {
+  font-family: 'Cascadia Code', 'Symbols Nerd Font Mono';
+  font-size: 16px;
+  font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+  min-height: 30px;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+window#waybar.empty #window {
+  background-color: transparent;
+  transition: none;
+}
+
+#custom-apps, #workspaces, #custom-notifications {
+  border-radius: 6px;
+  background-color: #11111b;
+  
+  color: #b4befe;
+  margin-top: 6px;
+  margin-right: 15px;
+  padding-top: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#custom-apps, #custom-notifications {
+  font-size: 20px;
+  margin-left: 15px;
+  color: #b4befe;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+#custom-notifications {
+  margin-left: 0px;
+  margin-right: 5px;
+}
+
+#custom-apps {
+  margin-left: 5px;
+}
+
+#workspaces button {
+  background: #11111b;
+  color: #b4befe;
+}
+
+#workspaces button:hover {
+  box-shadow: inherit;
+  text-shadow: inherit;
+}
+
+#clock, #pulseaudio, #window, #tray {
+  border-radius: 6px;
+  background-color: #11111b;
+  color: #cdd6f4;
+  
+  margin-top: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 15px;
+}
+
+#custom-power-left-end {
+  background-color: #11111b;
+  border-radius: 6px 0 0 6px;
+  margin-top: 6px;
+}
+
+#custom-shutdown, #custom-logout, #custom-reboot, #custom-firmware {
+  background-color: #11111b;
+  color: #b4befe;
+  
+  margin-top: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#custom-divider {
+  background-color: #11111b;
+  color: #b4befe;
+  margin-top: 6px;
+}
+
+#custom-firmware {
+  border-radius: 0;
+}
+
+#custom-shutdown {
+  border-radius: 0 6px 6px 0;
+  margin-right: 15px;
+}
+
+#window {
+  transition: linear 0.3s;
+}

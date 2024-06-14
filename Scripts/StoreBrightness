@@ -1,0 +1,9 @@
+#!/bin/sh
+
+ogoutput=$(ddcutil getvcp 10)
+
+tmp=${ogoutput#*=}
+
+output=${tmp%,*}
+
+echo $output > /tmp/brightness

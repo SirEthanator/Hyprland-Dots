@@ -1,0 +1,56 @@
+# Everforest
+
+spacing = 2
+
+padding = 1
+
+hide_ascii = true
+
+separator = ""
+
+key_color = "#A7C080"
+
+separator_color = "#7A8478"
+
+
+[custom_ascii]
+
+path = "~/.config/macchina/ascii"
+
+color = "#A7C080"
+
+
+[palette]
+
+visible = true
+
+type = "Full"
+
+glyph = "  "
+
+
+[bar]
+
+visible = false
+
+glyph = ""
+
+symbol_open = '('
+
+symbol_close = ')'
+
+
+[box]
+
+visible = true
+
+title =
+
+border = "plain"
+
+
+[box.inner_margin]
+
+x = 1
+
+y = 1

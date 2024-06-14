@@ -1,0 +1,55 @@
+#!/usr/bin/python3
+
+print()
+print("==== Ansi escape sequences ====")
+print()
+
+class ansiCodes:
+  Red = '\033[31m'
+  Yellow = '\033[93m'
+  Green = '\033[32m'
+  Blue = '\033[34m'
+  Bold = '\033[1m'
+  Reset = '\033[0m'
+
+print(ansiCodes.Red + 'ERROR: Everything is ok')
+print(ansiCodes.Yellow + 'WARNING: Nothing went wrong')
+print(ansiCodes.Blue + "BLUE: I'm blue")
+print(ansiCodes.Green + 'All is good' + ansiCodes.Reset)
+print()
+print()
+
+for i in range(30, 37 + 1):
+  print("\033[%dm%d\t\t\033[%dm%d" % (i, i, i + 60, i + 60))
+print('\033[0m') # Reset color and line break
+
+print(f"{ansiCodes.Bold}Usage for colors:")
+print(f"\\033[<NUMBER>m{ansiCodes.Reset}")
+
+print()
+
+print("╭───────────────────────────────────╮")
+print("│  \\033[0m                          │ Reset")
+print("│  \\033[2K                          │ Clear Line")
+print("│  \\033[<L>;<C>H or \\033[<L>;<C>f   │ Put the cursor at line L and column C.")
+print("│  \\033[<N>A                        │ Move the cursor up N lines")
+print("│  \\033[<N>B                        │ Move the cursor down N lines")
+print("│  \\033[<N>C                        │ Move the cursor forward N columns")
+print("│  \\033[<N>D                        │ Move the cursor backward N columns")
+print("│                                   │")
+print("│  \\033[2J                          │ Clear the screen, move to (0,0)")
+print("│  \\033[K                           │ Erase to end of line")
+print("│  \\033[s                           │ Save cursor position")
+print("│  \\033[u                           │ Restore cursor position")
+print("│                                   │")
+print("│  \\033[4m                          │ Underline on")
+print("│  \\033[24m                         │ Underline off")
+print("│                                   │")
+print("│  \\033[1m                          │ Bold on")
+print("│  \\033[21m                         │ Bold off")
+print("╰───────────────────────────────────╯")
+
+print()
+print('\033[4m' + "Underlined I am." + ansiCodes.Reset)
+print('\033[1m' + "I'm bold!" + ansiCodes.Reset)
+print()

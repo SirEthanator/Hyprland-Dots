@@ -1,0 +1,48 @@
+#!/bin/bash
+
+if [ "$#" -ge 2 ]; then
+	exit 128
+elif [ "$#" -le 0 ]; then
+	exit 128
+fi
+
+
+common () {
+    sleep 5
+    killall yad
+    killall waybar
+    hyprctl dispatch workspace 15
+    sleep 1
+}
+
+shutdown () {
+    common
+    exec systemctl poweroff
+}
+
+reboot () {
+    common
+    exec systemctl reboot
+}
+
+logoutFunc () {
+    common
+    exec hyprctl dispatch exit
+}
+
+firmware () {
+    common
+    exec systemctl reboot --firmware-setup
+}
+
+if [ $1 == '-s' ] || [ $1 == '--shutdown' ]; then
+    shutdown
+elif [ $1 == '-r' ] || [ $1 == '--reboot' ]; then
+    reboot
+elif [ $1 == '-l' ] || [ $1 == '--logout' ]; then
+    logoutFunc
+elif [ $1 == '-f' ] || [ $1 == '--firmware' ]; then
+    firmware
+else
+    exit 128
+fi

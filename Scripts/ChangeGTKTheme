@@ -1,0 +1,34 @@
+#!/bin/bash
+
+## Set GTK Themes, Icons, Cursor and Fonts
+
+SCHEMA='gsettings set org.gnome.desktop.interface'
+
+if [ "$#" -ne 2 ]; then
+	echo "Invalid number of arguments. Please set one at a time."
+	exit 1
+fi
+
+while getopts ":t:i:f:c:" opt; do
+	case $opt in
+	t)
+	THEME="$OPTARG"
+	${SCHEMA} gtk-theme "$THEME"
+	echo "Set theme to $THEME";;
+	i)
+	ICONS="$OPTARG"
+	${SCHEMA} icon-theme "$ICONS"
+	echo "Set icon theme to $ICONS";;
+	f)
+	FONT="$OPTARG"
+	${SCHEMA} font-name "$font"
+	echo "Set font to $Font";;
+	c)
+	CURSOR="$OPTARG"
+	${SCHEMA} cursor-theme "$CURSOR"
+	echo "Set cursor to $CURSOR";;
+	esac
+done
+
+exit 0
+
