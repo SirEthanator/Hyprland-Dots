@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" enable-background="new" version="1.1">
- <title>Gnome Symbolic Icons</title>
-
- <g class="layer">
-  <title>Layer 1</title>
-  <path d="m8.06,0.84c-0.21,-0.03 -0.43,0.08 -0.52,0.28l-2.04,4.15l-4.57,0.68c-0.41,0.06 -0.57,0.56 -0.28,0.85l3.32,3.22l-0.77,4.56c-0.07,0.41 0.36,0.72 0.73,0.53l4.09,-2.17l4.09,2.14c0.37,0.2 0.8,-0.12 0.73,-0.52l-0.79,-4.56l3.3,-3.24c0.3,-0.29 0.13,-0.79 -0.28,-0.85l-4.58,-0.65l-2.05,-4.15c-0.08,-0.14 -0.22,-0.24 -0.38,-0.27z" enable-background="accumulate" fill="#b4befe" id="svg_1"/>
- </g>
-</svg>
