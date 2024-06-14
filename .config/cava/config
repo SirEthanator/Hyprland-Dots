@@ -217,7 +217,7 @@ source = auto
 # a terminal that can change color definitions such as Gnome-terminal or rxvt.
 # default is to keep current terminal color
 background = default
-foreground = '#b4befe'
+foreground = '#A7C080'
 
 # SDL and sdl_glsl only support hex code colors, these are the default:
 ; background = '#111111'
