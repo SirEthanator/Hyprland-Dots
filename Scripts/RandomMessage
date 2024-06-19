@@ -9,17 +9,17 @@ elif [ $randNum -eq 1 ]; then
 elif [ $randNum -eq 2 ]; then
     text="\" Hyprland.exe \""
 elif [ $randNum -eq 3 ]; then
-    text="\" Everforest is the best! \""
+    text="\" Tree. \""
 elif [ $randNum -eq 4 ]; then
-    text="\" Everforest forever! \""
+    text="\" Foreverforest! \""
 elif [ $randNum -eq 5 ]; then
     text="\" Hello World! \""
 elif [ $randNum -eq 6 ]; then
-    text="\" WHY IS THERE CODE??? MAKE A FUCKING .EXE FILE AND GIVE IT TO ME. \""
+    text="\" 🌲 \""
 elif [ $randNum -eq 7 ]; then
     text="\" tf is grass \""
 else
-    text="\" Something's wrong with your script \""
+    text="\" Error \""
 fi
 
 if [ ! -e $HOME/.config/macchina/themes/Everforest-No-Title.toml ]; then
@@ -40,5 +40,3 @@ else
 
 fi
 
-# The second to last entry a reference to this reddit post that I found amusing:
-# https://www.reddit.com/r/github/comments/1at9br4/i_am_new_to_github_and_i_have_lots_to_say/
