@@ -91,13 +91,16 @@
     },
 
     "hyprland/workspaces": {
-      "format": "{name}",
+      "active-only": false,
       "format": "{icon}",
       "tooltip": false,
       "all-outputs": true,
       "format-icons": {
         "active": "",
-        "default": "<span color='#3C4841'></span>"
+        "default": "<span color='#7A8478'></span>"
+      },
+      "persistent-workspaces": {
+        "*": 5,
       }
     },
 
