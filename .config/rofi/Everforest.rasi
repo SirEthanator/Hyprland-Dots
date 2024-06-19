@@ -20,7 +20,7 @@ configuration {
 /*****----- Global Properties -----*****/
 * {
     font:                        "CaskaydiaCove Nerd Font 10";
-    background:                  #1E2326;
+    background:                  #272E33;
     background-alt:              #2E383C;
     foreground:                  #D3C6AA;
     selected:                    #A7C080;
@@ -117,7 +117,7 @@ button {
 }
 button selected {
     background-color:            @selected;
-    text-color:                  #1e1e2e;
+    text-color:                  #2E383C;
 }
 
 /*****----- Listview -----*****/
@@ -159,11 +159,11 @@ element normal.urgent {
 }
 element normal.active {
     background-color:            @active;
-    text-color:                  #1e1e2e;
+    text-color:                  #2E383C;
 }
 element selected.normal {
     background-color:            @selected;
-    text-color:                  #1e1e2e;
+    text-color:                  #2E383C;
 }
 element selected.urgent {
     background-color:            @urgent;
