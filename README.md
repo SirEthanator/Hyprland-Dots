@@ -21,3 +21,7 @@
 - [Everforest GTK Theme + Icons](https://github.com/Fausto-Korpsvart/Everforest-GTK-Theme)
 - [Ocean Sound Theme](https://invent.kde.org/plasma/ocean-sound-theme)
 
+## To do
+
+- [ ] New shell prompt
+
