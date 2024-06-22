@@ -2,7 +2,9 @@
 
 <p align="center">My Everforest themed config for Hyprland!</p>
 
-![Screenshot](/assets/Screenshot.png)
+
+https://github.com/SirEthanator/Everforest-Dots/assets/130725768/34dfd6ad-8ca0-4113-a1dc-8c4aa3099cc3
+
 
 > [!NOTE]
 > This repo contains my personal configuration and it will not work well on all hardware.
