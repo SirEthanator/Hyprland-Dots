@@ -4,7 +4,7 @@
 
 ![Screenshot](/assets/Screenshot.png)
 
-<video src='/assets/Video.mp4' width=180/>
+<video src='/assets/Video.mp4' width=180></video>
 
 > [!NOTE]
 > This repo contains my personal configuration and it will not work well on all hardware.
