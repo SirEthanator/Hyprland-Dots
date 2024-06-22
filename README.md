@@ -1,4 +1,4 @@
-# Everforest Dots
+<h1 align="center">Everforest Dots</h1>
 
 My Everforest themed config for Hyprland!
 
@@ -9,9 +9,10 @@ My Everforest themed config for Hyprland!
 
 ## Credits
 
-- My Kvantum theme is based on [Catppuccin Kvantum](https://github.com/catppuccin/Kvantum)
-- My theme for Swaync is based on [Catppuccin swaync](https://github.com/catppuccin/swaync)
-- My Rofi theme is from [this collection of Rofi themes](https://github.com/adi1090x/rofi)
+- Cursors come from [Everforest Cursors](https://github.com/talwat/everforest-cursors) with an included hyprcursor port.
+- My Kvantum theme is based on [Catppuccin Kvantum](https://github.com/catppuccin/Kvantum).
+- My theme for Swaync is based on [Catppuccin swaync](https://github.com/catppuccin/swaync).
+- My Rofi theme is from [this collection of Rofi themes](https://github.com/adi1090x/rofi).
 - The zsh theme is tweaked [fox](https://github.com/trusktr/oh-my-zsh/blob/master/themes/fox.zsh-theme) with elements from [bira](https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/bira.zsh-theme).
 
 ## Use with
