@@ -1,6 +1,6 @@
 <h1 align="center">Everforest Dots</h1>
 
-My Everforest themed config for Hyprland!
+<p align="center">My Everforest themed config for Hyprland!</p>
 
 ## Notes
 
