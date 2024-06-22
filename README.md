@@ -4,6 +4,8 @@
 
 ![Screenshot](/assets/Screenshot.png)
 
+<video src='/assets/Video.mp4' width=180/>
+
 > [!NOTE]
 > This repo contains my personal configuration and it will not work well on all hardware.
 
