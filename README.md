@@ -2,10 +2,10 @@
 
 <p align="center">My Everforest themed config for Hyprland!</p>
 
-## Notes
+![Screenshot](/assets/Screenshot.png)
 
 > [!NOTE]
-> This repo contains my personal configuration and it may not work on all hardware.
+> This repo contains my personal configuration and it will not work well on all hardware.
 
 ## Credits
 
