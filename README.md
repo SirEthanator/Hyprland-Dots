@@ -27,3 +27,7 @@ https://github.com/SirEthanator/Everforest-Dots/assets/130725768/34dfd6ad-8ca0-4
 
 - [ ] New shell prompt
 
+- [ ] Add some stuff from previous dotfiles for alt styles
+
+- [ ] Themes?
+
