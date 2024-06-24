@@ -1,13 +1,11 @@
+@import 'styles/regular.css';
+/*@import 'styles/floating.css';*/
+
 * {
   font-family: 'Cascadia Code', 'Symbols Nerd Font Mono';
   font-size: 14px;
   font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
   min-height: 35px;
-}
-
-window#waybar {
-  background-color: #272E33;
-  border-bottom: 1px solid #374145;
 }
 
 window#waybar.empty #window {
