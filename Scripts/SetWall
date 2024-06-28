@@ -19,3 +19,5 @@ killall hyprpaper
 
 nohup hyprpaper -c $HOME/.config/hypr/hyprpaper.conf > /dev/null &!
 
+exit 0
+
