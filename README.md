@@ -6,7 +6,7 @@
 https://github.com/SirEthanator/Everforest-Dots/assets/130725768/34dfd6ad-8ca0-4113-a1dc-8c4aa3099cc3
 
 
-> [!NOTE]
+> [!WARNING]
 > This repo contains my personal configuration and it will not work well on all hardware.
 
 ## Credits
@@ -30,9 +30,11 @@ https://github.com/SirEthanator/Everforest-Dots/assets/130725768/34dfd6ad-8ca0-4
 
 - [ ] Themes
 
-- [ ] Improve margins for different Waybar styles
+- [ ] Optimise Waybar styles
 
 #
 
 - [x] New shell prompt
+
+- [x] Improve margins for different Waybar styles
 
