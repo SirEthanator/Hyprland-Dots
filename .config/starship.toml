@@ -1,0 +1,51 @@
+format = """
+[░▒▓](#83C092)\
+[  ](bg:#83C092 fg:#272E33)\
+[](bg:#A7C080 fg:#7FBBB3)\
+$directory\
+[](fg:#A7C080 bg:#374145)\
+$git_branch\
+$git_status\
+[](fg:#374145)\
+\n$character
+"""
+
+right_format = """
+[](fg:#2E383C)\
+$status\
+[](fg:#3C4841 bg:#2E383C)\
+$time\
+[▓▒░](#3C4841)
+"""
+
+[directory]
+style = "fg:#272E33 bg:#A7C080"
+format = "[ $path ]($style)"
+truncation_length = 6
+truncation_symbol = "…/"
+read_only = ""
+
+[git_branch]
+symbol = ""
+style = "bg:#374145"
+format = '[[ $symbol $branch ](fg:#D3C6AA bg:#374145)]($style)'
+
+[git_status]
+style = "bg:#374145"
+format = '[[($all_status$ahead_behind )](fg:#D3C6AA bg:#374145)]($style)'
+
+[status]
+style = "fg:#E67E80 bg:#2E383C"
+symbol = " "
+sigint_symbol = " "
+not_executable_symbol = " "
+not_found_symbol = " "
+signal_symbol = " "
+format = '[ $symbol$status ]($style)'
+disabled = false
+
+[time]
+style = "bg:#3C4841 fg:#D3C6AA"
+format = "[  $time ]($style)"
+disabled = false
+
