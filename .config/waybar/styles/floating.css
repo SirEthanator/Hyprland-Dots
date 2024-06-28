@@ -1,3 +1,6 @@
+@define-color bg-light @bg;
+
 window#waybar {
   background-color: transparent;
+  border: none;
 }

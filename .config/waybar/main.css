@@ -1,0 +1,118 @@
+* {
+  font-family: 'Cascadia Code', 'Symbols Nerd Font Mono';
+  font-size: 14px;
+  font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+  min-height: 35px;
+}
+
+window#waybar.empty #window {
+  background-color: transparent;
+  transition: none;
+}
+
+#custom-apps, #workspaces, #custom-notifications {
+  margin-right: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 6px;
+  border-radius: 4px;
+}
+
+#custom-apps, #custom-notifications {
+  font-size: 15px;
+  margin-left: 15px; 
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+#custom-notifications {
+  margin-left: 0px;
+  margin-right: 5px;
+}
+
+#custom-apps {
+  margin-left: 5px;
+}
+
+#workspaces button { 
+  padding: 0 10px;
+}
+
+#workspaces button:hover {
+  box-shadow: inherit;
+  text-shadow: inherit;
+}
+
+#clock, #pulseaudio, #window, #tray { 
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 15px; 
+  margin-top: 5px;
+  margin-bottom: 6px;
+  border-radius: 4px;
+}
+
+#tray {
+  border-radius: 4px 0 0 4px;
+  margin-right: 0;
+}
+
+#custom-shutdown, #custom-logout, #custom-reboot, #custom-firmware, #custom-suspend, #custom-tray-collapsed {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 6px;
+}
+
+#custom-divider {
+  margin-top: 5px;
+  margin-bottom: 6px;
+}
+
+#custom-shutdown, #custom-tray-collapsed {
+  margin-right: 15px;
+  border-radius: 0 4px 4px 0;
+}
+
+#custom-power-left-end, #custom-tray-left-end { 
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  margin-top: 5px;
+  margin-bottom: 6px;
+}
+
+#window {
+  transition: linear 0.3s;
+}
+
+#custom-notifications {
+  margin-left: 0px;
+  margin-right: 12px;
+}
+
+#custom-apps {
+  margin-left: 12px;
+}
+
+/* Colours */
+
+window#waybar {
+  background-color: @bg;
+  border-bottom: 1px solid @border;
+}
+
+#custom-apps, #workspaces, #custom-notifications, #workspaces button, #custom-shutdown, #custom-logout, #custom-reboot, #custom-firmware, #custom-suspend, #custom-tray-collapsed, #custom-divider {
+  color: @green;
+  background-color: @bg-light;
+}
+
+#clock, #pulseaudio, #window, #tray {
+  color: @fg;
+  background-color: @bg-light;
+}
+
+#custom-power-left-end, #custom-tray-left-end {
+  background-color: @bg-light;
+}
+
