@@ -28,9 +28,11 @@ https://github.com/SirEthanator/Everforest-Dots/assets/130725768/34dfd6ad-8ca0-4
 
 ## To do
 
-- [ ] New shell prompt
+- [ ] Themes
 
-- [ ] Add some stuff from previous dotfiles for alt styles
+- [ ] Improve margins for different Waybar styles
 
-- [ ] Themes?
+#
+
+- [x] New shell prompt
 
