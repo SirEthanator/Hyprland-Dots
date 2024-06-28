@@ -6,5 +6,5 @@
 /* @import 'colours/catppuccin.css' */
 
 /* --- Style selection --- */
-@import 'styles/floating.css'; /* If not using floating, change gaps in hyprland config */
+@import 'styles/floating.css';
 
