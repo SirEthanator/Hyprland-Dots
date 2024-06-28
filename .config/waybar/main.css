@@ -54,7 +54,7 @@ window#waybar.empty #window {
 }
 
 #tray {
-  border-radius: 4px 0 0 4px;
+  border-radius: 0;
   margin-right: 0;
 }
 
