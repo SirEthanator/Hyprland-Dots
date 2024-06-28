@@ -1,4 +1,5 @@
 {
+  "reload_style_on_change": true,
   "layer": "top",
     "modules-left": ["custom/apps", "hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
