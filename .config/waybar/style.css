@@ -1,5 +1,5 @@
 /* --- Import main styles --- */
-@import 'main.css';
+@import 'styles/main.css';
 
 /* --- Colour selection (Uncomment one at a time) --- */
 @import 'colours/everforest.css';
