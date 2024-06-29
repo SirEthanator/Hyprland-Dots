@@ -38,8 +38,17 @@ window#waybar.empty #window {
   margin-left: 12px
 }
 
+#workspaces,#clock,#pulseaudio { 
+  background: @bg-light
+}
+
 #workspaces button {
-  padding: 0 10px
+  padding: 0 10px;
+  color: @inactive;
+}
+
+#workspaces button.active {
+  color: @accent
 }
 
 #workspaces button:hover {
@@ -47,7 +56,7 @@ window#waybar.empty #window {
   text-shadow: inherit
 }
 
-#clock,#pulseaudio,#window,#tray {
+#window,#tray {
   background-color: @bg-light;
   border-radius: 4px;
   color: @fg;
@@ -63,7 +72,7 @@ window#waybar.empty #window {
   margin-right: 0
 }
 
-#custom-shutdown,#custom-logout,#custom-reboot,#custom-firmware,#custom-suspend,#custom-tray-collapsed {
+#custom-shutdown,#custom-logout,#custom-reboot,#custom-firmware,#custom-suspend,#custom-tray-collapsed,#clock,#pulseaudio,#custom-clock-icon,#custom-audio-icon {
   margin-bottom: 6px;
   margin-top: 5px;
   padding-left: 10px;
@@ -75,17 +84,22 @@ window#waybar.empty #window {
   margin-top: 5px
 }
 
-#custom-shutdown,#custom-tray-collapsed {
+#custom-shutdown,#custom-tray-collapsed,#clock,#pulseaudio {
   border-radius: 0 4px 4px 0;
   margin-right: 15px
 }
 
-#custom-power-left-end,#custom-tray-left-end {
+#custom-power-left-end,#custom-tray-left-end,#custom-clock-icon,#custom-audio-icon {
   background-color: @bg-light;
   border-radius: 4px 0 0 4px;
   border-right: none;
   margin-bottom: 6px;
   margin-top: 5px
+}
+
+#clock,#pulseaudio {
+  color: @fg;
+  padding-left: 0px
 }
 
 #window {
@@ -97,8 +111,8 @@ window#waybar {
   border-bottom: 1px solid @border
 }
 
-#custom-apps,#workspaces,#custom-notifications,#workspaces button,#custom-shutdown,#custom-logout,#custom-reboot,#custom-firmware,#custom-suspend,#custom-tray-collapsed,#custom-divider {
+#custom-apps,#custom-notifications,#custom-shutdown,#custom-logout,#custom-reboot,#custom-firmware,#custom-suspend,#custom-tray-collapsed,#custom-divider,#custom-clock-icon,#custom-audio-icon {
   background-color: @bg-light;
-  color: @green
+  color: @accent
 }
 
