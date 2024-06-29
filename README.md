@@ -30,11 +30,11 @@ https://github.com/SirEthanator/Everforest-Dots/assets/130725768/34dfd6ad-8ca0-4
 
 - [ ] Themes
 
-- [ ] Optimise Waybar styles
-
 #
 
 - [x] New shell prompt
 
 - [x] Improve margins for different Waybar styles
+
+- [x] Optimise Waybar styles
 
