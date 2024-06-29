@@ -3,7 +3,7 @@
   "layer": "top",
     "modules-left": ["custom/apps", "hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["custom/power-left-end", "group/power", "custom/tray-left-end", "group/sys-tray", "pulseaudio", "clock", "custom/notifications"],
+    "modules-right": ["custom/power-left-end", "group/power", "custom/tray-left-end", "group/sys-tray", "custom/audio-icon", "pulseaudio", "custom/clock-icon", "clock", "custom/notifications"],
     "custom/apps": {
       "format": "  ",
       "tooltip": false,
@@ -98,7 +98,7 @@
       "all-outputs": true,
       "format-icons": {
         "active": "",
-        "default": "<span color='#7A8478'></span>"
+        "default": ""
       },
       "persistent-workspaces": {
         "*": 5,
@@ -132,19 +132,24 @@
       ]
     },
 
+    "custom/clock-icon": {
+      "format": "",
+      "tooltip": false
+    },
+
     "clock": {
-      "format": "<span color='#A7C080'> </span>{:%I:%M %p}",
+      "format": "{:%I:%M:%S %p}",
+      "interval": 1,
+    },
+
+    "custom/audio-icon": {
+      "format": "󰓃",
+      "tooltip": false
     },
 
     "pulseaudio": {
-      "format": "<span color='#A7C080'>{icon}</span> {volume}%",
-      "format-muted": "<span color ='#A7C080'></span>",
+      "format": "{volume}%",
       "tooltip": false,
-      "format-icons": {
-        "headphone": "",
-        "default": ["", "", "", "", "", ""]
-      },
-
       "scroll-step": 1,
     },
 }
