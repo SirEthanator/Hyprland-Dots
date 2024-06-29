@@ -42,7 +42,7 @@ window#waybar.empty #window {
   padding: 0 10px
 }
 
-#workspaces button: hover {
+#workspaces button:hover {
   box-shadow: inherit;
   text-shadow: inherit
 }
