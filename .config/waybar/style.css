@@ -2,8 +2,8 @@
 @import 'styles/main.css';
 
 /* --- Colour selection (Uncomment one at a time) --- */
-@import 'colours/everforest.css';
-/* @import 'colours/catppuccin.css' */
+@import 'colours/Everforest.css';
+/* @import 'colours/CatMocha.css' */
 
 /* --- Style selection --- */
 @import 'styles/floating.css';
