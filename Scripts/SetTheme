@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# ==== Options ==== #
+#
+# 1. Everforest
+# 2. Catppuccin Mocha
+#
+
+echo ''
+if [ $1 -gt 2 ] || [ $1 -lt 1 ]; then
+  echo 'Syntax: SetTheme <option>'
+  echo 'Options:'
+  echo '1. Everforest'
+  echo '2. Catppuccin Mocha'
+  exit 1
+fi
+
+
+# ==== Common ==== #
+
+if [ $1 -eq 1 ]; then
+  theme='Everforest'
+elif [ $1 -eq 2 ]; then
+  theme='CatMocha'
+fi
+
+
+# ==== Kitty ==== #
+
+cat < $HOME/.config/kitty/main > $HOME/.config/kitty/kitty.conf
+
+cat < $HOME/.config/kitty/$theme >> $HOME/.config/kitty/kitty.conf
+
