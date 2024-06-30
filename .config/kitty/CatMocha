@@ -1,0 +1,64 @@
+# Colors
+
+# Basic colors
+foreground              #cdd6f4
+background              #1e1e2e
+selection_foreground    #1e1e2e
+selection_background    #bac2de
+
+# Cursor colors
+cursor                  #cdd6f4
+cursor_text_color       #1e1e2e
+
+# URL underline hover
+url_color               #cdd6f4
+
+# Tab bar colors
+active_tab_foreground   #11111b
+active_tab_background   #b4befe
+inactive_tab_foreground #cdd6f4
+inactive_tab_background #11111b
+tab_bar_background      #11111b
+
+# Colors for marks (marked text in the terminal)
+mark1_foreground        #1e1e2e
+mark1_background        #b4befe
+mark2_foreground        #1e1e2e
+mark2_background        #cba6f7
+mark3_foreground        #1e1e2e
+mark3_background        #74c7ec
+
+# The Almighty 16 Colours
+
+# black
+color0 #313244
+color8 #45475a
+
+# red
+color1 #f38ba8
+color9 #f38ba8
+
+# green
+color2  #a6e3a1
+color10 #a6e3a1
+
+# yellow
+color3  #f9e2af
+color11 #f9e2af
+
+# blue
+color4  #89b4fa
+color12 #89b4fa
+
+# magenta
+color5  #b4befe
+color13 #b4befe
+
+# cyan
+color6  #94e2d5
+color14 #94e2d5
+
+# white
+color7  #bac2de
+color15 #a6adc8
+
