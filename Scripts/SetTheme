@@ -31,3 +31,31 @@ cat < $HOME/.config/kitty/main > $HOME/.config/kitty/kitty.conf
 
 cat < $HOME/.config/kitty/$theme >> $HOME/.config/kitty/kitty.conf
 
+
+# ==== Waybar ==== #
+
+echo '/* --- Import main styles --- */'  > $HOME/.config/waybar/style.css
+echo "@import 'styles/main.css';"       >> $HOME/.config/waybar/style.css
+echo ''                                 >> $HOME/.config/waybar/style.css
+echo '/* --- Colour selection --- */'   >> $HOME/.config/waybar/style.css
+echo "@import 'colours/$theme.css';"    >> $HOME/.config/waybar/style.css
+echo ''                                 >> $HOME/.config/waybar/style.css
+echo '/* --- Style selection --- */'    >> $HOME/.config/waybar/style.css
+
+read -p 'Enable floating Waybar? (Y/n) ' floating
+
+floating=$(echo "$floating" | tr '[:lower:]' '[:upper:]')
+
+
+if [ "$floating" == 'Y' ] || [ -z "$floating" ]; then # -z checks for empty string
+  echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
+elif [ "$floating" != 'N' ]; then
+  echo 'Invalid option: Defaulting to N'
+fi
+
+
+# ==== Reload things ==== #
+
+killall waybar
+nohup waybar > /dev/null 2>&1 &
+
