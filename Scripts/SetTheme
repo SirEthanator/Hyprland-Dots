@@ -7,7 +7,7 @@
 #
 
 echo ''
-if [ $1 -gt 2 ] || [ $1 -lt 1 ]; then
+if [[ ! $1 -gt 0 ]] || [[ ! $1 -lt 3 ]]; then # True if arg is not an int between 0 and 3
   echo 'Syntax: SetTheme <option>'
   echo 'Options:'
   echo '1. Everforest'
@@ -18,21 +18,23 @@ fi
 
 # ==== Common ==== #
 
-if [ $1 -eq 1 ]; then
+if [[ $1 -eq 1 ]]; then
   theme='Everforest'
-elif [ $1 -eq 2 ]; then
+elif [[ $1 -eq 2 ]]; then
   theme='CatMocha'
 fi
 
 
 # ==== Kitty ==== #
+echo 'Setting Kitty theme...'
 
-cat < $HOME/.config/kitty/main > $HOME/.config/kitty/kitty.conf
-
-cat < $HOME/.config/kitty/$theme >> $HOME/.config/kitty/kitty.conf
+cat < $HOME/.config/kitty/main    > $HOME/.config/kitty/kitty.conf # > overwrites whole file
+cat < $HOME/.config/kitty/$theme >> $HOME/.config/kitty/kitty.conf # >> appends to file
+sleep 0.2
 
 
 # ==== Waybar ==== #
+echo 'Setting Waybar theme...'
 
 echo '/* --- Import main styles --- */'  > $HOME/.config/waybar/style.css
 echo "@import 'styles/main.css';"       >> $HOME/.config/waybar/style.css
@@ -41,21 +43,22 @@ echo '/* --- Colour selection --- */'   >> $HOME/.config/waybar/style.css
 echo "@import 'colours/$theme.css';"    >> $HOME/.config/waybar/style.css
 echo ''                                 >> $HOME/.config/waybar/style.css
 echo '/* --- Style selection --- */'    >> $HOME/.config/waybar/style.css
+sleep 0.2
 
 read -p 'Enable floating Waybar? (Y/n) ' floating
-
 floating=$(echo "$floating" | tr '[:lower:]' '[:upper:]')
-
 
 if [ "$floating" == 'Y' ] || [ -z "$floating" ]; then # -z checks for empty string
   echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
 elif [ "$floating" != 'N' ]; then
-  echo 'Invalid option: Defaulting to N'
+  echo 'Invalid option: Defaulting to Y'
+  echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
 fi
+sleep 0.2
 
 
-# ==== Reload things ==== #
-
+# ==== Reload Waybar ==== #
+echo 'Reloading Waybar...'
 killall waybar
 nohup waybar > /dev/null 2>&1 &
 
