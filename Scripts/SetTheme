@@ -33,6 +33,34 @@ cat < $HOME/.config/kitty/$theme >> $HOME/.config/kitty/kitty.conf # >> appends 
 sleep 0.2
 
 
+# ==== Macchina ==== #
+echo 'Setting Macchina theme...'
+if [[ "$theme" == 'Everforest' ]]; then
+  key_color='A7C080'
+  seperator_color='7A8478'
+elif [[ "$theme" == 'CatMocha' ]]; then
+  key_color='B4BEFE'
+  seperator_color='9399b2'
+fi
+
+sed -i "s/.*key_color.*/key_color = \"#$key_color\"/" ~/.config/macchina/themes/Theme.toml
+sed -i "s/.*seperator_color.*/seperator_color = \"#$seperator_color\"/" ~/.config/macchina/themes/Theme.toml
+# The above replace the entire line that contains the first string with the second string
+sleep 0.2
+
+
+# ==== Cava ====
+echo 'Setting Cava theme...'
+sed -i '/foreground/d' $HOME/.config/cava/config
+if [[ "$theme" == 'Everforest' ]]; then
+  color='A7C080'
+elif [[ "$theme" == 'CatMocha' ]]; then
+  color='B4BEFE'
+fi
+echo "foreground = '#$color'" >> $HOME/.config/cava/config
+sleep 0.2
+
+
 # ==== Waybar ==== #
 echo 'Setting Waybar theme...'
 
@@ -54,18 +82,6 @@ elif [ "$floating" != 'N' ]; then
   echo 'Invalid option: Defaulting to Y'
   echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
 fi
-sleep 0.2
-
-
-# ==== Cava ====
-echo 'Setting Cava theme...'
-sed -i '/foreground/d' $HOME/.config/cava/config
-if [[ "$theme" == 'Everforest' ]]; then
-  color='A7C080'
-elif [[ "$theme" == 'CatMocha' ]]; then
-  color='B4BEFE'
-fi
-echo "foreground = '#$color'" >> $HOME/.config/cava/config
 
 
 # ==== Reload Waybar ==== #
