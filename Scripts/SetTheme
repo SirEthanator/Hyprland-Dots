@@ -57,6 +57,17 @@ fi
 sleep 0.2
 
 
+# ==== Cava ====
+echo 'Setting Cava theme...'
+sed -i '/foreground/d' $HOME/.config/cava/config
+if [[ "$theme" == 'Everforest' ]]; then
+  color='A7C080'
+elif [[ "$theme" == 'CatMocha' ]]; then
+  color='B4BEFE'
+fi
+echo "foreground = '#$color'" >> $HOME/.config/cava/config
+
+
 # ==== Reload Waybar ==== #
 echo 'Reloading Waybar...'
 killall waybar
