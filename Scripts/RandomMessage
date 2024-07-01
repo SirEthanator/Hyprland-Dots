@@ -22,21 +22,5 @@ else
     text="\" Error \""
 fi
 
-if [ ! -e $HOME/.config/macchina/themes/Everforest-No-Title.toml ]; then
-
-    echo "Config for macchina not found. Quitting..."
-    exit 1
-
-else
-    if [ ! -e $HOME/.config/macchina/themes/Everforest.toml ]; then
-        touch $HOME/.config/macchina/themes/Everforest.toml
-    fi
-
-    rm $HOME/.config/macchina/themes/Everforest.toml
-
-    cp $HOME/.config/macchina/themes/Everforest-No-Title.toml $HOME/.config/macchina/themes/Everforest.toml
-
-    sed "s/title =/& $text/" $HOME/.config/macchina/themes/Everforest.toml -i
-
-fi
+sed -i "s/.*title.*/title = $text/" ~/.config/macchina/themes/Theme.toml
 
