@@ -1,5 +1,5 @@
 # Set theme
-theme = "Everforest"
+theme = "Theme"
 
 # Specifies the network interface to use for the LocalIP readout
 interface = "wlan0"

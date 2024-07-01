@@ -44,7 +44,7 @@ symbol_close = ')'
 
 visible = true
 
-title =
+title = " Hyprland on top "
 
 border = "plain"
 
