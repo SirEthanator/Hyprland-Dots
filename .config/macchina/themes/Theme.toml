@@ -13,13 +13,6 @@ key_color = "#A7C080"
 separator_color = "#7A8478"
 
 
-[custom_ascii]
-
-path = "~/.config/macchina/ascii"
-
-color = "#A7C080"
-
-
 [palette]
 
 visible = true
@@ -44,9 +37,9 @@ symbol_close = ')'
 
 visible = true
 
-title = " Hyprland on top "
+title = " Everforest! "
 
-border = "plain"
+border = "round"
 
 
 [box.inner_margin]
