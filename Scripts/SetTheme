@@ -23,6 +23,45 @@ elif [[ $1 -eq 2 ]]; then
 fi
 
 
+# ==== Hyprpaper ==== #
+read -p 'Change wallpaper? (y/N) ' changeWall
+changeWall=$(echo "$changeWall" | tr '[:lower:]' '[:upper:]')
+
+if [[ "$changeWall" == 'Y' ]]; then
+  echo 'Setting wallpaper...'
+  echo "preload = $wall"     > $HOME/.config/hypr/hyprpaper.conf
+  echo "wallpaper = ,$wall" >> $HOME/.config/hypr/hyprpaper.conf
+  echo "splash = false"     >> $HOME/.config/hypr/hyprpaper.conf
+  echo ""                   >> $HOME/.config/hypr/hyprpaper.conf
+
+elif [[ "$changeWall" != 'N' ]] & [[ "$changeWall" != '' ]]; then
+  echo 'Invalid option: Defaulting to N'
+fi
+
+
+# ==== Waybar ==== #
+echo 'Setting Waybar theme...'
+
+echo '/* --- Import main styles --- */'  > $HOME/.config/waybar/style.css
+echo "@import 'styles/main.css';"       >> $HOME/.config/waybar/style.css
+echo ''                                 >> $HOME/.config/waybar/style.css
+echo '/* --- Colour selection --- */'   >> $HOME/.config/waybar/style.css
+echo "@import 'colours/$theme.css';"    >> $HOME/.config/waybar/style.css
+echo ''                                 >> $HOME/.config/waybar/style.css
+echo '/* --- Style selection --- */'    >> $HOME/.config/waybar/style.css
+sleep 0.05
+
+read -p 'Enable floating Waybar? (Y/n) ' floating
+floating=$(echo "$floating" | tr '[:lower:]' '[:upper:]')
+
+if [ "$floating" == 'Y' ] || [ -z "$floating" ]; then # -z checks for empty string
+  echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
+elif [ "$floating" != 'N' ]; then
+  echo 'Invalid option: Defaulting to Y'
+  echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
+fi
+
+
 # ==== Kitty ==== #
 echo 'Setting Kitty theme...'
 
@@ -69,12 +108,6 @@ echo "@theme \"~/.config/rofi/$theme.rasi\"" > $HOME/.config/rofi/config.rasi
 sleep 0.05
 
 
-# ==== Hyprland ==== #
-echo 'Setting Hyprland theme...'
-sed -i "s/.*col.active_border.*/    col.active_border = 0xff$accent/" ~/.config/hypr/hyprland.conf
-sleep 0.05
-
-
 # ==== Hyprlock ==== #
 echo 'Setting Hyprlock theme...'
 cd $HOME/.config/hypr
@@ -85,55 +118,22 @@ ln -s ./hyprlock/$theme.conf ./hyprlock.conf
 sleep 0.05
 
 
-# ==== Hyprpaper ==== #
-read -p 'Change wallpaper? (y/N) ' changeWall
-changeWall=$(echo "$changeWall" | tr '[:lower:]' '[:upper:]')
-
-if [[ "$changeWall" == 'Y' ]]; then
-  echo 'Setting wallpaper...'
-  echo "preload = $wall"     > $HOME/.config/hypr/hyprpaper.conf
-  echo "wallpaper = ,$wall" >> $HOME/.config/hypr/hyprpaper.conf
-  echo "splash = false"     >> $HOME/.config/hypr/hyprpaper.conf
-  echo ""                   >> $HOME/.config/hypr/hyprpaper.conf
-
-elif [[ "$changeWall" != 'N' ]] || [[ ! -z "$changeWall" ]]; then # -z checks for empty string
-  echo 'Invalid option: Defaulting to N'
-fi
-
-
-# ==== Waybar ==== #
-echo 'Setting Waybar theme...'
-
-echo '/* --- Import main styles --- */'  > $HOME/.config/waybar/style.css
-echo "@import 'styles/main.css';"       >> $HOME/.config/waybar/style.css
-echo ''                                 >> $HOME/.config/waybar/style.css
-echo '/* --- Colour selection --- */'   >> $HOME/.config/waybar/style.css
-echo "@import 'colours/$theme.css';"    >> $HOME/.config/waybar/style.css
-echo ''                                 >> $HOME/.config/waybar/style.css
-echo '/* --- Style selection --- */'    >> $HOME/.config/waybar/style.css
+# ==== Hyprland ==== #
+echo 'Setting Hyprland theme...'
+sed -i "s/.*col.active_border.*/    col.active_border = 0xff$accent/" ~/.config/hypr/hyprland.conf
 sleep 0.05
-
-read -p 'Enable floating Waybar? (Y/n) ' floating
-floating=$(echo "$floating" | tr '[:lower:]' '[:upper:]')
-
-if [ "$floating" == 'Y' ] || [ -z "$floating" ]; then
-  echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
-elif [ "$floating" != 'N' ]; then
-  echo 'Invalid option: Defaulting to Y'
-  echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
-fi
 
 
 # ==== Finish up ==== #
 echo 'Reloading Waybar...'
-killall waybar
-nohup waybar > /dev/null 2>&1 & # Output deleted and & will stop script from waiting
+killall waybar > /dev/null 2>&1 # Output gets deleted
+nohup waybar > /dev/null 2>&1 & # & will stop script from waiting
 sleep 0.05
 echo 'Reloading Swaync...'
 swaync-client -rs > /dev/null 2>&1 &
 echo 'Reloading Hyprland...'
 hyprctl reload > /dev/null 2>&1 &
 echo 'Reloading Hyprpaper...'
-killall hyprpaper
+killall hyprpaper > /dev/null 2>&1
 nohup hyprpaper > /dev/null 2>&1 &
 
