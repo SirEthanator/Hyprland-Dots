@@ -37,9 +37,12 @@ if [[ "$changeWall" == 'Y' ]]; then
 elif [[ "$changeWall" != 'N' ]] & [[ "$changeWall" != '' ]]; then
   echo 'Invalid option: Defaulting to N'
 fi
+sleep 0.05
 
 
 # ==== Waybar ==== #
+read -p 'Enable floating Waybar? (Y/n) ' floating
+floating=$(echo "$floating" | tr '[:lower:]' '[:upper:]')
 echo 'Setting Waybar theme...'
 
 echo '/* --- Import main styles --- */'  > $HOME/.config/waybar/style.css
@@ -49,17 +52,15 @@ echo '/* --- Colour selection --- */'   >> $HOME/.config/waybar/style.css
 echo "@import 'colours/$theme.css';"    >> $HOME/.config/waybar/style.css
 echo ''                                 >> $HOME/.config/waybar/style.css
 echo '/* --- Style selection --- */'    >> $HOME/.config/waybar/style.css
-sleep 0.05
 
-read -p 'Enable floating Waybar? (Y/n) ' floating
-floating=$(echo "$floating" | tr '[:lower:]' '[:upper:]')
-
-if [ "$floating" == 'Y' ] || [ -z "$floating" ]; then # -z checks for empty string
+if [[ "$floating" == 'Y' ]] || [[ -z "$floating" ]]; then # -z checks for empty string
   echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
-elif [ "$floating" != 'N' ]; then
+elif [[ "$floating" != 'N' ]]; then
   echo 'Invalid option: Defaulting to Y'
   echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
 fi
+
+sleep 0.05
 
 
 # ==== Kitty ==== #
