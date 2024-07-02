@@ -30,7 +30,7 @@ echo 'Setting Kitty theme...'
 
 cat < $HOME/.config/kitty/main    > $HOME/.config/kitty/kitty.conf # > overwrites whole file
 cat < $HOME/.config/kitty/$theme >> $HOME/.config/kitty/kitty.conf # >> appends to file
-sleep 0.2
+sleep 0.05
 
 
 # ==== Macchina ==== #
@@ -46,7 +46,7 @@ fi
 sed -i "s/.*key_color.*/key_color = \"#$key_color\"/" ~/.config/macchina/themes/Theme.toml
 sed -i "s/.*seperator_color.*/seperator_color = \"#$seperator_color\"/" ~/.config/macchina/themes/Theme.toml
 # The above replace the entire line that contains the first string with the second string
-sleep 0.2
+sleep 0.05
 
 
 # ==== Cava ====
@@ -58,16 +58,17 @@ elif [[ "$theme" == 'CatMocha' ]]; then
   color='B4BEFE'
 fi
 echo "foreground = '#$color'" >> $HOME/.config/cava/config
-sleep 0.2
+sleep 0.05
 
 
 # ==== Swaync ==== #
 echo 'Setting Swaync theme...'
-if [[ -e $HOME/.config/swaync/style.css ]]; then
-  rm $HOME/.config/swaync/style.css
+cd $HOME/.config/swaync # So that symlink can use ./
+if [[ -e ./style.css ]]; then # -e checks if file exsists
+  rm ./style.css
 fi
-ln -s $HOME/.config/swaync/$theme.css $HOME/.config/swaync/style.css
-sleep 0.2
+ln -s ./$theme.css ./style.css
+sleep 0.05
 
 
 # ==== Waybar ==== #
@@ -80,7 +81,7 @@ echo '/* --- Colour selection --- */'   >> $HOME/.config/waybar/style.css
 echo "@import 'colours/$theme.css';"    >> $HOME/.config/waybar/style.css
 echo ''                                 >> $HOME/.config/waybar/style.css
 echo '/* --- Style selection --- */'    >> $HOME/.config/waybar/style.css
-sleep 0.2
+sleep 0.05
 
 read -p 'Enable floating Waybar? (Y/n) ' floating
 floating=$(echo "$floating" | tr '[:lower:]' '[:upper:]')
@@ -96,7 +97,8 @@ fi
 # ==== Finish up ==== #
 echo 'Reloading Waybar...'
 killall waybar
-nohup waybar > /dev/null 2>&1 &
+nohup waybar > /dev/null 2>&1 & # Output deleted and & will stop script from waiting
+sleep 0.05
 echo 'Reloading Swaync...'
 swaync-client -rs > /dev/null 2>&1 &
 
