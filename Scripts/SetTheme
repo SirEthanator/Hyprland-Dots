@@ -45,8 +45,7 @@ sleep 0.05
 
 # ==== Cava ====
 echo 'Setting Cava theme...'
-sed -i '/foreground/d' $HOME/.config/cava/config
-echo "foreground = '#$accent'" >> $HOME/.config/cava/config
+sed -i "s/.*foreground.*/foreground = '#$accent'/" ~/.config/cava/config
 sleep 0.05
 
 
