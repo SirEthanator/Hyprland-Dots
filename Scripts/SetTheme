@@ -71,6 +71,16 @@ sed -i "s/.*col.active_border.*/    col.active_border = 0xff$accent/" ~/.config/
 sleep 0.05
 
 
+# ==== Hyprlock ==== #
+echo 'Setting Hyprlock theme...'
+cd $HOME/.config/hypr
+if [[ -e ./hyprlock.conf ]]; then
+  rm ./hyprlock.conf
+fi
+ln -s ./hyprlock/$theme.conf ./hyprlock.conf
+sleep 0.05
+
+
 # ==== Waybar ==== #
 echo 'Setting Waybar theme...'
 
