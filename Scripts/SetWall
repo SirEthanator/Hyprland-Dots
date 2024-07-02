@@ -10,14 +10,14 @@ if [ ! -f "$1" ]; then
     exit 1
 fi
 
-echo "preload = $1" > $HOME/.config/hypr/hyprpaper.conf
-echo "wallpaper = DP-3,$1" >> $HOME/.config/hypr/hyprpaper.conf
-echo "splash = false" >> $HOME/.config/hypr/hyprpaper.conf
-echo "" >> $HOME/.config/hypr/hyprpaper.conf
+echo "preload = $1"     > $HOME/.config/hypr/hyprpaper.conf
+echo "wallpaper = ,$1" >> $HOME/.config/hypr/hyprpaper.conf
+echo "splash = false"  >> $HOME/.config/hypr/hyprpaper.conf
+echo ""                >> $HOME/.config/hypr/hyprpaper.conf
 
-killall hyprpaper
+killall hyprpaper > /dev/null 2>&1
 
-nohup hyprpaper -c $HOME/.config/hypr/hyprpaper.conf > /dev/null &!
+nohup hyprpaper -c $HOME/.config/hypr/hyprpaper.conf > /dev/null 2>&1 &
 
 exit 0
 
