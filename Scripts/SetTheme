@@ -61,6 +61,15 @@ echo "foreground = '#$color'" >> $HOME/.config/cava/config
 sleep 0.2
 
 
+# ==== Swaync ==== #
+echo 'Setting Swaync theme...'
+if [[ -e $HOME/.config/swaync/style.css ]]; then
+  rm $HOME/.config/swaync/style.css
+fi
+ln -s $HOME/.config/swaync/$theme.css $HOME/.config/swaync/style.css
+sleep 0.2
+
+
 # ==== Waybar ==== #
 echo 'Setting Waybar theme...'
 
@@ -84,8 +93,10 @@ elif [ "$floating" != 'N' ]; then
 fi
 
 
-# ==== Reload Waybar ==== #
+# ==== Finish up ==== #
 echo 'Reloading Waybar...'
 killall waybar
 nohup waybar > /dev/null 2>&1 &
+echo 'Reloading Swaync...'
+swaync-client -rs > /dev/null 2>&1 &
 
