@@ -1,11 +1,3 @@
-#!/bin/bash
-
-# ==== Options ==== #
-#
-# 1. Everforest
-# 2. Catppuccin Mocha
-#
-
 echo ''
 if [[ ! $1 -gt 0 ]] || [[ ! $1 -lt 3 ]]; then # True if arg is not an int between 0 and 3
   echo 'Syntax: SetTheme <option>'
@@ -20,8 +12,10 @@ fi
 
 if [[ $1 -eq 1 ]]; then
   theme='Everforest'
+  accent='A7C080'
 elif [[ $1 -eq 2 ]]; then
   theme='CatMocha'
+  accent='B4BEFE'
 fi
 
 
@@ -52,12 +46,7 @@ sleep 0.05
 # ==== Cava ====
 echo 'Setting Cava theme...'
 sed -i '/foreground/d' $HOME/.config/cava/config
-if [[ "$theme" == 'Everforest' ]]; then
-  color='A7C080'
-elif [[ "$theme" == 'CatMocha' ]]; then
-  color='B4BEFE'
-fi
-echo "foreground = '#$color'" >> $HOME/.config/cava/config
+echo "foreground = '#$accent'" >> $HOME/.config/cava/config
 sleep 0.05
 
 
@@ -68,6 +57,18 @@ if [[ -e ./style.css ]]; then # -e checks if file exsists
   rm ./style.css
 fi
 ln -s ./$theme.css ./style.css
+sleep 0.05
+
+
+# ==== Rofi ==== #
+echo 'Setting Rofi theme...'
+echo "@theme \"~/.config/rofi/$theme.rasi\"" > $HOME/.config/rofi/config.rasi
+sleep 0.05
+
+
+# ==== Hyprland ==== #
+echo 'Setting Hyprland theme...'
+sed -i "s/.*col.active_border.*/    col.active_border = 0xff$accent/" ~/.config/hypr/hyprland.conf
 sleep 0.05
 
 
@@ -101,4 +102,7 @@ nohup waybar > /dev/null 2>&1 & # Output deleted and & will stop script from wai
 sleep 0.05
 echo 'Reloading Swaync...'
 swaync-client -rs > /dev/null 2>&1 &
+echo 'Reloading Hyprland...'
+hyprctl reload > /dev/null 2>&1 &
+
 
