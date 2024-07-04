@@ -30,6 +30,8 @@ https://github.com/SirEthanator/Everforest-Dots/assets/130725768/34dfd6ad-8ca0-4
 
 - [ ] Themes
 
+- [ ] Install script
+
 #
 
 - [x] New shell prompt
