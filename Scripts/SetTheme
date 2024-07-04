@@ -123,6 +123,24 @@ echo "@theme \"~/.config/rofi/$theme.rasi\"" > $HOME/.config/rofi/config.rasi
 sleep 0.05
 
 
+# ==== Kvantum ==== #
+echo 'Setting Kvantum theme...'
+echo '[General]'     > $HOME/.config/Kvantum/kvantum.kvconfig
+echo "theme=$theme" >> $HOME/.config/Kvantum/kvantum.kvconfig
+sleep 0.05
+
+
+# ==== Qt icons ==== #
+echo 'Setting QT icon theme...'
+if [[ "$theme" == 'Everforest' ]]; then
+  sed -i "s/.*icon_theme.*/icon_theme=Everforest-Dark/" $HOME/.config/qt5ct/qt5ct.conf
+  sed -i "s/.*icon_theme.*/icon_theme=Everforest-Dark/" $HOME/.config/qt6ct/qt6ct.conf
+elif [[ "$theme" == 'CatMocha' ]]; then
+  sed -i "s/.*icon_theme.*/icon_theme=Papirus-Dark/" $HOME/.config/qt5ct/qt5ct.conf
+  sed -i "s/.*icon_theme.*/icon_theme=Papirus-Dark/" $HOME/.config/qt6ct/qt6ct.conf
+fi
+
+
 # ==== Hyprlock ==== #
 echo 'Setting Hyprlock theme...'
 cd $HOME/.config/hypr
