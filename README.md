@@ -26,9 +26,26 @@ https://github.com/SirEthanator/Everforest-Dots/assets/130725768/34dfd6ad-8ca0-4
 - [FF Ultima Firefox CSS](https://github.com/soulhotel/FF-ULTIMA)
 - [Everforest Firefox Theme](https://addons.mozilla.org/en-US/firefox/addon/everforest-dark-hard/)
 
+## Installation
+
+This section isn't a complete install guide, but just some tips if you plan to install my dotfiles!
+
+#### Catppuccin
+
+- The SetTheme script is currently unfinished so some things will still use Everforest.
+- There is other stuff to install other than what's in the previous section, I may add these later.
+- Make sure to install the GTK theme as CatMocha (Rename the directory).
+- Ensure that you install the cursors as catppuccin-cursors.
+
+#### Everforest
+
+- Make sure to install the GTK theme as Everforest (Rename the directory).
+
 ## To do
 
-- [ ] Themes
+- [ ] Themes (Currently WIP)
+
+- [ ] Error handling in theme script
 
 - [ ] Install script
 
