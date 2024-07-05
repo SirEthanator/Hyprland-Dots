@@ -52,7 +52,7 @@ if [[ -e $HOME/.config/gtk-4.0/settings.ini ]]; then
   sed -i "s/.*gtk-cursor-theme-name.*/gtk-cursor-theme-name=$cursors/" $HOME/.config/gtk-4.0/settings.ini
 fi
 
-if [[ -d $HOME/.icons ]]; then
+if [[ ! -d $HOME/.icons ]]; then
   mkdir $HOME/.icons
 fi
 
@@ -74,7 +74,7 @@ if [[ -e $HOME/.config/gtk-4.0/gtk-dark.css ]]; then
   rm $HOME/.config/gtk-4.0/gtk-dark.css
 fi
 if [[ -e $HOME/.config/gtk-4.0/assets ]]; then
-  rm -r $HOME/.config/gtk-4.0/assets  # -r is just in case it's not a symlink already
+  rm -r $HOME/.config/gtk-4.0/assets  # -r is just in case it's not a symlink already (is a directory)
 fi
 
 ln -s $HOME/.themes/$theme/gtk-4.0/gtk-dark.css $HOME/.config/gtk-4.0
