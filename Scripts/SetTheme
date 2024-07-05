@@ -186,8 +186,9 @@ elif [[ "$theme" == 'CatMocha' ]]; then
   seperator_color='9399b2'
 fi
 
-sed -i "s/.*key_color.*/key_color = \"#$key_color\"/" ~/.config/macchina/themes/Theme.toml
-sed -i "s/.*seperator_color.*/seperator_color = \"#$seperator_color\"/" ~/.config/macchina/themes/Theme.toml
+sed -i "s/.*key_color.*/key_color = \"#$key_color\"/" $HOME/.config/macchina/themes/Theme.toml
+sed -i "s/.*seperator_color.*/seperator_color = \"#$seperator_color\"/" $HOME/.config/macchina/themes/Theme.toml
+sed -i "s/.*msgFile=.*/msgFile=~\/Scripts\/Messages\/$theme/" $HOME/Scripts/RandomMessage
 # The above replace the entire line that contains the first string with the second string
 sleep 0.05
 
