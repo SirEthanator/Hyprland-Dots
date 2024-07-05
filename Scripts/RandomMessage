@@ -1,26 +1,9 @@
 #!/bin/bash
 
-randNum=$(echo $(( $RANDOM % 8 )))
+msgFile="$HOME/Scripts/Messages/Everforest"
 
-if [ $randNum -eq 0 ]; then
-    text="\" Everforest! \""
-elif [ $randNum -eq 1 ]; then
-    text="\" Hyprland on top \""
-elif [ $randNum -eq 2 ]; then
-    text="\" Hyprland.exe \""
-elif [ $randNum -eq 3 ]; then
-    text="\" Tree. \""
-elif [ $randNum -eq 4 ]; then
-    text="\" Foreverforest! \""
-elif [ $randNum -eq 5 ]; then
-    text="\" Hello World! \""
-elif [ $randNum -eq 6 ]; then
-    text="\" 🌲 \""
-elif [ $randNum -eq 7 ]; then
-    text="\" tf is grass \""
-else
-    text="\" Error \""
-fi
+randNum=$(echo $(( $RANDOM % 8 + 1 )))
+text="\" $(sed "${randNum}!d" $msgFile) \""
 
 sed -i "s/.*title.*/title = $text/" ~/.config/macchina/themes/Theme.toml
 
