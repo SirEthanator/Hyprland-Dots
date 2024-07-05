@@ -31,6 +31,46 @@ elif [[ $1 -eq 2 ]]; then
 fi
 
 
+# ==== Hyprpaper ==== #
+read -p 'Change wallpaper? (y/N) ' changeWall
+changeWall=$(echo "$changeWall" | tr '[:lower:]' '[:upper:]')
+
+if [[ "$changeWall" == 'Y' ]]; then
+  echo 'Setting wallpaper...'
+  echo "preload = $wall"     > $HOME/.config/hypr/hyprpaper.conf
+  echo "wallpaper = ,$wall" >> $HOME/.config/hypr/hyprpaper.conf
+  echo "splash = false"     >> $HOME/.config/hypr/hyprpaper.conf
+  echo ''                   >> $HOME/.config/hypr/hyprpaper.conf
+
+elif [[ "$changeWall" != 'N' ]] & [[ "$changeWall" != '' ]]; then
+  echo 'Invalid option: Defaulting to N'
+fi
+sleep 0.05
+
+
+# ==== Waybar ==== #
+read -p 'Enable floating Waybar? (Y/n) ' floating
+floating=$(echo "$floating" | tr '[:lower:]' '[:upper:]')
+echo 'Setting Waybar theme...'
+
+echo '/* --- Import main styles --- */'  > $HOME/.config/waybar/style.css
+echo "@import 'styles/main.css';"       >> $HOME/.config/waybar/style.css
+echo ''                                 >> $HOME/.config/waybar/style.css
+echo '/* --- Colour selection --- */'   >> $HOME/.config/waybar/style.css
+echo "@import 'colours/$theme.css';"    >> $HOME/.config/waybar/style.css
+echo ''                                 >> $HOME/.config/waybar/style.css
+echo '/* --- Style selection --- */'    >> $HOME/.config/waybar/style.css
+
+if [[ "$floating" == 'Y' ]] || [[ -z "$floating" ]]; then  # -z checks for empty string
+  echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
+elif [[ "$floating" != 'N' ]]; then
+  echo 'Invalid option: Defaulting to Y'
+  echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
+fi
+
+sleep 0.05
+
+
 # ==== GTK theme + icons ==== #
 read -p 'Use light cursors? (y/N) ' lightCurs
 lightCurs=$(echo "$lightCurs" | tr '[:lower:]' '[:upper:]')
@@ -105,44 +145,17 @@ fi
 sleep 0.05
 
 
-# ==== Hyprpaper ==== #
-read -p 'Change wallpaper? (y/N) ' changeWall
-changeWall=$(echo "$changeWall" | tr '[:lower:]' '[:upper:]')
-
-if [[ "$changeWall" == 'Y' ]]; then
-  echo 'Setting wallpaper...'
-  echo "preload = $wall"     > $HOME/.config/hypr/hyprpaper.conf
-  echo "wallpaper = ,$wall" >> $HOME/.config/hypr/hyprpaper.conf
-  echo "splash = false"     >> $HOME/.config/hypr/hyprpaper.conf
-  echo ''                   >> $HOME/.config/hypr/hyprpaper.conf
-
-elif [[ "$changeWall" != 'N' ]] & [[ "$changeWall" != '' ]]; then
-  echo 'Invalid option: Defaulting to N'
-fi
+# ==== Kvantum ==== #
+echo 'Setting Kvantum theme...'
+echo '[General]'     > $HOME/.config/Kvantum/kvantum.kvconfig
+echo "theme=$theme" >> $HOME/.config/Kvantum/kvantum.kvconfig
 sleep 0.05
 
 
-# ==== Waybar ==== #
-read -p 'Enable floating Waybar? (Y/n) ' floating
-floating=$(echo "$floating" | tr '[:lower:]' '[:upper:]')
-echo 'Setting Waybar theme...'
-
-echo '/* --- Import main styles --- */'  > $HOME/.config/waybar/style.css
-echo "@import 'styles/main.css';"       >> $HOME/.config/waybar/style.css
-echo ''                                 >> $HOME/.config/waybar/style.css
-echo '/* --- Colour selection --- */'   >> $HOME/.config/waybar/style.css
-echo "@import 'colours/$theme.css';"    >> $HOME/.config/waybar/style.css
-echo ''                                 >> $HOME/.config/waybar/style.css
-echo '/* --- Style selection --- */'    >> $HOME/.config/waybar/style.css
-
-if [[ "$floating" == 'Y' ]] || [[ -z "$floating" ]]; then  # -z checks for empty string
-  echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
-elif [[ "$floating" != 'N' ]]; then
-  echo 'Invalid option: Defaulting to Y'
-  echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
-fi
-
-sleep 0.05
+# ==== Qt icons ==== #
+echo 'Setting QT icon theme...'
+sed -i "s/.*icon_theme.*/icon_theme=$icons/" $HOME/.config/qt5ct/qt5ct.conf
+sed -i "s/.*icon_theme.*/icon_theme=$icons/" $HOME/.config/qt6ct/qt6ct.conf
 
 
 # ==== Kitty ==== #
@@ -199,19 +212,6 @@ sleep 0.05
 echo 'Setting Rofi theme...'
 echo "@theme \"~/.config/rofi/$theme.rasi\"" > $HOME/.config/rofi/config.rasi
 sleep 0.05
-
-
-# ==== Kvantum ==== #
-echo 'Setting Kvantum theme...'
-echo '[General]'     > $HOME/.config/Kvantum/kvantum.kvconfig
-echo "theme=$theme" >> $HOME/.config/Kvantum/kvantum.kvconfig
-sleep 0.05
-
-
-# ==== Qt icons ==== #
-echo 'Setting QT icon theme...'
-sed -i "s/.*icon_theme.*/icon_theme=$icons/" $HOME/.config/qt5ct/qt5ct.conf
-sed -i "s/.*icon_theme.*/icon_theme=$icons/" $HOME/.config/qt6ct/qt6ct.conf
 
 
 # ==== Hyprlock ==== #
