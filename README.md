@@ -12,6 +12,7 @@ https://github.com/SirEthanator/Everforest-Dots/assets/130725768/34dfd6ad-8ca0-4
 ## Credits
 
 - Obviously thanks to [Sainnhe](https://github.com/sainnhe) for [this beautiful color scheme](https://github.com/sainnhe/everforest).
+- My Neovim config is [LazyVim](https://github.com/LazyVim/LazyVim) with added plugin config and a tweaked init.lua.
 - Cursors come from [Everforest Cursors](https://github.com/talwat/everforest-cursors) with an included hyprcursor port.
 - My Everforest Kvantum theme is based on [Catppuccin Kvantum](https://github.com/catppuccin/Kvantum) which is also included in the repo.
 - My theme for Swaync is based on [Catppuccin swaync](https://github.com/catppuccin/swaync).
