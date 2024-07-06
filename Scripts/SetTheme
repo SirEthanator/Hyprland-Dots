@@ -215,6 +215,18 @@ echo "@theme \"~/.config/rofi/$theme.rasi\"" > $HOME/.config/rofi/config.rasi
 sleep 0.05
 
 
+# ==== Neovim ==== #
+if [[ -d $HOME/.config/nvim/lua/plugins ]]; then
+  cd $HOME/.config/nvim/lua/plugins
+  if [[ -e ./Theme.lua ]]; then
+    rm ./Theme.lua
+  fi
+  ln -s ./$theme ./Theme.lua
+else
+  echo 'lazy.nvim not found, please set Neovim theme manually.'
+fi
+
+
 # ==== Hyprlock ==== #
 echo 'Setting Hyprlock theme...'
 cd $HOME/.config/hypr
