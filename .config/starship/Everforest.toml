@@ -1,7 +1,7 @@
 format = """
 [░▒▓](#83C092)\
 [  ](bg:#83C092 fg:#272E33)\
-[](bg:#A7C080 fg:#7FBBB3)\
+[](bg:#A7C080 fg:#83C092)\
 $directory\
 [](fg:#A7C080 bg:#374145)\
 $git_branch\
