@@ -1,6 +1,6 @@
-<h1 align="center">Everforest Dots</h1>
+<h1 align="center">Hyprland Dots</h1>
 
-<p align="center">My Everforest themed config for Hyprland!</p>
+<p align="center">My Everforest (soon Catppuccin too) config for Hyprland!</p>
 
 
 https://github.com/SirEthanator/Everforest-Dots/assets/130725768/34dfd6ad-8ca0-4113-a1dc-8c4aa3099cc3
