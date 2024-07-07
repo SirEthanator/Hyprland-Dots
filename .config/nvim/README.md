@@ -1,4 +1,7 @@
 # 💤 LazyVim
 
-A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
-Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
+### MODIFICATIONS MADE
+
+- Added everything in ```lua/plugins``` and removed ```example.lua``` from it
+- Added a couple of lines to ```init.lua``` to set a variable
+
