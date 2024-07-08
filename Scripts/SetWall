@@ -10,8 +10,10 @@ if [ ! -f "$1" ]; then
     exit 1
 fi
 
-echo "preload = $1"     > $HOME/.config/hypr/hyprpaper.conf
-echo "wallpaper = ,$1" >> $HOME/.config/hypr/hyprpaper.conf
+wall=$(realpath $1)
+
+echo "preload = $wall"     > $HOME/.config/hypr/hyprpaper.conf
+echo "wallpaper = ,$wall" >> $HOME/.config/hypr/hyprpaper.conf
 echo "splash = false"  >> $HOME/.config/hypr/hyprpaper.conf
 echo ""                >> $HOME/.config/hypr/hyprpaper.conf
 
