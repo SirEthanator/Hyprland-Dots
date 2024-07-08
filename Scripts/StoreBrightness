@@ -7,3 +7,4 @@ tmp=${ogoutput#*=}
 output=${tmp%,*}
 
 echo $output > /tmp/brightness
+
