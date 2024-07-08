@@ -6,8 +6,8 @@ if [ "$#" -gt 1 ]; then
 fi
 
 if [ ! -e "$1" ] && [ ! -d "$1" ]; then
-    echo "File or directory does not exsist at: $1"
-    exit 1
+  echo "File or directory does not exsist at: $1"
+  exit 1
 fi
 
 if [ "$#" -eq 0 ]; then
@@ -22,3 +22,4 @@ echo 'Copied to clipboard:'
 echo $path
 
 exit 0
+
