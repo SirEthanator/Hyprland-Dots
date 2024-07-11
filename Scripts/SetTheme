@@ -42,7 +42,7 @@ if [[ "$changeWall" == 'Y' ]]; then
   echo "splash = false"     >> $HOME/.config/hypr/hyprpaper.conf
   echo ''                   >> $HOME/.config/hypr/hyprpaper.conf
 
-elif [[ "$changeWall" != 'N' ]] & [[ "$changeWall" != '' ]]; then
+elif [[ "$changeWall" != 'N' ]] && [[ "$changeWall" != '' ]]; then
   echo 'Invalid option: Defaulting to N'
 fi
 sleep 0.05
@@ -76,7 +76,7 @@ read -p 'Use light cursors? (y/N) ' lightCurs
 lightCurs=$(echo "$lightCurs" | tr '[:lower:]' '[:upper:]')
 if [[ "$lightCurs" == 'Y' ]]; then
   cursors=$(echo "${cursors}-light")
-elif [[ "$lightCurs" != 'N' ]] & [[ "$lightCurs" != '' ]]; then
+elif [[ "$lightCurs" != 'N' ]] && [[ "$lightCurs" != '' ]]; then
   echo 'Invalid option: Defaulting to N'
 fi
 
