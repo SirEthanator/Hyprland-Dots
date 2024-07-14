@@ -1,6 +1,6 @@
 <h1 align="center">Hyprland Dots</h1>
 
-<p align="center">My Everforest (soon Catppuccin too) config for Hyprland!</p>
+<p align="center">My Everforest and Catppuccin config for Hyprland!</p>
 
 
 ![Screenshot](/assets/Preview.png)
