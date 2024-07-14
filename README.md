@@ -3,7 +3,9 @@
 <p align="center">My Everforest (soon Catppuccin too) config for Hyprland!</p>
 
 
-https://github.com/SirEthanator/Everforest-Dots/assets/130725768/34dfd6ad-8ca0-4113-a1dc-8c4aa3099cc3
+![Screenshot](/assets/Preview.png)
+
+[Video here](https://youtu.be/pL73Pv5E7Sc)
 
 
 > [!WARNING]
@@ -33,7 +35,7 @@ This section isn't a complete install guide, but just some tips if you plan to i
 
 #### Catppuccin
 
-- The SetTheme script is currently unfinished so some things will still use Everforest.
+- The SetTheme script doesn't change some things such as the Firefox theme. It must be set manually.
 - There is other stuff to install other than what's in the previous section, I may add these later.
 - Make sure to install the GTK theme as CatMocha (Rename the directory).
 - Ensure that you install the cursors as catppuccin-cursors.
@@ -42,19 +44,29 @@ This section isn't a complete install guide, but just some tips if you plan to i
 
 - Make sure to install the GTK theme as Everforest (Rename the directory).
 
-## To do
 
-- [ ] Themes (Currently WIP)
+Also note that I may have missed some things here, so don't expect everything to work perfectly.
+I will try to improve on my dotfiles to be easily usable for anyone!
+
+## To do
 
 - [ ] Error handling in theme script
 
-- [ ] Install script
+- [ ] Installation script
 
 #
+
+- [x] Themes
 
 - [x] New shell prompt
 
 - [x] Improve margins for different Waybar styles
 
 - [x] Optimise Waybar styles
+
+## More screenshots
+
+![Screenshot 1](/assets/Everforest1.png)
+![Screenshot 2](/assets/Catppuccin1.png)
+![Screenshot 3](/assets/Everforest2.png)
 
