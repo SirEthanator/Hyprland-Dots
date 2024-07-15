@@ -5,7 +5,7 @@
 
 ![Screenshot](/assets/Preview.png)
 
-[Video here](https://youtu.be/pL73Pv5E7Sc)
+[Video here](https://youtu.be/3GAusK1uaDE)
 
 
 > [!WARNING]
