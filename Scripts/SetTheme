@@ -21,12 +21,14 @@ if [[ $1 -eq 1 ]]; then
   icons='Everforest-Dark'
   cursors='everforest-cursors'
   accent='A7C080'
+  darkbg='1E2326'
   wall="$HOME/Hyprland-Dots/Wallpapers/Everforest/Hard.jpg"
 elif [[ $1 -eq 2 ]]; then
   theme='CatMocha'
   icons='Papirus-Dark'
   cursors='catppuccin-cursors'
   accent='B4BEFE'
+  darkbg='11111B'
   wall="$HOME/Hyprland-Dots/Wallpapers/Catppuccin/Crust.jpg"
 fi
 
@@ -239,7 +241,7 @@ sleep 0.05
 
 # ==== Hyprland ==== #
 echo 'Setting Hyprland theme...'
-sed -i "s/.*col.active_border.*/    col.active_border = 0xff$accent/" ~/.config/hypr/hyprland.conf
+sed -i "s/.*col.active_border.*/    col.active_border = 0xff$accent 0xff$darkbg 0xff$darkbg 0xff$accent/" ~/.config/hypr/hyprland.conf
 sleep 0.05
 
 
