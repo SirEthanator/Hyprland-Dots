@@ -16,48 +16,49 @@ if [[ "$#" -le 0 ]] || [[ "$#" -gt 1 ]]; then
   exit 1
 fi
 
-shutdown () {
-  action () {
-    systemctl poweroff
-  }
-  delayedAction &
-  delayedPID=$(echo $!)
-  yad --image=dialog-warning --title="Shut down?" --button="Shut down now":0 --button="Cancel":1 --text="Shutting down in 5 seconds"
-}
-
-reboot () {
-  action () {
-    systemctl reboot
-  }
-  delayedAction &
-  delayedPID=$(echo $!)
-  yad --image=dialog-warning --title="Reboot?" --button="Reboot now":0 --button="Cancel":1 --text="Rebooting in 5 seconds"
-}
-
-logoutFunc () {
-  action () {
-    hyprctl dispatch exit
-  }
-  delayedAction &
-  delayedPID=$(echo $!)
-  yad --image=dialog-warning --title="Log out?" --button="Log out now":0 --button="Cancel":1 --text="Logging out in 5 seconds"
-}
-
-firmware () {
-  action () {
-    systemctl reboot --firmware-setup
-  }
-  delayedAction &
-  delayedPID=$(echo $!)
-  yad --image=dialog-warning --title="Reboot to firmware?" --button="Reboot now":0 --button="Cancel":1 --text="Rebooting to firmware settings in 5 seconds"
-}
-
 delayedAction () {
   sleep 5
   action
 }
 
-common () {
+common1 () {
+  delayedAction &
+  delayedPID=$(echo $!)
+}
+
+shutdown () {
+  action() {
+    systemctl poweroff
+  }
+  common1
+  yad --image=dialog-warning --title="Shut down?" --button="Shut down now":0 --button="Cancel":1 --text="Shutting down in 5 seconds"
+}
+
+reboot () {
+  action() {
+    systemctl reboot
+  }
+  common1
+  yad --image=dialog-warning --title="Reboot?" --button="Reboot now":0 --button="Cancel":1 --text="Rebooting in 5 seconds"
+}
+
+logoutFunc () {
+  action() {
+    hyprctl dispatch exit
+  }
+  common1
+  yad --image=dialog-warning --title="Log out?" --button="Log out now":0 --button="Cancel":1 --text="Logging out in 5 seconds"
+}
+
+firmware () {
+  action() {
+    systemctl reboot --firmware-setup
+  }
+  common1
+  yad --image=dialog-warning --title="Reboot to firmware?" --button="Reboot now":0 --button="Cancel":1 --text="Rebooting to firmware settings in 5 seconds"
+}
+
+common2 () {
   if [[ "$?" == 0 ]]; then
     action
   else
@@ -87,7 +88,7 @@ else
   fi
 fi
 
-common
+common2
 
 exit 0
 
