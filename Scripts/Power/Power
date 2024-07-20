@@ -21,44 +21,11 @@ delayedAction () {
   action
 }
 
-common1 () {
+common () {
   delayedAction &
   delayedPID=$(echo $!)
-}
+  yad --image=dialog-warning --title="${1}?" --button="$1 now":0 --button="Cancel":1 --text="$2 in 5 seconds"
 
-shutdown () {
-  action() {
-    systemctl poweroff
-  }
-  common1
-  yad --image=dialog-warning --title="Shut down?" --button="Shut down now":0 --button="Cancel":1 --text="Shutting down in 5 seconds"
-}
-
-reboot () {
-  action() {
-    systemctl reboot
-  }
-  common1
-  yad --image=dialog-warning --title="Reboot?" --button="Reboot now":0 --button="Cancel":1 --text="Rebooting in 5 seconds"
-}
-
-logoutFunc () {
-  action() {
-    hyprctl dispatch exit
-  }
-  common1
-  yad --image=dialog-warning --title="Log out?" --button="Log out now":0 --button="Cancel":1 --text="Logging out in 5 seconds"
-}
-
-firmware () {
-  action() {
-    systemctl reboot --firmware-setup
-  }
-  common1
-  yad --image=dialog-warning --title="Reboot to firmware?" --button="Reboot now":0 --button="Cancel":1 --text="Rebooting to firmware settings in 5 seconds"
-}
-
-common2 () {
   if [[ "$?" == 0 ]]; then
     action
   else
@@ -68,6 +35,25 @@ common2 () {
   fi
 }
 
+shutdown () {
+  action () { systemctl poweroff;}
+  common 'Shut down' 'Shutting down'
+}
+
+reboot () {
+  action () { systemctl reboot;}
+  common 'Reboot' 'Rebooting'
+}
+
+logoutFunc () {
+  action () { hyprctl dispatch exit;}
+  common 'Log out' 'Logging out'
+}
+
+firmware () {
+  action () { systemctl reboot --firmware-setup;}
+  common 'Reboot' 'Booting to FW Setup'
+}
 
 if [[ "$1" == '-s' ]] || [[ "$1" == '--shutdown' ]]; then
   shutdown
@@ -87,8 +73,6 @@ else
     exit 1
   fi
 fi
-
-common2
 
 exit 0
 
