@@ -50,8 +50,6 @@ I will try to improve on my dotfiles to be easily usable for anyone!
 
 ## To do
 
-- [ ] Error handling in theme script
-
 - [ ] Installation script
 
 #
