@@ -16,6 +16,8 @@ fi
 
 # ==== Common ==== #
 
+echo "If running this for the first time, it's recommended to take a backup first in case of errors."
+
 if [[ $1 -eq 1 ]]; then
   theme='Everforest'
   icons='Everforest-Dark'
