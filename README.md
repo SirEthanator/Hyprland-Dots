@@ -50,7 +50,7 @@ I will try to improve on my dotfiles to be easily usable for anyone!
 
 ## To do
 
-- [ ] Installation script
+- [ ] Installation script (Currently in the works)!
 
 #
 
