@@ -19,7 +19,6 @@
 - My Everforest Kvantum theme is based on [Catppuccin Kvantum](https://github.com/catppuccin/Kvantum) which is also included in the repo.
 - My theme for Swaync is based on [Catppuccin swaync](https://github.com/catppuccin/swaync).
 - My Rofi theme is from [this collection of Rofi themes](https://github.com/adi1090x/rofi).
-- The zsh theme is tweaked [fox](https://github.com/trusktr/oh-my-zsh/blob/master/themes/fox.zsh-theme) with elements from [bira](https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/bira.zsh-theme).
 
 ## Use with
 
