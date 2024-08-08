@@ -43,8 +43,17 @@ This section isn't a complete install guide, but just some tips if you plan to i
 
 - Make sure to install the GTK theme as Everforest (Rename the directory).
 
+### Install via script (NOT RECOMMENDED)
 
-Also note that I may have missed some things here, so don't expect everything to work perfectly.
+The script is currently unfinished and unstable. Use at your own risk!
+
+If you do decide to use this, do not clone the repo beforehand and use this command:
+
+```
+$ sh -c "$(curl -L https://raw.githubusercontent.com/SirEthanator/Hyprland-Dots/main/install.sh)"
+```
+
+Also note that I probably have missed some things in this section, so don't expect everything to work perfectly.
 I will try to improve on my dotfiles to be easily usable for anyone!
 
 ## To do
