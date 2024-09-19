@@ -1,0 +1,73 @@
+#!/bin/bash
+
+help() {
+  echo 'SYNTAX'
+  echo 'Number <TARGET DIR> [<START NUM> <CRITERIA> <PREFIX> <SUFFIX>]'
+  echo 'Items in square brackets are optional'
+  echo "Example criteria: '*.jpg' - Will number files with the .jpg extension"
+}
+
+if [[ $# -lt 1 ]] || [[ $# -gt 5 ]]; then
+  echo 'Invalid number of arguments'
+  help
+  exit 1
+fi
+
+if [[ ! -d "$1" ]]; then
+  echo "Invalid directory: $1"
+  exit 1
+fi
+
+if [[ ! "$2" =~ ^[+-]?[0-9]+$ ]] && [[ $# -ge 2 ]]; then
+  echo 'Invalid start number'
+  help
+  exit 1
+fi
+
+if [[ $# -ge 2 ]]; then
+  count=$(($2))
+else
+  count=0
+fi
+
+if [[ $# -ge 3 ]]; then
+  criteria=$3
+else
+  criteria='*'
+fi
+
+if [[ $# -ge 4 ]]; then
+  prefix=$4
+else
+  prefix=''
+fi
+
+if [[ $# -ge 5 ]]; then
+  suffix=$5
+else
+  suffix=''
+fi
+
+echo "RENAMING FILES IN $1"
+
+read -p 'Preview changes? [RECOMMENDED] (Y/n) ' preview
+preview=$(echo "$preview" | tr '[:lower:]' '[:upper:]')
+
+if [[ "$preview" == 'Y' ]] || [[ -z "$preview" ]]; then
+  for file in ${1}/$criteria; do
+    echo "${file##*/} -> ${prefix}${count}${suffix}"
+    count=$((count+1))
+  done
+fi
+
+read -p 'Continue? (Y/n) ' confirmation
+confirmation=$(echo "$confirmation" | tr '[:lower:]' '[:upper:]')
+
+if [[ "$confirmation" == 'Y' ]] || [[ -z "$confirmation" ]]; then
+  for file in ${1}/$criteria; do
+    mv "$file" "${prefix}${count}${suffix}"
+    count=$((count+1))
+  done
+  echo 'Done!'
+fi
+
