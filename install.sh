@@ -23,24 +23,35 @@ fi
 # ==== Install packages ==== #
 
 echo 'Installing packages...'
-sudo pacman --needed -Syu rustup pipewire-jack
-sudo pacman --needed -S \
+sudo pacman --needed --noconfirm -Syu rustup pipewire-jack
+sudo pacman --needed --noconfirm -S \
   hyprland hyprpaper hyprcursor hyprlock waybar rofi-wayland swaync yad mate-polkit \
   kitty zsh starship neovim luajit stow neofetch hypridle cliphist grim slurp \
   kvantum kvantum-qt5 qt5ct qt6ct gtk2 gtk3 gtk4 \
   cargo base-devel fftw iniparser autoconf-archive pkgconf xdg-user-dirs wget unzip \
-  pulseaudio ocean-sound-theme alsa-lib sox \
+  pulseaudio pamixer ocean-sound-theme alsa-lib sox \
   ttf-cascadia-code ttf-cascadia-code-nerd ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
-sudo pacman --needed -Rs grml-zsh-config
+sudo pacman --needed --noconfirm -Rs grml-zsh-config
 
 if [[ ! -d $HOME/.oh-my-zsh ]]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
+
 if [[ ! -e $HOME/.cargo/bin/macchina ]]; then
   rustup default stable
   cargo install macchina
 fi
-# TODO: Install SwayOSD
+
+if [[ ! -e /usr/bin/swayosd-client ]]; then
+  if [[ -e ./SwayOSD ]]; then
+    mv ./SwayOSD ./SwayOSD.bak
+  fi
+  git clone https://github.com/ErikReider/SwayOSD.git
+  cd SwayOSD
+  makepkg -si --noconfirm --needed
+  cd ..
+  rm -rf ./SwayOSD
+fi
 
 # ==== Install sddm ==== #
 
@@ -70,7 +81,7 @@ fi
 
 backupItems=(cava hypr kitty Kvantum macchina nvim rofi starship swaync waybar starship.toml)
 
-for item in ${backupItems[@]}; do
+for item in "${backupItems[@]}"; do
   if [[ -e $HOME/.config/$item ]]; then
     echo "Backing up ~/.config/${item}..."
     mv $HOME/.config/$item $HOME/.config/.backup/$item
@@ -119,7 +130,16 @@ if [[ ! -e $HOME/.icons ]]; then
 fi
 
 cp -r $HOME/Everforest-GTK-Theme/icons/Everforest-Dark $HOME/.icons/
-# TODO: Install Papirus + Catppuccin folders
+
+wget -qO- https://git.io/papirus-icon-theme-install | env DESTDIR="$HOME/.icons" EXTRA_THEMES="Papirus-Dark" sh  # Install papirus using official script
+git clone https://github.com/catppuccin/papirus-folders.git
+cd papirus-folders
+sudo cp -r ./src/* $HOME/.icons/{Papirus,Papirus-Dark}
+curl -LO https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folders/master/papirus-folders && chmod +x ./papirus-folders
+./papirus-folders -C cat-mocha-lavender --theme Papirus-Dark
+./papirus-folders -C cat-mocha-lavender --theme Papirus
+
+# TODO: Check if directories exist before icon installation
 
 # Clone repo and symlink with stow
 git clone https://github.com/SirEthanator/Hyprland-Dots.git $HOME/Hyprland-Dots
