@@ -58,7 +58,7 @@
     "custom/suspend": {
       "format": "  ",
       "tooltip": false,
-      "on-click": "hyprlock & sleep 1; systemctl suspend"
+      "on-click": "gtklock & sleep 1; systemctl suspend"
     },
 
     "custom/divider": {
