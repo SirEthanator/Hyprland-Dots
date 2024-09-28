@@ -43,6 +43,9 @@ This section isn't a complete install guide, but just some tips if you plan to i
 
 - Make sure to install the GTK theme as Everforest (Rename the directory).
 
+#### Common
+- My config defaults to using gtklock now but can be modified to use hyprlock as themes are provided for it.
+
 ### Install via script (NOT RECOMMENDED)
 
 The script is currently unfinished and unstable. Use at your own risk!
