@@ -28,7 +28,7 @@ printh() {
 }
 
 refresh() {
-  # Goal syntax: page-title option1-title option1-command option2-title option2-command etc.
+  # syntax: page-title option1-title option1-command option2-title option2-command etc.
   # The commands do not need to be passed in as they aren't used here but it's just easier to pass them in than to not
 
   tput reset  # Clear the terminal
@@ -114,7 +114,7 @@ refresh() {
 }
 
 dialog() {
-  # Goal syntax: page-title option1-title option1-command option2-title option2-command etc.
+  # syntax: page-title option1-title option1-command option2-title option2-command etc.
 
   if [[ $(awk "BEGIN { printf ( ($#-1)/2 ) }") =~ ^[+-]?[0-9]*\.[0-9]+$ ]]; then
     echo 'ERROR: Invalid number of arguments in dialog function'
