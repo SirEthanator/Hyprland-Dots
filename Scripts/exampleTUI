@@ -1,0 +1,8 @@
+#!/bin/bash
+
+source $HOME/Scripts/TUI
+
+dialog 'The Hello World Page' 'Option one' 'notify-send uno' 'Option two' 'notify-send dos' 'Option three' 'notify-send tres' 'Option four' 'notify-send cuatro'
+printf '\n'
+
+
