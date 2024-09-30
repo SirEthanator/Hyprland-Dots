@@ -1,0 +1,148 @@
+#!/bin/bash
+
+# This script is just something I did for fun and currently has zero purpose and it's very inefficient
+# I'll probably use this to make something somewhat useful later on
+
+# ==== Functions ====
+
+# Output highlighted text
+printh() {
+  if [[ -n $2 ]]; then
+    args=(setab $2)  # Set highlight colour
+  fi
+  if [[ -n $3 ]]; then
+    args+=(setaf $3)  # Set text colour
+  fi
+  if [[ $2 -lt 0 ]]; then
+    smso=''
+  else
+    smso=$(tput smso ${args[*]})  # For highlighting and text colour
+  fi
+
+  printf "%s" "${smso}${1}"
+  if [[ ! $4 == true ]]; then
+    # Do not reset if $4 is true
+    printf "$(tput sgr0)"
+  fi
+  # NOTE: Reset when finished with $(tput sgr0)
+}
+
+refresh() {
+  # Goal syntax: page-title option1-title option1-command option2-title option2-command etc.
+  # The commands do not need to be passed in as they aren't used here but it's just easier to pass them in than to not
+
+  tput reset  # Clear the terminal
+
+
+  # ---- Define variables ----
+  option=$1
+  pageTitle=$2
+  optionCount=$((($#-2)/2))
+  options=("$@")
+  options=("${options[@]:2}")  # Remove first two elements
+  # $options now contains pairs of option title and command
+  maxBoxWidth=180
+  maxBoxHeight=90
+
+  if [[ $COLUMNS -ge $maxBoxWidth ]]; then
+    boxWidth=$maxBoxWidth
+  else
+    boxWidth=$COLUMNS
+  fi
+
+  if [[ $LINES -ge $maxBoxHeight ]]; then
+    boxHeight=$maxBoxHeight
+  else
+    boxHeight=$LINES
+  fi
+
+
+  # ---- Draw top of box ----
+  printf '┌'
+  for i in $(seq $(($boxWidth-2))); do printf '─'; done  # This is not a dash (keep in mind for later)
+  printf '┐\n'
+
+
+  # ---- Draw line with title ----
+  printf '│'
+  spaces=$(($boxWidth - ${#pageTitle} - 2))  # Subtract length of title from box width then subtract sides of box
+
+  for i in $(seq $(($spaces / 2))); do printf ' '; done  # Does floor rounding
+  printf "$(tput bold)$pageTitle$(tput sgr0)"  # Print title in bold
+  for i in $(seq $(($spaces / 2))); do printf ' '; done
+
+  if [[ $(($COLUMNS % 2)) -eq 1 ]] && [[ $((${#pageTitle} % 2)) -eq 0 ]] && [[ ! $boxWidth -eq $maxBoxWidth ]]; then
+    printf ' '  # Extra space if the title cannot be truly centred
+  fi
+  printf '│\n'
+
+
+  # ---- Draw box sides with no content ----
+  spaces=$(($spaces + ${#pageTitle}))
+  for i in $(seq $(($boxHeight-$optionCount-3))); do  # Height minus top, bottom and title row and number of options
+    printf '│'
+    for i in $(seq $spaces); do printf ' '; done
+    printf '│\n'
+  done
+
+
+  # ---- Draw options ----
+  for i in $(seq 0 2 $(($optionCount * 2 - 2))); do  # start at 0, increment by 2, stop at double the option count
+
+    # Calculate spaces starting with spaces in between box sides then subtracting the length of option title
+    # then subtracting the following '. ' then subtracting the number in front e.g. '2'
+    number=$(($i / 2 + 1))
+    spaces=$(($spaces - ${#options[$i]} - 2 - ${#number}))
+    printf '│'
+    if [[ $(($i / 2)) -eq $option ]]; then
+      printh "${number}. ${options[$i]}" 7 0 true  # Print highlighted text for selected option
+      for i in $(seq $spaces); do printh ' ' -1 -1 true; done  # true stops it from automatically resetting and -1 stops it from running tput every time for extra SPEED 🔥 (Still not fast lol)
+      printf "$(tput sgr0)"  # Reset so that other text isn't highlighted
+    else
+      printf "${number}. ${options[$i]}"
+      for i in $(seq $spaces); do printf ' '; done
+    fi
+    printf '│\n'
+    spaces=$(($boxWidth - 2))  # Reset spaces
+  done
+
+
+  # ---- Draw bottom of box ----
+  printf '└'
+  for i in $(seq $(($boxWidth-2))); do printf '─'; done
+  printf '┘'
+}
+
+dialog() {
+  # Goal syntax: page-title option1-title option1-command option2-title option2-command etc.
+
+  if [[ $(awk "BEGIN { printf ( ($#-1)/2 ) }") =~ ^[+-]?[0-9]*\.[0-9]+$ ]]; then
+    echo 'ERROR: Invalid number of arguments in dialog function'
+    exit 1
+  fi
+
+  optionCount=$((($#-2)/2))
+  option=0  # 0 is option 1
+  while true; do
+    refresh $option "$@"  # Pass selected option and all other arguments into refresh function
+    # I also didn't know that vars were global when I did the above so passing in all this stuff is kinda pointless since I could just define vars here
+    read -rsn1 mode # get 1 character
+    if [[ $mode == $(printf "\u1b") ]]; then
+      read -rsn2 mode # read 2 more chars
+    fi
+    case $mode in
+      '[D' | '[A') if [[ option -ge 1 ]]; then option=$(($option-1)); fi ;;  # Left/Up
+      '[C' | '[B') if [[ option -le $optionCount ]]; then option=$(($option+1)); fi ;;  # Right/Down
+      ''         ) eval "${options[$(($option * 2 + 1))]}"; break ;;  # Select (Return/Space)
+      # eval treats strings as shell code so the above will run the command that corresponds to the active option
+      *          ) >&2 ;;  # Do nothing if invalid key
+    esac
+  done
+}
+
+
+# ==== Main program ====
+
+dialog 'The Hello World Page' 'Option one' 'notify-send uno' 'Option two' 'notify-send dos' 'Option three' 'notify-send tres' 'Option four' 'notify-send cuatro'
+printf '\n'
+
