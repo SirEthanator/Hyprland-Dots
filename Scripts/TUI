@@ -123,18 +123,30 @@ dialog() {
   optionCount=$((($#-2)/2))
   option=0  # 0 is option 1
   while true; do
-    refresh $option "$@"  # Pass selected option and all other arguments into refresh function
+    if [[ $noRefresh != true ]]; then
+      refresh $option "$@"  # Pass selected option and all other arguments into refresh function
+    fi
+    noRefresh=false
     # I also didn't know that vars were global when I did the above so passing in all this stuff is kinda pointless since I could just define vars here
     read -rsn1 mode # get 1 character
     if [[ $mode == $(printf "\u1b") ]]; then
       read -rsn2 mode # read 2 more chars
     fi
     case $mode in
-      '[D' | '[A') if [[ option -ge 1 ]]; then option=$(($option-1)); fi ;;  # Left/Up
-      '[C' | '[B') if [[ option -le $optionCount ]]; then option=$(($option+1)); fi ;;  # Right/Down
+      '[D' | '[A') if [[ $option -ge 1 ]]; then option=$(($option-1)); fi ;;  # Left/Up
+      '[C' | '[B') if [[ $option -le $optionCount ]]; then option=$(($option+1)); fi ;;  # Right/Down
+      '1'        ) if [[ $optionCount -ge 1 ]]; then option=0; else noRefresh=true; fi ;;
+      '2'        ) if [[ $optionCount -ge 2 ]]; then option=1; else noRefresh=true; fi ;;
+      '3'        ) if [[ $optionCount -ge 3 ]]; then option=2; else noRefresh=true; fi ;;
+      '4'        ) if [[ $optionCount -ge 4 ]]; then option=3; else noRefresh=true; fi ;;
+      '5'        ) if [[ $optionCount -ge 5 ]]; then option=4; else noRefresh=true; fi ;;
+      '6'        ) if [[ $optionCount -ge 6 ]]; then option=5; else noRefresh=true; fi ;;
+      '7'        ) if [[ $optionCount -ge 7 ]]; then option=6; else noRefresh=true; fi ;;
+      '8'        ) if [[ $optionCount -ge 8 ]]; then option=7; else noRefresh=true; fi ;;
+      '9'        ) if [[ $optionCount -ge 9 ]]; then option=8; else noRefresh=true; fi ;;
       ''         ) eval "${options[$(($option * 2 + 1))]}"; break ;;  # Select (Return/Space)
       # eval treats strings as shell code so the above will run the command that corresponds to the active option
-      *          ) >&2 ;;  # Do nothing if invalid key
+      *          ) >&2 noRefresh=true ;;  # Do nothing if invalid key
     esac
   done
 }
