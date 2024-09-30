@@ -3,7 +3,6 @@
 # This script is just something I did for fun and currently has zero purpose and it's very inefficient
 # I'll probably use this to make something somewhat useful later on
 
-# ==== Functions ====
 
 # Output highlighted text
 printh() {
@@ -139,10 +138,4 @@ dialog() {
     esac
   done
 }
-
-
-# ==== Main program ====
-
-dialog 'The Hello World Page' 'Option one' 'notify-send uno' 'Option two' 'notify-send dos' 'Option three' 'notify-send tres' 'Option four' 'notify-send cuatro'
-printf '\n'
 
