@@ -70,7 +70,7 @@ refresh() {
   printf "$(tput bold)$pageTitle$(tput sgr0)"  # Print title in bold
   for i in $(seq $(($spaces / 2))); do printf ' '; done
 
-  if [[ $(($COLUMNS % 2)) -eq 1 ]] && [[ $((${#pageTitle} % 2)) -eq 0 ]] && [[ ! $boxWidth -eq $maxBoxWidth ]]; then
+  if [[ ( $(($boxWidth % 2)) -eq 0 && $((${#pageTitle} % 2)) -eq 1 ) || ( $(($boxWidth % 2)) -eq 1 && $((${#pageTitle} % 2)) -eq 0 ) ]]; then
     printf ' '  # Extra space if the title cannot be truly centred
   fi
   printf '│\n'
@@ -133,8 +133,8 @@ dialog() {
       read -rsn2 mode # read 2 more chars
     fi
     case $mode in
-      '[D' | '[A') if [[ $option -ge 1 ]]; then option=$(($option-1)); fi ;;  # Left/Up
-      '[C' | '[B') if [[ $option -le $optionCount ]]; then option=$(($option+1)); fi ;;  # Right/Down
+      '[D' | '[A') if [[ $option -gt 0 ]]; then option=$(($option-1)); else noRefresh=true; fi ;;  # Left/Up
+      '[C' | '[B') if [[ $option -lt $(($optionCount - 1)) ]]; then option=$(($option+1)); else noRefresh=true; fi ;;  # Right/Down
       '1'        ) if [[ $optionCount -ge 1 ]]; then option=0; else noRefresh=true; fi ;;
       '2'        ) if [[ $optionCount -ge 2 ]]; then option=1; else noRefresh=true; fi ;;
       '3'        ) if [[ $optionCount -ge 3 ]]; then option=2; else noRefresh=true; fi ;;
@@ -144,7 +144,7 @@ dialog() {
       '7'        ) if [[ $optionCount -ge 7 ]]; then option=6; else noRefresh=true; fi ;;
       '8'        ) if [[ $optionCount -ge 8 ]]; then option=7; else noRefresh=true; fi ;;
       '9'        ) if [[ $optionCount -ge 9 ]]; then option=8; else noRefresh=true; fi ;;
-      ''         ) eval "${options[$(($option * 2 + 1))]}"; break ;;  # Select (Return/Space)
+      ''         ) tput reset; eval "${options[$(($option * 2 + 1))]}"; break ;;  # Select (Return/Space)
       # eval treats strings as shell code so the above will run the command that corresponds to the active option
       *          ) >&2 noRefresh=true ;;  # Do nothing if invalid key
     esac
