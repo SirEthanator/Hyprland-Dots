@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# This script is just something I did for fun and currently has zero purpose and it's very inefficient
-# I'll probably use this to make something somewhat useful later on
+# This script is a fun proof of concept for the most part.
+# It's not very well optimised (though I'm working on that)
+# and Bash just isn't the best for a TUI.
+
+# All that is here is some functions. The script does nothing alone.
+# It's intended to be used like a library. Just source it in another file.
 
 
 # Output highlighted text
@@ -25,6 +29,8 @@ printh() {
   fi
 }
 
+
+
 refresh() {
   # syntax: active-option page-title option1-title option1-command option2-title option2-command etc.
   # The commands do not need to be passed in as they aren't used here but it's just easier to pass them in than to not
@@ -33,32 +39,31 @@ refresh() {
 
 
   # ---- Define variables ----
-  option=$1
-  pageTitle=$2
-  optionCount=$((($#-2)/2))
+  local pageTitle=$1
   options=("$@")
-  options=("${options[@]:2}")  # Remove first two elements
+  options=("${options[@]:1}")  # Remove first element
   # $options now contains pairs of option title and command
-  maxBoxWidth=160
-  maxBoxHeight=$((40 + $optionCount))
+  local maxBoxWidth=160
+  local maxBoxHeight=$((40 + $optionCount))
 
   if [[ $COLUMNS -ge $maxBoxWidth ]]; then
-    boxWidth=$maxBoxWidth
+    local boxWidth=$maxBoxWidth
   else
-    boxWidth=$COLUMNS
+    local boxWidth=$COLUMNS
   fi
 
   if [[ $LINES -ge $maxBoxHeight ]]; then
-    boxHeight=$maxBoxHeight
+    local boxHeight=$maxBoxHeight
   else
-    boxHeight=$LINES
+    local boxHeight=$LINES
   fi
 
-  leadingColumns=$((($COLUMNS - $boxWidth) / 2))  # Does floor rounding
-  leadingColumns=$(for i in $(seq $leadingColumns); do printf ' '; done)
+  local leadingColumns=$((($COLUMNS - $boxWidth) / 2))  # Does floor rounding
+  local leadingColumns=$(for i in $(seq $leadingColumns); do printf ' '; done)
 
-  leadingLines=$((($LINES - $boxHeight) / 2))
+  local leadingLines=$((($LINES - $boxHeight) / 2))
   for i in $(seq $leadingLines); do printf '\n'; done
+
 
   # ---- Draw top of box ----
   printf "${leadingColumns}┌"
@@ -68,11 +73,12 @@ refresh() {
 
   # ---- Draw line with title ----
   printf "${leadingColumns}│"
-  spaces=$(($boxWidth - ${#pageTitle} - 2))  # Subtract length of title from box width then subtract sides of box
+  spaceCount=$(($boxWidth - ${#pageTitle} - 2))  # Subtract length of title from box width then subtract sides of box
+  spaces=$(for i in $(seq $(($spaceCount / 2))); do printf ' '; done)
 
-  for i in $(seq $(($spaces / 2))); do printf ' '; done  # Does floor rounding
+  printf "$spaces"
   printf "$(tput bold)$pageTitle$(tput sgr0)"  # Print title in bold
-  for i in $(seq $(($spaces / 2))); do printf ' '; done
+  printf "$spaces"
 
   if [[ ( $(($boxWidth % 2)) -eq 0 && $((${#pageTitle} % 2)) -eq 1 ) || ( $(($boxWidth % 2)) -eq 1 && $((${#pageTitle} % 2)) -eq 0 ) ]]; then
     printf ' '  # Extra space if the title cannot be truly centred
@@ -81,10 +87,12 @@ refresh() {
 
 
   # ---- Draw box sides with no content ----
-  spaces=$(($spaces + ${#pageTitle}))
+  spaceCount=$(($spaceCount + ${#pageTitle}))
+  spaces=$(for i in $(seq $(($spaceCount))); do printf ' '; done)
+
   for i in $(seq $(($boxHeight-$optionCount-3))); do  # Height minus top, bottom and title row and number of options
     printf "${leadingColumns}│"
-    for i in $(seq $spaces); do printf ' '; done
+    printf "$spaces"
     printf '│\n'
   done
 
@@ -95,18 +103,20 @@ refresh() {
     # Calculate spaces starting with spaces in between box sides then subtracting the length of option title
     # then subtracting the following '. ' then subtracting the number in front e.g. '2'
     number=$(($i / 2 + 1))
-    spaces=$(($spaces - ${#options[$i]} - 2 - ${#number}))
+    spaceCount=$(($spaceCount - ${#options[$i]} - 2 - ${#number}))
+    spaces=$(for i in $(seq $(($spaceCount))); do printf ' '; done)
+
     printf "${leadingColumns}│"
     if [[ $(($i / 2)) -eq $option ]]; then
       printh "${number}. ${options[$i]}" 7 0 true  # Print highlighted text for selected option
-      for i in $(seq $spaces); do printh ' ' -1 -1 true; done  # true stops it from automatically resetting and -1 stops it from running tput every time for extra SPEED 🔥 (Still not fast lol)
+      printh "$spaces" -1 -1 true  # true stops it from automatically resetting and -1 stops it from running tput every time for extra SPEED 🔥 (Still not that fast lol)
       printf "$(tput sgr0)"  # Reset so that other text isn't highlighted
     else
       printf "${number}. ${options[$i]}"
-      for i in $(seq $spaces); do printf ' '; done
+      printf "$spaces"
     fi
     printf '│\n'
-    spaces=$(($boxWidth - 2))  # Reset spaces
+    spaceCount=$(($boxWidth - 2))  # Reset spaceCount
   done
 
 
@@ -116,22 +126,25 @@ refresh() {
   printf '┘'
 }
 
+
+
 dialog() {
   # syntax: page-title option1-title option1-command option2-title option2-command etc.
 
-  if [[ $(awk "BEGIN { printf ( ($#-1)/2 ) }") =~ ^[+-]?[0-9]*\.[0-9]+$ ]]; then
-    echo 'ERROR: Invalid number of arguments in dialog function'
+  # if [[ $(awk "BEGIN { printf ( ($#-1)/2 ) }") =~ ^[+-]?[0-9]*\.[0-9]+$ ]]; then
+  if [[ $(($# % 2)) -eq 0 ]] || [[ $# -eq 1 ]]; then
+    local errDetails=($(caller))
+    echo "${errDetails[1]}: line ${errDetails[0]}: dialog: invalid number of arguments"
     exit 1
   fi
 
-  optionCount=$((($#-2)/2))
+  optionCount=$((($#-1)/2))
   option=0  # 0 is option 1
   while true; do
     if [[ $noRefresh != true ]]; then
-      refresh $option "$@"  # Pass selected option and all other arguments into refresh function
+      refresh "$@"  # Pass all arguments into refresh function
     fi
     noRefresh=false
-    # I also didn't know that vars were global when I did the above so passing in all this stuff is kinda pointless since I could just define vars here
     read -rsn1 mode # get 1 character
     if [[ $mode == $(printf "\u1b") ]]; then
       read -rsn2 mode # read 2 more chars
