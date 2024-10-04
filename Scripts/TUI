@@ -23,7 +23,6 @@ printh() {
     # Do not reset if $4 is true
     printf "$(tput sgr0)"
   fi
-  # NOTE: Reset when finished with $(tput sgr0)
 }
 
 refresh() {
@@ -40,8 +39,8 @@ refresh() {
   options=("$@")
   options=("${options[@]:2}")  # Remove first two elements
   # $options now contains pairs of option title and command
-  maxBoxWidth=180
-  maxBoxHeight=90
+  maxBoxWidth=160
+  maxBoxHeight=$((40 + $optionCount))
 
   if [[ $COLUMNS -ge $maxBoxWidth ]]; then
     boxWidth=$maxBoxWidth
@@ -55,15 +54,20 @@ refresh() {
     boxHeight=$LINES
   fi
 
+  leadingColumns=$((($COLUMNS - $boxWidth) / 2))  # Does floor rounding
+  leadingColumns=$(for i in $(seq $leadingColumns); do printf ' '; done)
+
+  leadingLines=$((($LINES - $boxHeight) / 2))
+  for i in $(seq $leadingLines); do printf '\n'; done
 
   # ---- Draw top of box ----
-  printf '┌'
+  printf "${leadingColumns}┌"
   for i in $(seq $(($boxWidth-2))); do printf '─'; done  # This is not a dash (keep in mind for later)
   printf '┐\n'
 
 
   # ---- Draw line with title ----
-  printf '│'
+  printf "${leadingColumns}│"
   spaces=$(($boxWidth - ${#pageTitle} - 2))  # Subtract length of title from box width then subtract sides of box
 
   for i in $(seq $(($spaces / 2))); do printf ' '; done  # Does floor rounding
@@ -79,7 +83,7 @@ refresh() {
   # ---- Draw box sides with no content ----
   spaces=$(($spaces + ${#pageTitle}))
   for i in $(seq $(($boxHeight-$optionCount-3))); do  # Height minus top, bottom and title row and number of options
-    printf '│'
+    printf "${leadingColumns}│"
     for i in $(seq $spaces); do printf ' '; done
     printf '│\n'
   done
@@ -92,7 +96,7 @@ refresh() {
     # then subtracting the following '. ' then subtracting the number in front e.g. '2'
     number=$(($i / 2 + 1))
     spaces=$(($spaces - ${#options[$i]} - 2 - ${#number}))
-    printf '│'
+    printf "${leadingColumns}│"
     if [[ $(($i / 2)) -eq $option ]]; then
       printh "${number}. ${options[$i]}" 7 0 true  # Print highlighted text for selected option
       for i in $(seq $spaces); do printh ' ' -1 -1 true; done  # true stops it from automatically resetting and -1 stops it from running tput every time for extra SPEED 🔥 (Still not fast lol)
@@ -107,7 +111,7 @@ refresh() {
 
 
   # ---- Draw bottom of box ----
-  printf '└'
+  printf "${leadingColumns}└"
   for i in $(seq $(($boxWidth-2))); do printf '─'; done
   printf '┘'
 }
