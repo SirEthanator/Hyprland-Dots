@@ -65,32 +65,27 @@ refresh() {
   for i in $(seq $leadingLines); do printf '\n'; done
 
 
-  # ---- Draw top of box ----
+  # ---- Draw top of box with title ----
+  spaceCount=$(($boxWidth - ${#pageTitle} - 4))  # Subtract length of title from box width then subtract sides of box and spaces on sides of title
+  spaces=$(for i in $(seq $(($spaceCount / 2))); do printf '─'; done)  # This is not a dash (keep in mind for later)
+
   printf "${leadingColumns}┌"
-  for i in $(seq $(($boxWidth-2))); do printf '─'; done  # This is not a dash (keep in mind for later)
-  printf '┐\n'
-
-
-  # ---- Draw line with title ----
-  printf "${leadingColumns}│"
-  spaceCount=$(($boxWidth - ${#pageTitle} - 2))  # Subtract length of title from box width then subtract sides of box
-  spaces=$(for i in $(seq $(($spaceCount / 2))); do printf ' '; done)
 
   printf "$spaces"
-  printf "$(tput bold)$pageTitle$(tput sgr0)"  # Print title in bold
+  printf "$(tput bold) $pageTitle $(tput sgr0)"  # Print title in bold
   printf "$spaces"
 
   if [[ ( $(($boxWidth % 2)) -eq 0 && $((${#pageTitle} % 2)) -eq 1 ) || ( $(($boxWidth % 2)) -eq 1 && $((${#pageTitle} % 2)) -eq 0 ) ]]; then
     printf ' '  # Extra space if the title cannot be truly centred
   fi
-  printf '│\n'
+  printf '┐\n'
 
 
   # ---- Draw box sides with no content ----
-  spaceCount=$(($spaceCount + ${#pageTitle}))
+  spaceCount=$(($boxWidth - 2))
   spaces=$(for i in $(seq $(($spaceCount))); do printf ' '; done)
 
-  for i in $(seq $(($boxHeight-$optionCount-3))); do  # Height minus top, bottom and title row and number of options
+  for i in $(seq $(($boxHeight-$optionCount-2))); do  # Height minus top and bottom row and number of options
     printf "${leadingColumns}│"
     printf "$spaces"
     printf '│\n'
