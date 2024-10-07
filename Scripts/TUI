@@ -24,8 +24,7 @@ printh() {
 
   printf "%s" "${smso}${1}"
   if [[ ! $4 == true ]]; then
-    # Do not reset if $4 is true
-    printf "$(tput sgr0)"
+    printf "$(tput sgr0)"  # Reset formatting if $4 is not true
   fi
 }
 
@@ -39,10 +38,6 @@ refresh() {
 
 
   # ---- Define variables ----
-  local pageTitle=$1
-  options=("$@")
-  options=("${options[@]:1}")  # Remove first element
-  # $options now contains pairs of option title and command
   local maxBoxWidth=160
   local maxBoxHeight=$((40 + $optionCount))
 
@@ -66,8 +61,8 @@ refresh() {
 
 
   # ---- Draw top of box with title ----
-  spaceCount=$(($boxWidth - ${#pageTitle} - 4))  # Subtract length of title from box width then subtract sides of box and spaces on sides of title
-  spaces=$(for i in $(seq $(($spaceCount / 2))); do printf '─'; done)  # This is not a dash (keep in mind for later)
+  local spaceCount=$(($boxWidth - ${#pageTitle} - 4))  # width - length of title - (box sides + spaces on sides of title)
+  local spaces=$(for i in $(seq $(($spaceCount / 2))); do printf '─'; done)  # This is not a dash
 
   printf "${leadingColumns}┌"
 
@@ -76,16 +71,16 @@ refresh() {
   printf "$spaces"
 
   if [[ ( $(($boxWidth % 2)) -eq 0 && $((${#pageTitle} % 2)) -eq 1 ) || ( $(($boxWidth % 2)) -eq 1 && $((${#pageTitle} % 2)) -eq 0 ) ]]; then
-    printf ' '  # Extra space if the title cannot be truly centred
+    printf '─'  # Extra '─' if the title cannot be truly centred
   fi
   printf '┐\n'
 
 
   # ---- Draw box sides with no content ----
-  spaceCount=$(($boxWidth - 2))
-  spaces=$(for i in $(seq $(($spaceCount))); do printf ' '; done)
+  local spaceCount=$(($boxWidth - 2))
+  local spaces=$(for i in $(seq $(($spaceCount))); do printf ' '; done)
 
-  for i in $(seq $(($boxHeight-$optionCount-2))); do  # Height minus top and bottom row and number of options
+  for i in $(seq $(($boxHeight-$optionCount-2))); do  # height - num of options - top and bottom row
     printf "${leadingColumns}│"
     printf "$spaces"
     printf '│\n'
@@ -97,21 +92,21 @@ refresh() {
 
     # Calculate spaces starting with spaces in between box sides then subtracting the length of option title
     # then subtracting the following '. ' then subtracting the number in front e.g. '2'
-    number=$(($i / 2 + 1))
-    spaceCount=$(($spaceCount - ${#options[$i]} - 2 - ${#number}))
-    spaces=$(for i in $(seq $(($spaceCount))); do printf ' '; done)
+    local optNumber=$(($i / 2 + 1))
+    local spaceCount=$(($spaceCount - ${#options[$i]} - 2 - ${#optNumber}))
+    local spaces=$(for i in $(seq $(($spaceCount))); do printf ' '; done)
 
     printf "${leadingColumns}│"
     if [[ $(($i / 2)) -eq $option ]]; then
-      printh "${number}. ${options[$i]}" 7 0 true  # Print highlighted text for selected option
-      printh "$spaces" -1 -1 true  # true stops it from automatically resetting and -1 stops it from running tput every time for extra SPEED 🔥 (Still not that fast lol)
+      printh "${optNumber}. ${options[$i]}" 7 0 true  # Print highlighted text for selected option
+      printh "$spaces" -1 -1 true  # true stops it from automatically resetting and -1 stops it from running tput every time to make it much print faster
       printf "$(tput sgr0)"  # Reset so that other text isn't highlighted
     else
-      printf "${number}. ${options[$i]}"
+      printf "${optNumber}. ${options[$i]}"
       printf "$spaces"
     fi
     printf '│\n'
-    spaceCount=$(($boxWidth - 2))  # Reset spaceCount
+    spaceCount=$(($boxWidth - 2))  # Reset $spaceCount
   done
 
 
@@ -126,24 +121,36 @@ refresh() {
 dialog() {
   # syntax: page-title option1-title option1-command option2-title option2-command etc.
 
-  # if [[ $(awk "BEGIN { printf ( ($#-1)/2 ) }") =~ ^[+-]?[0-9]*\.[0-9]+$ ]]; then
+
+  # ---- Check for invalid no. of args ----
   if [[ $(($# % 2)) -eq 0 ]] || [[ $# -eq 1 ]]; then
     local errDetails=($(caller))
     echo "${errDetails[1]}: line ${errDetails[0]}: dialog: invalid number of arguments"
     exit 1
   fi
 
+
+  # ---- Define variables ----
+  pageTitle=$1
   optionCount=$((($#-1)/2))
   option=0  # 0 is option 1
+  options=("$@")
+  options=("${options[@]:1}")  # Remove first element
+  # $options now contains pairs of option title and command
+
+
+  # ---- Main loop ----
   while true; do
     if [[ $noRefresh != true ]]; then
       refresh "$@"  # Pass all arguments into refresh function
     fi
     noRefresh=false
-    read -rsn1 mode # get 1 character
+
+    read -rsn1 mode  # get 1 character
     if [[ $mode == $(printf "\u1b") ]]; then
-      read -rsn2 mode # read 2 more chars
+      read -rsn2 mode  # read 2 more chars for arrow keys
     fi
+
     case $mode in
       '[D' | '[A') if [[ $option -gt 0 ]]; then option=$(($option-1)); else noRefresh=true; fi ;;  # Left/Up
       '[C' | '[B') if [[ $option -lt $(($optionCount - 1)) ]]; then option=$(($option+1)); else noRefresh=true; fi ;;  # Right/Down
