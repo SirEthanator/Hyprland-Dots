@@ -12,7 +12,7 @@ while true; do
       'Uninstall package' 'read -p \"Package(s) to remove: \" -a packages; \
         sudo pacman -Rs \${packages[@]}' \
       'Remove orphan packages' 'sudo pacman -Rns \$(pacman -Qtdq) || printf \"\e[A\033[2KNo orphan packages found.\n\"' \
-      'Clear package cache' 'sudo pacman -Scc' \
+      'Clear package cache' 'yes | sudo pacman -Scc' \
       'Update mirrors' 'echo \"Using config file: /etc/xdg/reflector/reflector.conf\"; sudo reflector @/etc/xdg/reflector/reflector.conf' \
       'Back' 'prompt=false'" \
     'Themes' "dialog 'Themes' \
