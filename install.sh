@@ -107,6 +107,7 @@ $HOME/Everforest-GTK-Theme/themes/install.sh -t green -c dark
 mv $HOME/.themes/Everforest-Green-Dark $HOME/.themes/Everforest
 mv $HOME/.themes/Everforest-Green-Dark-hdpi $HOME/.themes/Everforest-hdpi
 mv $HOME/.themes/Everforest-Green-Dark-xhdpi $HOME/.themes/Everforest-xhdpi
+ln -s $HOME/.themes/Everforest/gtk-4.0/{assets,gtk.css,gtk-dark.css}
 
 cd $HOME/.themes
 wget https://github.com/catppuccin/gtk/releases/download/v1.0.3/catppuccin-mocha-lavender-standard+default.zip
@@ -139,7 +140,7 @@ curl -LO https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folder
 ./papirus-folders -C cat-mocha-lavender --theme Papirus-Dark
 ./papirus-folders -C cat-mocha-lavender --theme Papirus
 
-# TODO: Check if directories exist before icon installation
+# TODO: Check if directories exist before icon and cursor installation
 
 # Clone repo and symlink with stow
 git clone https://github.com/SirEthanator/Hyprland-Dots.git $HOME/Hyprland-Dots
@@ -154,5 +155,12 @@ stow .
 cd $HOME/.icons
 ln -s ../Hyprland-Dots/Cursors/everforest-cursors .
 ln -s ../Hyprland-Dots/Cursors/everforest-cursors-light .
-# TODO: Install Catppuccin Cursors
+wget https://github.com/catppuccin/cursors/releases/download/v0.3.1/catppuccin-mocha-dark-cursors.zip
+wget https://github.com/catppuccin/cursors/releases/download/v0.3.1/catppuccin-mocha-light-cursors.zip
+unzip ./catppuccin-mocha-dark-cursors.zip > /dev/null 2>&1
+unzip ./catppuccin-mocha-light-cursors.zip > /dev/null 2>&1
+mv catppuccin-mocha-dark-cursors catppuccin-cursors
+mv catppuccin-mocha-light-cursors catppuccin-cursors-light
+
+# TODO: Create example .zshrc with starship enabled if .zshrc doesn't exsist
 
