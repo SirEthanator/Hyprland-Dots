@@ -1,0 +1,19 @@
+#!/bin/bash
+
+printf '\e[?25l'  # Hide the cursor
+
+counter=0
+
+while [ $counter -le 100 ]; do
+  printf "Doing something... ["
+  for i in $(seq $(($counter / 2))); do printf '-'; done
+  for i in $(seq $((50 - $counter / 2))); do printf ' '; done
+  printf "] [${counter}/100]\r"
+  counter=$(($counter + 1))
+  sleep 0.05
+done
+
+printf '\nDone! Nothing was achieved sucessfully.\n'
+
+printf '\e[?25h'  # Show the cursor
+
