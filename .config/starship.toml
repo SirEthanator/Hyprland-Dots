@@ -1,1 +1,42 @@
-./starship/Everforest.toml
+format = """
+\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+\n$character
+"""
+
+right_format = """
+$status\
+"""
+
+[character]
+success_symbol = "[⬩⬥◆](fg:white)"
+error_symbol = "[⬩⬥◆](fg:red)"
+
+[hostname]
+format = "[░▒▓](fg:cyan)[   $hostname ](bg:cyan fg:black)[](fg:cyan)"
+disabled = false
+ssh_only = false
+
+[directory]
+style = "fg:black bg:green"
+format = "[ ◆ ](fg:white)[](fg:green)[ $path ]($style)[](fg:green)"
+truncation_length = 6
+truncation_symbol = "…/"
+read_only = ""
+
+[git_branch]
+style = "fg:black bg:yellow"
+format = '[ ◆ ](fg:white)[](fg:yellow)[  $branch]($style)'
+
+[git_status]
+style = "fg:black bg:yellow"
+format = '[ $all_status$ahead_behind ]($style)[](fg:yellow)'
+
+[status]
+style = "fg:black bg:red"
+format = '[](fg:red)[  $status ]($style)[▓▒░](fg:red)'
+disabled = false
+
