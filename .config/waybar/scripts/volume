@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ "$(pamixer --get-volume-human)" = 'muted' ]; then
+  icon=''
+else
+  volume=$(($(pamixer --get-volume)))
+  if [ $volume -ge 50 ]; then
+    icon=''
+  elif [ $volume -gt 0 ]; then
+    icon=''
+  else
+    icon=''
+  fi
+fi
+
+echo "$icon"
+

@@ -68,14 +68,14 @@
 
     "custom/power-left-end": {
       "format": " ",
-      "tooltip": false,
+      "tooltip": false
     },
 
     "group/power": {
       "orientation": "horizontal",
       "drawer": {
         "transition-duration": 600,
-        "transition-left-to-right": false,
+        "transition-left-to-right": false
       },
       "modules": [
         "custom/shutdown",
@@ -86,7 +86,7 @@
         "custom/logout",
         "custom/divider",
         "custom/reboot",
-        "custom/divider",
+        "custom/divider"
       ]
     },
 
@@ -100,13 +100,13 @@
         "default": ""
       },
       "persistent-workspaces": {
-        "*": 5,
+        "*": 5
       }
     },
 
     "tray": {
       "icon-size": 18,
-      "spacing": 12,
+      "spacing": 12
     },
 
     "custom/tray-collapsed": {
@@ -123,7 +123,7 @@
       "orientation": "horizontal",
       "drawer": {
         "transition-duration": 600,
-        "transition-left-to-right": false,
+        "transition-left-to-right": false
       },
       "modules": [
         "custom/tray-collapsed",
@@ -138,17 +138,18 @@
 
     "clock": {
       "format": "{:%I:%M:%S %p}",
-      "interval": 1,
+      "interval": 1
     },
 
     "custom/audio-icon": {
-      "format": "󰓃",
+      "exec": "$HOME/.config/waybar/scripts/volume",
+      "interval": 1,
       "tooltip": false
     },
 
     "pulseaudio": {
       "format": "{volume}%",
       "tooltip": false,
-      "scroll-step": 1,
-    },
+      "scroll-step": 1
+    }
 }
