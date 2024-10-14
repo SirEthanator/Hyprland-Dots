@@ -3,5 +3,6 @@
 @define-color border #313244;
 @define-color fg #CDD6F4;
 @define-color accent #B4BEFE;
+@define-color icons @accent;
 @define-color inactive #45475A;
 
