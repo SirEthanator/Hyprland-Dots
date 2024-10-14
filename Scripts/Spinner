@@ -1,0 +1,23 @@
+#!/bin/bash
+
+printf '\e[?25l'  # Hide the cursor
+
+stages=('/' '-' '\' '|')
+stage=0
+counter=0
+
+while [ $counter -lt 100 ]; do
+  # Uses a carriage return to go back to the start of the line
+  printf "Doing something... ${stages[$stage]} \r"
+  stage=$(($stage + 1))
+  if [[ stage -gt 3 ]]; then
+    stage=0
+  fi
+  counter=$(($counter + 1))
+  sleep 0.2
+done
+
+echo 'Done! Nothing was achieved sucessfully.'
+
+printf '\e[?25h'  # Show the cursor
+
