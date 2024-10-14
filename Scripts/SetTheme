@@ -170,16 +170,6 @@ cat < $HOME/.config/kitty/$theme >> $HOME/.config/kitty/kitty.conf  # >> appends
 sleep 0.05
 
 
-# ==== Starship ==== #
-echo 'Setting Starship theme...'
-cd $HOME/.config
-if [[ -e ./starship.toml ]]; then
-  rm ./starship.toml
-fi
-ln -s ./starship/$theme.toml ./starship.toml
-sleep 0.05
-
-
 # ==== Macchina ==== #
 echo 'Setting Macchina theme...'
 if [[ "$theme" == 'Everforest' ]]; then
