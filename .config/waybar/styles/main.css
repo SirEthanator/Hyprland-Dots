@@ -48,7 +48,7 @@ window#waybar.empty #window {
 }
 
 #workspaces button.active {
-  color: @accent
+  color: @icons
 }
 
 #workspaces button:hover {
@@ -113,6 +113,6 @@ window#waybar {
 
 #custom-apps,#custom-notifications,#custom-shutdown,#custom-logout,#custom-reboot,#custom-firmware,#custom-suspend,#custom-tray-collapsed,#custom-divider,#custom-clock-icon,#custom-audio-icon {
   background-color: @bg-light;
-  color: @accent
+  color: @icons
 }
 
