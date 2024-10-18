@@ -2,24 +2,28 @@
 
 source $HOME/Scripts/TUI  # Import TUI functions
 
+pkgManagement="dialog 'Package management' \
+  'Update' 'sudo pacman -Syu' \
+  'Install package' 'read -p \"Package(s) to install: \" -a packages; \
+    sudo pacman -S \${packages[@]}' \
+  'Uninstall package' 'read -p \"Package(s) to remove: \" -a packages; \
+    sudo pacman -Rs \${packages[@]}' \
+  'Remove orphan packages' 'sudo pacman -Rns \$(pacman -Qtdq) || printf \"\e[A\033[2KNo orphan packages found.\n\"' \
+  'Clear package cache' 'yes | sudo pacman -Scc' \
+  'Update mirrors' 'echo \"Using config file: /etc/xdg/reflector/reflector.conf\"; sudo reflector @/etc/xdg/reflector/reflector.conf' \
+  'Back' 'prompt=false'"
+
+themes="dialog 'Themes' \
+  'Set wallpaper' ' $HOME/Scripts/SetWall \$(( zenity --file-selection) 2>&1 | tail -n1)' \
+  'Everforest' '$HOME/Scripts/SetTheme 1' \
+  'Catppuccin Mocha' '$HOME/Scripts/SetTheme 2' \
+  'Back' 'prompt=false'"
+
 while true; do
   prompt=true
   dialog 'Toolbox' \
-    'Package management' "dialog 'Package management' \
-      'Update' 'sudo pacman -Syu' \
-      'Install package' 'read -p \"Package(s) to install: \" -a packages; \
-        sudo pacman -S \${packages[@]}' \
-      'Uninstall package' 'read -p \"Package(s) to remove: \" -a packages; \
-        sudo pacman -Rs \${packages[@]}' \
-      'Remove orphan packages' 'sudo pacman -Rns \$(pacman -Qtdq) || printf \"\e[A\033[2KNo orphan packages found.\n\"' \
-      'Clear package cache' 'yes | sudo pacman -Scc' \
-      'Update mirrors' 'echo \"Using config file: /etc/xdg/reflector/reflector.conf\"; sudo reflector @/etc/xdg/reflector/reflector.conf' \
-      'Back' 'prompt=false'" \
-    'Themes' "dialog 'Themes' \
-    'Set wallpaper' ' $HOME/Scripts/SetWall \$(( zenity --file-selection) 2>&1 | tail -n1)' \
-      'Everforest' '$HOME/Scripts/SetTheme 1' \
-      'Catppuccin Mocha' '$HOME/Scripts/SetTheme 2' \
-      'Back' 'prompt=false'" \
+    'Package management' "$pkgManagement" \
+    'Themes' "$themes" \
     'Exit' 'exit 0'
   if [[ $prompt == true ]]; then printf '\n'; read -n 1 -srp 'Press any key to continue...'; fi
 done
