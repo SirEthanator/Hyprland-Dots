@@ -16,45 +16,57 @@ fi
 
 # ==== Common ==== #
 
-echo "If running this for the first time, it's recommended to take a backup first in case of errors."
-
 if [[ $1 -eq 1 ]]; then
   theme='Everforest'
   icons='Everforest-Dark'
   cursors='everforest-cursors'
   accent='A7C080'
-  darkbg='1E2326'
   wall="$HOME/Hyprland-Dots/Wallpapers/Everforest/Hard.jpg"
 elif [[ $1 -eq 2 ]]; then
   theme='CatMocha'
   icons='Papirus-Dark'
   cursors='catppuccin-cursors'
   accent='B4BEFE'
-  darkbg='11111B'
   wall="$HOME/Hyprland-Dots/Wallpapers/Catppuccin/Crust.jpg"
 fi
 
+prompt() {
+  # Syntax: prompt-text default
+
+  local prompt default input output
+  prompt=$1
+  default=$(echo "$2" | tr '[:upper:]' '[:lower:]')
+  read -p "$prompt" input
+  input=$(echo "$input" | tr '[:upper:]' '[:lower:]')
+
+  if [[ $input == 'y' || ( -z $input && $default == 'y' ) ]]; then
+    output=true
+  elif [[ $input == 'n' || ( -z $input && $default == 'n' ) ]]; then
+    output=false
+  else
+    if [[ $default == 'y' ]]; then output=true; else output=false; fi
+  fi
+  echo "$output"
+}
+
+changeWall=$(prompt 'Change wallpaper? (y/N) ' 'n')
+lightCurs=$(prompt 'Enable light cursors? (y/N) ' 'n')
+colourful=$(prompt 'Enable colourful Waybar? (y/N) ' 'n')
+floating=$(prompt 'Enable floating Waybar? (Y/n) ' 'y')
+
 
 # ==== Hyprpaper ==== #
-read -p 'Change wallpaper? (y/N) ' changeWall
-changeWall=$(echo "$changeWall" | tr '[:lower:]' '[:upper:]')
-
-if [[ "$changeWall" == 'Y' ]]; then
+if [[ "$changeWall" == 'true' ]]; then
   echo 'Setting wallpaper...'
   echo "preload = $wall"     > $HOME/.config/hypr/hyprpaper.conf
   echo "wallpaper = ,$wall" >> $HOME/.config/hypr/hyprpaper.conf
   echo "splash = false"     >> $HOME/.config/hypr/hyprpaper.conf
   echo ''                   >> $HOME/.config/hypr/hyprpaper.conf
-
-elif [[ "$changeWall" != 'N' ]] && [[ "$changeWall" != '' ]]; then
-  echo 'Invalid option: Defaulting to N'
 fi
 sleep 0.05
 
 
 # ==== Waybar ==== #
-read -p 'Enable floating Waybar? (Y/n) ' floating
-floating=$(echo "$floating" | tr '[:lower:]' '[:upper:]')
 echo 'Setting Waybar theme...'
 
 echo '/* --- Import main styles --- */'  > $HOME/.config/waybar/style.css
@@ -65,23 +77,20 @@ echo "@import 'colours/$theme.css';"    >> $HOME/.config/waybar/style.css
 echo ''                                 >> $HOME/.config/waybar/style.css
 echo '/* --- Style selection --- */'    >> $HOME/.config/waybar/style.css
 
-if [[ "$floating" == 'Y' ]] || [[ -z "$floating" ]]; then  # -z checks for empty string
+if [[ "$floating" == 'true' ]]; then
   echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
-elif [[ "$floating" != 'N' ]]; then
-  echo 'Invalid option: Defaulting to Y'
-  echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
+fi
+
+if [[ "$colourful" == 'true' ]]; then
+  echo "@import 'styles/colourful.css';" >> $HOME/.config/waybar/style.css
 fi
 
 sleep 0.05
 
 
 # ==== GTK theme + icons ==== #
-read -p 'Use light cursors? (y/N) ' lightCurs
-lightCurs=$(echo "$lightCurs" | tr '[:lower:]' '[:upper:]')
-if [[ "$lightCurs" == 'Y' ]]; then
+if [[ "$lightCurs" == 'true' ]]; then
   cursors=$(echo "${cursors}-light")
-elif [[ "$lightCurs" != 'N' ]] && [[ "$lightCurs" != '' ]]; then
-  echo 'Invalid option: Defaulting to N'
 fi
 
 echo 'Setting GTK theme, icons & cursors...'
@@ -127,19 +136,19 @@ ln -s $HOME/.themes/$theme/gtk-4.0/assets $HOME/.config/gtk-4.0
 
 # Envvars
 if [[ -e $HOME/.config/hypr/envvars.conf ]]; then
-  if [[ "grep -q GTK_THEME $HOME/.config/hypr/envvars.conf" ]]; then
+  if grep -q GTK_THEME $HOME/.config/hypr/envvars.conf; then
     sed -i "s/.*GTK_THEME.*/env = GTK_THEME,$theme:dark/" $HOME/.config/hypr/envvars.conf
   else
     echo "env = GTK_THEME,$theme:dark" >> $HOME/.config/hypr/envvars.conf
   fi
 
-  if [[ "grep -q HYPRCURSOR_THEME $HOME/.config/hypr/envvars.conf" ]]; then
+  if grep -q HYPRCURSOR_THEME $HOME/.config/hypr/envvars.conf; then
     sed -i "s/.*HYPRCURSOR_THEME.*/env = HYPRCURSOR_THEME,$cursors/" $HOME/.config/hypr/envvars.conf
   else
     echo "env = HYPRCURSOR_THEME,$cursors" >> $HOME/.config/hypr/envvars.conf
   fi
 
-  if [[ "grep -q XCURSOR_THEME $HOME/.config/hypr/envvars.conf" ]]; then
+  if grep -q XCURSOR_THEME $HOME/.config/hypr/envvars.conf; then
     sed -i "s/.*XCURSOR_THEME.*/env = XCURSOR_THEME,$cursors/" $HOME/.config/hypr/envvars.conf
   else
     echo "env = XCURSOR_THEME,$cursors" >> $HOME/.config/hypr/envvars.conf
@@ -256,7 +265,11 @@ echo 'Reloading Kitty...'
 for pid in $(pidof kitty); do
   kill -SIGUSR1 $pid > /dev/null 2>&1 &
 done
+echo 'Reloading Cava...'
+for pid in $(pidof cava); do
+  kill -SIGUSR1 $pid > /dev/null 2>&1 &
+done
 
-echo 'Done! Please reboot for all changes to take effect.'
+echo 'Done! Reboot may be required for some changes to take effect.'
 exit 0
 
