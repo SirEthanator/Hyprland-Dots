@@ -2,3 +2,7 @@
 @define-color fg @bg;
 @define-color icons @bg;
 
+#custom-apps {
+  color: @bg;
+}
+
