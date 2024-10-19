@@ -1,0 +1,10 @@
+#!/bin/bash
+
+source $HOME/Scripts/TUI
+
+dialog 'The Hello World Page' 'Option one' "notify-send 'Example TUI' 'Option one selected'"\
+  'Option two' "notify-send 'Example TUI' 'Option two selected'"\
+  'Option three' "notify-send 'Example TUI' 'Option three selected'"\
+  'Option four' "notify-send 'Example TUI' 'Option four selected'"
+printf '\n'
+
