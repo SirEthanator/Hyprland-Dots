@@ -4,14 +4,14 @@
     "modules-center": ["hyprland/window"],
     "modules-right": ["custom/power-left-end", "group/power", "custom/tray-left-end", "group/sys-tray", "custom/audio-icon", "pulseaudio", "custom/clock-icon", "clock", "custom/notifications"],
     "custom/apps": {
-      "format": "  ",
+      "format": " 󰣇 ",
       "tooltip": false,
       "on-click": "rofi -show drun -disable-history"
     },
 
     "custom/notifications": {
       "tooltip": false,
-      "format": "{icon}",
+      "format": " {icon} ",
       "format-icons": {
         "notification": "",
         "none": "",
@@ -132,12 +132,12 @@
     },
 
     "custom/clock-icon": {
-      "format": "",
+      "format": " ",
       "tooltip": false
     },
 
     "clock": {
-      "format": "{:%I:%M:%S %p}",
+      "format": "{:%I:%M:%S %p} ",
       "interval": 1
     },
 
@@ -148,7 +148,7 @@
     },
 
     "pulseaudio": {
-      "format": "{volume}%",
+      "format": "{volume}% ",
       "tooltip": false,
       "scroll-step": 1
     }
