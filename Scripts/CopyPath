@@ -5,7 +5,7 @@ if [ "$#" -gt 1 ]; then
 	exit 1
 fi
 
-if [ ! -e "$1" ] && [ ! -d "$1" ]; then
+if [ ! -e "$1" ] && [ -n "$1" ]; then
   echo "File or directory does not exsist at: $1"
   exit 1
 fi
