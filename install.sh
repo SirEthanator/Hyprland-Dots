@@ -42,15 +42,15 @@ if [[ ! -e $HOME/.cargo/bin/macchina ]]; then
   cargo install macchina
 fi
 
-if [[ ! -e /usr/bin/swayosd-client ]]; then
-  if [[ -e ./SwayOSD ]]; then
-    mv ./SwayOSD ./SwayOSD.bak
+if [[ ! -e /usr/bin/syshud ]]; then
+  if [[ -e ./syshud ]]; then
+    mv ./syshud ./syshud.bak
   fi
-  git clone https://github.com/ErikReider/SwayOSD.git
-  cd SwayOSD
-  makepkg -si --noconfirm --needed
+  git clone https://aur.archlinux.org/syshud.git syshud
+  cd syshud
+  makepkg -si --noconfirm --needed  # -s will install deps, -i installs automatically
   cd ..
-  rm -rf ./SwayOSD
+  rm -rf ./syshud
 fi
 
 # ==== Install sddm ==== #
@@ -83,6 +83,7 @@ backupItems=(cava hypr kitty Kvantum macchina nvim rofi starship swaync waybar s
 
 for item in "${backupItems[@]}"; do
   if [[ -e $HOME/.config/$item ]]; then
+    if [[ ! -e $HOME/.config/.backup ]]; then mkdir $HOME/.config/.backup; fi
     echo "Backing up ~/.config/${item}..."
     mv $HOME/.config/$item $HOME/.config/.backup/$item
     backedUp=true
@@ -90,7 +91,7 @@ for item in "${backupItems[@]}"; do
 done
 
 if [[ "$backedUp" = true ]]; then
-  echo 'Backed up items have been stored in ~/..config/.backup'
+  echo 'Backed up items have been stored in ~/.config/.backup'
 fi
 
 # ==== Install new config ==== #
@@ -101,6 +102,26 @@ cd $HOME
 if [[ ! -e $HOME/.themes ]]; then
   mkdir $HOME/.themes
 fi
+
+
+if [[ ! -e $HOME/.themes/.backup ]]; then mkdir $HOME/.themes/.backup; fi
+backedUp=false
+themeDirs=(Everforest-Green-Dark Everforest-Green-Dark-hdpi Everforest-Green-Dark-xhdpi Everforest Everforest-hdpi Everforest-xhdpi \
+           catppuccin-mocha-lavender-standard+default catppuccin-mocha-lavender-standard+default-hdpi catppuccin-mocha-lavender-standard+default-xhdpi CatMocha CatMocha-hdpi CatMocha-xhdpi)
+for item in "${themeDirs[@]}"; do
+  if [[ -e $HOME/.themes/$item ]]; then
+    echo "Backing up ~/.themes/$item"
+    mv $HOME/.themes/$item $HOME/.themes/.backup/$item
+    backedUp=true
+  fi
+done
+
+if [[ "$backedUp" = true ]]; then
+  echo 'Backed up items have been stored in ~/.themes/.backup'
+else
+  rm -d $HOME/.themes/.backup
+fi
+
 git clone https://github.com/Fausto-Korpsvart/Everforest-GTK-Theme.git
 chmod +x $HOME/Everforest-GTK-Theme/themes/install.sh
 $HOME/Everforest-GTK-Theme/themes/install.sh -t green -c dark
