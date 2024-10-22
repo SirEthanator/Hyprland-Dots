@@ -58,7 +58,7 @@ mainbox {
 imagebox {
     padding:                     20px;
     background-color:            transparent;
-    background-image:            url("~/.config/rofi/Arch.png", height);
+    background-image:            url("~/.config/rofi/Arch.png", width);
     orientation:                 vertical;
     children:                    [ "inputbar", "dummy", "mode-switcher" ];
 }
