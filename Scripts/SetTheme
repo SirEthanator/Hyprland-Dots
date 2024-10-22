@@ -1,11 +1,29 @@
 #!/bin/bash
 
+# ==== Adding a theme ==== #
+
+# Modify argument check
+# Define theme variables
+# Add wallpaper
+# Add waybar colour css file
+# Add gtk and kvantum themes
+# Add icon and cursor themes
+# Add kitty colour file
+# Add swaync theme
+# Add rofi theme
+# Add Hyprlock theme
+# Add neovim theme
+
+
+# ==== Check for valid arguments ==== #
+
 echo ''
 if [[ ! $1 -gt 0 ]] || [[ ! $1 -lt 3 ]]; then  # True if arg is not an int between 0 and 3
   echo 'Syntax: SetTheme <option>'
   echo 'Options:'
   echo '1. Everforest'
   echo '2. Catppuccin Mocha'
+  echo '3. Rose Pine (WIP - will not apply)'
   if [[ $1 == '-h' ]] || [[ $1 == '--help' ]]; then
     exit 0
   else
@@ -28,6 +46,12 @@ elif [[ $1 -eq 2 ]]; then
   cursors='catppuccin-cursors'
   accent='B4BEFE'
   wall="$HOME/Hyprland-Dots/Wallpapers/Catppuccin/Crust.jpg"
+elif [[ $1 -eq 3 ]]; then
+  theme='Rose-Pine'
+  icons='Rose-Pine'
+  cursors='rose-pine-cursors'
+  accent='9ccfd8'
+  wall="$HOME/Hyprland-Dots/Wallpapers/Rose-Pine/Base.png"
 fi
 
 prompt() {
