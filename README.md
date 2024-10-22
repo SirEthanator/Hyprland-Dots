@@ -27,6 +27,7 @@
 - [Ocean Sound Theme](https://invent.kde.org/plasma/ocean-sound-theme)
 - [FF Ultima Firefox CSS](https://github.com/soulhotel/FF-ULTIMA)
 - [Everforest Firefox Theme](https://addons.mozilla.org/en-US/firefox/addon/everforest-dark-hard/)
+- [syshud](https://github.com/system64fumo/syshud)
 
 ## Installation
 
