@@ -62,7 +62,11 @@ I will try to improve on my dotfiles to be easily usable for anyone!
 
 ## To do
 
-- [ ] Installation script (Currently in the works)!
+- [ ] Installation script
+
+- [ ] Add Rose Pine theme
+
+- [ ] Update Kvantum themes (Everforest + Catppuccin)
 
 #
 
