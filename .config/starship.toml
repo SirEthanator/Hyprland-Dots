@@ -24,6 +24,7 @@ ssh_only = false
 style = "fg:black bg:green"
 format = "[ ◆ ](fg:white)[](fg:green)[ $path ]($style)[](fg:green)"
 truncation_length = 6
+truncate_to_repo = false
 truncation_symbol = "…/"
 read_only = ""
 
