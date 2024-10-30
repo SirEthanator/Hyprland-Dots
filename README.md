@@ -60,23 +60,13 @@ $ sh -c "$(curl -L https://raw.githubusercontent.com/SirEthanator/Hyprland-Dots/
 Also note that I probably have missed some things in this section, so don't expect everything to work perfectly.
 I will try to improve on my dotfiles to be easily usable for anyone!
 
-## To do
+## TODO
 
 - [ ] Installation script
 
-- [ ] Add Rose Pine theme
+- [ ] Add GTK, icon, and cursor themes to repo
 
 - [ ] Update Kvantum themes (Everforest + Catppuccin)
-
-#
-
-- [x] Themes
-
-- [x] New shell prompt
-
-- [x] Improve margins for different Waybar styles
-
-- [x] Optimise Waybar styles
 
 ## More screenshots
 
