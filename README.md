@@ -15,10 +15,10 @@
 
 - Obviously thanks to [Sainnhe](https://github.com/sainnhe) for [this beautiful color scheme](https://github.com/sainnhe/everforest).
 - My Neovim config is [LazyVim](https://github.com/LazyVim/LazyVim) with added plugin config and a tweaked init.lua.
-- Cursors come from [Everforest Cursors](https://github.com/talwat/everforest-cursors) with an included hyprcursor port.
-- My Everforest Kvantum theme is based on [Catppuccin Kvantum](https://github.com/catppuccin/Kvantum) which is also included in the repo.
-- My theme for Swaync is based on [Catppuccin swaync](https://github.com/catppuccin/swaync).
-- My Rofi theme is from [this collection of Rofi themes](https://github.com/adi1090x/rofi).
+- Cursors come from [Everforest Cursors](https://github.com/talwat/everforest-cursors), [Catppuccin Cursors](https://github.com/catppuccin/cursors), and (Rose Pine Cursors)[https://github.com/rose-pine/cursor].
+- My Everforest and Rose Pine Kvantum themes are based on [Catppuccin Kvantum](https://github.com/catppuccin/Kvantum) which is also included in the repo.
+- My themes for Swaync is based on [Catppuccin swaync](https://github.com/catppuccin/swaync).
+- My Rofi themes are from [this collection of Rofi themes](https://github.com/adi1090x/rofi).
 
 ## Use with
 
@@ -33,19 +33,9 @@
 
 This section isn't a complete install guide, but just some tips if you plan to install my dotfiles!
 
-#### Catppuccin
-
 - The SetTheme script doesn't change some things such as the Firefox theme. It must be set manually.
-- There is other stuff to install other than what's in the previous section, I may add these later.
-- Make sure to install the GTK theme as CatMocha (Rename the directory).
-- Ensure that you install the cursors as catppuccin-cursors.
-
-#### Everforest
-
-- Make sure to install the GTK theme as Everforest (Rename the directory).
-
-#### Common
 - My config defaults to using gtklock now but can be modified to use hyprlock as themes are provided for it.
+- I will have missed things both here and in my list of things to install, so don't expect everything to work without installing extra packages.
 
 ### Install via script (NOT RECOMMENDED)
 
