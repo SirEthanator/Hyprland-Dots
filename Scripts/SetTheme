@@ -13,12 +13,13 @@
 # Add rofi theme
 # Add Hyprlock theme
 # Add neovim theme
+# Add macchina messages
 
 
 # ==== Check for valid arguments ==== #
 
 echo ''
-if [[ ! $1 -gt 0 ]] || [[ ! $1 -lt 3 ]]; then  # True if arg is not an int between 0 and 3
+if [[ ! $1 -gt 0 ]] || [[ ! $1 -lt 4 ]]; then  # True if arg is not an int between 0 and 4
   echo 'Syntax: SetTheme <option>'
   echo 'Options:'
   echo '1. Everforest'
@@ -205,16 +206,8 @@ sleep 0.05
 
 # ==== Macchina ==== #
 echo 'Setting Macchina theme...'
-if [[ "$theme" == 'Everforest' ]]; then
-  key_color='A7C080'
-  seperator_color='7A8478'
-elif [[ "$theme" == 'CatMocha' ]]; then
-  key_color='B4BEFE'
-  seperator_color='9399b2'
-fi
-
-sed -i "s/.*key_color.*/key_color = \"#$key_color\"/" $HOME/.config/macchina/themes/Theme.toml
-sed -i "s/.*seperator_color.*/seperator_color = \"#$seperator_color\"/" $HOME/.config/macchina/themes/Theme.toml
+sed -i "s/.*key_color.*/key_color = \"#$accent\"/" $HOME/.config/macchina/themes/Theme.toml
+sed -i "s/.*separator_color.*/separator_color = \"#$accent\"/" $HOME/.config/macchina/themes/Theme.toml
 sed -i "s/.*msgFile=.*/msgFile=~\/Scripts\/Messages\/$theme/" $HOME/Scripts/RandomMessage
 # The above replace the entire line that contains the first string with the second string
 sleep 0.05
