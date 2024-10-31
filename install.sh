@@ -98,7 +98,7 @@ fi
 
 cd $HOME
 
-# Install GTK themes
+# Back up GTK themes
 if [[ ! -e $HOME/.themes ]]; then
   mkdir $HOME/.themes
 fi
@@ -122,46 +122,7 @@ else
   rm -d $HOME/.themes/.backup
 fi
 
-git clone https://github.com/Fausto-Korpsvart/Everforest-GTK-Theme.git
-chmod +x $HOME/Everforest-GTK-Theme/themes/install.sh
-$HOME/Everforest-GTK-Theme/themes/install.sh -t green -c dark
-mv $HOME/.themes/Everforest-Green-Dark $HOME/.themes/Everforest
-mv $HOME/.themes/Everforest-Green-Dark-hdpi $HOME/.themes/Everforest-hdpi
-mv $HOME/.themes/Everforest-Green-Dark-xhdpi $HOME/.themes/Everforest-xhdpi
-ln -s $HOME/.themes/Everforest/gtk-4.0/{assets,gtk.css,gtk-dark.css}
-
-cd $HOME/.themes
-wget https://github.com/catppuccin/gtk/releases/download/v1.0.3/catppuccin-mocha-lavender-standard+default.zip
-if [[ $? -eq 0 ]]; then
-  unzip catppuccin-mocha-lavender-standard+default.zip > /dev/null 2>&1
-  if [[ $? -eq 0 ]]; then
-    rm catppuccin-mocha-lavender-standard+default.zip
-    mv catppuccin-mocha-lavender-standard+default CatMocha
-    mv catppuccin-mocha-lavender-standard+default-hdpi CatMocha-hdpi
-    mv catppuccin-mocha-lavender-standard+default-xhdpi CatMocha-xhdpi
-  else
-    echo 'Error extracting Catppuccin GTK'
-  fi
-else
-  echo 'Failed to download Catppuccin GTK'
-fi
-
-# Install icons
-if [[ ! -e $HOME/.icons ]]; then
-  mkdir $HOME/.icons
-fi
-
-cp -r $HOME/Everforest-GTK-Theme/icons/Everforest-Dark $HOME/.icons/
-
-wget -qO- https://git.io/papirus-icon-theme-install | env DESTDIR="$HOME/.icons" EXTRA_THEMES="Papirus-Dark" sh  # Install papirus using official script
-git clone https://github.com/catppuccin/papirus-folders.git
-cd papirus-folders
-sudo cp -r ./src/* $HOME/.icons/{Papirus,Papirus-Dark}
-curl -LO https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folders/master/papirus-folders && chmod +x ./papirus-folders
-./papirus-folders -C cat-mocha-lavender --theme Papirus-Dark
-./papirus-folders -C cat-mocha-lavender --theme Papirus
-
-# TODO: Check if directories exist before icon and cursor installation
+# TODO: Back up icons and cursors
 
 # Clone repo and symlink with stow
 git clone https://github.com/SirEthanator/Hyprland-Dots.git $HOME/Hyprland-Dots
@@ -174,14 +135,6 @@ stow .
 
 # Install cursors
 cd $HOME/.icons
-ln -s ../Hyprland-Dots/Cursors/everforest-cursors .
-ln -s ../Hyprland-Dots/Cursors/everforest-cursors-light .
-wget https://github.com/catppuccin/cursors/releases/download/v0.3.1/catppuccin-mocha-dark-cursors.zip
-wget https://github.com/catppuccin/cursors/releases/download/v0.3.1/catppuccin-mocha-light-cursors.zip
-unzip ./catppuccin-mocha-dark-cursors.zip > /dev/null 2>&1
-unzip ./catppuccin-mocha-light-cursors.zip > /dev/null 2>&1
-mv catppuccin-mocha-dark-cursors catppuccin-cursors
-mv catppuccin-mocha-light-cursors catppuccin-cursors-light
 
 # TODO: Create example .zshrc with starship enabled if .zshrc doesn't exsist
 
