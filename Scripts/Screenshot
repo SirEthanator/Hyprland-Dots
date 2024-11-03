@@ -1,25 +1,14 @@
 #!/bin/bash
 
-iDIR="/usr/share/icons/Papirus/64x64"
-
 time=$(date +%Y-%m-%d-%H-%M-%S)
 dir="$(xdg-user-dir PICTURES)/Screenshots"
 file="Screenshot_${time}_${RANDOM}.png"
 
-# notify and view screenshot
-notify_cmd_shot="notify-send -h string:x-canonical-private-synchronous:shot-notify -i ${iDIR}/apps/gtkam-camera.svg -t 5000 -u low"
-notify_view() {
-	${notify_cmd_shot} "Copied to clipboard."
-	if [[ -e "$dir/$file" ]]; then
-		notifID=$(${notify_cmd_shot} "Screenshot Saved." -p)
-	fi
-}
-
 # countdown
 countdown() {
-	notifIDCountdown=$(notify-send -h string:x-canonical-private-synchronous:shot-notify -t 1500 -i "$iDIR"/apps/alarm-timer.svg -p "Taking shot in : $sec")
+	notifIDCountdown=$(notify-send -h string:x-canonical-private-synchronous:shot-notify -t 1500 -i clock -p "Taking shot in : $sec")
 	for sec in $(seq $1 -1 1); do
-		notify-send -h string:x-canonical-private-synchronous:shot-notify -t 1500 -i "$iDIR"/apps/alarm-timer.svg "Taking shot in : $sec" -r $notifIDCountdown
+		notify-send -h string:x-canonical-private-synchronous:shot-notify -t 1500 -i clock "Taking shot in : $sec" -r $notifIDCountdown
 		sleep 1
 	done
 }
@@ -27,33 +16,27 @@ countdown() {
 # take shots
 shotnow() {
 	cd ${dir} && grim - | tee "$file" | wl-copy
-	notify_view
 }
 
 shot5() {
 	countdown '5'
 	sleep 1 && cd ${dir} && grim - | tee "$file" | wl-copy
-	notify_view
 }
 
 shot10() {
 	countdown '10'
 	sleep 1 && cd ${dir} && grim - | tee "$file" | wl-copy
-	notify_view
 }
 
 shotwin() {
 	w_pos=$(hyprctl activewindow | grep 'at:' | cut -d':' -f2 | tr -d ' ' | tail -n1)
 	w_size=$(hyprctl activewindow | grep 'size:' | cut -d':' -f2 | tr -d ' ' | tail -n1 | sed s/,/x/g)
 	cd ${dir} && grim -g "$w_pos $w_size" - | tee "$file" | wl-copy
-	notify_view
 }
 
 shotarea() {
 	cd ${dir} && grim -g "$(slurp -b 9399b230 -c bac2deff -s 00000000 -w 2)" - | tee "$file" | wl-copy
-	notify_view
 }
-
 
 if [[ ! -d "$dir" ]]; then
 	mkdir -p "$dir"
@@ -71,12 +54,13 @@ elif [[ "$1" == "--area" ]]; then
 	shotarea
 else
 	echo -e "Available Options : --now --in5 --in10 --win --area"
+  exit 1
 fi
 
-if [ ! -s $file ]; then
-	rm $file
-	sleep 2
-	notify-send "Just kidding." "There was no screenshot :(" -t 5000 -i dialog-information -r $notifID
+if [[ -s "$dir/$file" ]]; then
+  notify-send -h string:x-canonical-private-synchronous:shot-notify -i camera -t 5000 -u low "Screenshot Saved." -p
+else
+  rm ${dir}/${file}
 fi
 
 exit 0
