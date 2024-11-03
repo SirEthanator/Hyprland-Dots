@@ -106,8 +106,9 @@ fi
 
 if [[ ! -e $HOME/.themes/.backup ]]; then mkdir $HOME/.themes/.backup; fi
 backedUp=false
-themeDirs=(Everforest-Green-Dark Everforest-Green-Dark-hdpi Everforest-Green-Dark-xhdpi Everforest Everforest-hdpi Everforest-xhdpi \
-           catppuccin-mocha-lavender-standard+default catppuccin-mocha-lavender-standard+default-hdpi catppuccin-mocha-lavender-standard+default-xhdpi CatMocha CatMocha-hdpi CatMocha-xhdpi)
+themeDirs=(Everforest Everforest-hdpi Everforest-xhdpi \
+           CatMocha CatMocha-hdpi CatMocha-xhdpi
+           Rose-Pine Rose-Pine-hdpi Rose-Pine-xhdpi)
 for item in "${themeDirs[@]}"; do
   if [[ -e $HOME/.themes/$item ]]; then
     echo "Backing up ~/.themes/$item"
@@ -122,7 +123,23 @@ else
   rm -d $HOME/.themes/.backup
 fi
 
-# TODO: Back up icons and cursors
+if [[ ! -e $HOME/.icons/.backup ]]; then mkdir $HOME/.icons/.backup; fi
+backedUp=false
+iconDirs=(Everfoest-Dark Papirus Papirus-Dark Papirus-Light Rose-Pine
+          catppuccin-cursors catppuccin-cursors-light everforest-cursors everforest-cursors-light rose-pine-cursors rose-pine-cursors-light)
+for item in "${iconDirs[@]}"; do
+  if [[ -e $HOME/.icons/$item ]]; then
+    echo "Backing up ~/.icons/$item"
+    mv $HOME/.icons/$item $HOME/.icons/.backup/$item
+    backedUp=true
+  fi
+done
+
+if [[ "$backedUp" = true ]]; then
+  echo 'Backed up items have been stored in ~/.icons/.backup'
+else
+  rm -d $HOME/.icons/.backup
+fi
 
 # Clone repo and symlink with stow
 git clone https://github.com/SirEthanator/Hyprland-Dots.git $HOME/Hyprland-Dots
