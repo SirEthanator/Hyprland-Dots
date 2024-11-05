@@ -30,7 +30,8 @@ error() {
 backUp() {
   # SYNTAX: Backup-path:string items:array
   backupPath="$1"
-  items=$2
+  shift  # Shift args to the left (removes $1 from $@)
+  items=("$@")
 
   if [[ ! -e "$backupPath"/.backup ]]; then mkdir "$backupPath"/.backup; fi
   local backedUp=false
@@ -105,10 +106,10 @@ fi
 # ==== Backup exsisting config dirs ==== #
 
 backupItems=(Hyprland-Dots Scripts)
-backUp $HOME $backupItems
+backUp $HOME "${backupItems[@]}"
 
 backupItems=(.backup cava hypr kitty Kvantum macchina nvim rofi swaync waybar starship.toml)
-backUp $HOME/.config $backupItems
+backUp $HOME/.config "${backupItems[@]}"
 
 # ==== Install new config ==== #
 
@@ -117,14 +118,14 @@ if [[ -e $HOME/.themes ]]; then
   themeDirs=(Everforest Everforest-hdpi Everforest-xhdpi \
             CatMocha CatMocha-hdpi CatMocha-xhdpi \
             Rose-Pine Rose-Pine-hdpi Rose-Pine-xhdpi)
-  backUp $HOME/.themes $themeDirs
+  backUp $HOME/.themes "${themeDirs[@]}"
 fi
 
 # Back up icons and cursors
 if [[ -e $HOME/.icons ]]; then
   iconDirs=(Everfoest-Dark Papirus Papirus-Dark Papirus-Light Rose-Pine \
             catppuccin-cursors catppuccin-cursors-light everforest-cursors everforest-cursors-light rose-pine-cursors rose-pine-cursors-light)
-  backUp $HOME/.icons $iconDirs
+  backUp $HOME/.icons "${iconDirs[@]}"
 fi
 
 # Clone repo and symlink with stow
