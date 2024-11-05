@@ -24,7 +24,7 @@ if [[ ! $1 -gt 0 ]] || [[ ! $1 -lt 4 ]]; then  # True if arg is not an int betwe
   echo 'Options:'
   echo '1. Everforest'
   echo '2. Catppuccin Mocha'
-  echo '3. Rose Pine (WIP - will not apply)'
+  echo '3. Rose Pine'
   if [[ $1 == '-h' ]] || [[ $1 == '--help' ]]; then
     exit 0
   else
