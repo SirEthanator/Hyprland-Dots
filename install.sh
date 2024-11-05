@@ -20,138 +20,117 @@ if [[ "$confirmation" == 'N' ]] || [[ "$confirmation" == '' ]]; then
   exit 0
 fi
 
+# ==== Back up function ==== #
+
+error() {
+  printf "\033[0;31mERROR: \033[0m $1"
+  exit 1
+}
+
+backUp() {
+  # SYNTAX: Backup-path:string items:array
+  backupPath="$1"
+  items=$2
+
+  if [[ ! -e "$backupPath"/.backup ]]; then mkdir "$backupPath"/.backup; fi
+  local backedUp=false
+  for item in "${items[@]}"; do
+    if [[ -e "$backupPath"/"$item" ]]; then
+      echo "Backing up ${backupPath}/${item}"
+      mv ${backupPath}/${item} ${backupPath}/.backup  || error "Failed to back up: ${backupPath}/${item}"
+      backedUp=true
+    fi
+  done
+  if [[ "$backedUp" = true ]]; then
+    echo "Backed up items have been stored in ${backupPath}/.backup"
+  else
+    rm -d ${backupPath}/.backup > /dev/null 2>&1 || true  # Don't show error if failed to delete. Will fail if not empty dir.
+  fi
+}
+
 # ==== Install packages ==== #
 
 echo 'Installing packages...'
-sudo pacman --needed --noconfirm -Syu rustup pipewire-jack
-sudo pacman --needed --noconfirm -S \
-  hyprland hyprpaper hyprcursor hyprlock waybar rofi-wayland swaync yad mate-polkit \
-  kitty zsh starship neovim luajit stow neofetch hypridle cliphist grim slurp \
-  kvantum kvantum-qt5 qt5ct qt6ct gtk2 gtk3 gtk4 \
-  cargo base-devel fftw iniparser autoconf-archive pkgconf xdg-user-dirs wget unzip \
-  pulseaudio pamixer ocean-sound-theme alsa-lib sox \
-  ttf-cascadia-code ttf-cascadia-code-nerd ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
-sudo pacman --needed --noconfirm -Rs grml-zsh-config
+{
+  sudo pacman --needed --noconfirm -Syu rustup pipewire-jack
+  sudo pacman --needed --noconfirm -S \
+    hyprland hyprpaper hyprcursor hyprlock waybar rofi-wayland swaync yad mate-polkit \
+    kitty zsh starship neovim luajit stow neofetch hypridle cliphist grim slurp \
+    kvantum kvantum-qt5 qt5ct qt6ct gtk2 gtk3 gtk4 \
+    cargo base-devel fftw iniparser autoconf-archive pkgconf xdg-user-dirs wget unzip \
+    pulseaudio pamixer ocean-sound-theme alsa-lib sox \
+    ttf-cascadia-code ttf-cascadia-code-nerd ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
+  sudo pacman --needed --noconfirm -Rs grml-zsh-config
+} || error 'Failed to install required packages'
 
 if [[ ! -d $HOME/.oh-my-zsh ]]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
+# TODO: Fully automate installation of omz
 
-if [[ ! -e $HOME/.cargo/bin/macchina ]]; then
-  rustup default stable
-  cargo install macchina
-fi
-
-if [[ ! -e /usr/bin/syshud ]]; then
-  if [[ -e ./syshud ]]; then
-    mv ./syshud ./syshud.bak
+{
+  if [[ ! -e $HOME/.cargo/bin/macchina ]]; then
+    rustup default stable
+    cargo install macchina
   fi
-  git clone https://aur.archlinux.org/syshud.git syshud
-  cd syshud
-  makepkg -si --noconfirm --needed  # -s will install deps, -i installs automatically
-  cd ..
-  rm -rf ./syshud
-fi
+} || error 'Failed to install Macchina'
+
+{
+  if [[ ! -e /usr/bin/syshud ]]; then
+    if [[ -e ./syshud ]]; then
+      mv ./syshud ./syshud.bak
+    fi
+    git clone https://aur.archlinux.org/syshud.git syshud
+    cd syshud
+    makepkg -si --noconfirm --needed  # -s will install deps, -i installs automatically
+    cd ..
+    rm -rf ./syshud
+  fi
+} || error 'Failed to install Syshud'
 
 # ==== Install sddm ==== #
 
-if [[ ! $(pacman -Q sddm > /dev/null 2>&1) ]]; then
-  read -p 'Install sddm? (Y/n) ' instSDDM
-  instSDDM=$(echo "$instSDDM" | tr '[:lower:]' '[:upper:]')
-  if [[ "$instSDDM" == 'Y' ]] || [[ "$instSDDM" == '' ]]; then
-    echo 'Installing sddm...'
-    sudo pacman -S sddm
-    sudo systemctl enable sddm.service
+{
+  if [[ ! $(pacman -Q sddm > /dev/null 2>&1) ]]; then
+    read -p 'Install sddm? (Y/n) ' instSDDM
+    instSDDM=$(echo "$instSDDM" | tr '[:lower:]' '[:upper:]')
+    if [[ "$instSDDM" == 'Y' ]] || [[ "$instSDDM" == '' ]]; then
+      echo 'Installing sddm...'
+      sudo pacman --noconfirm -S sddm
+      sudo systemctl enable sddm.service
+    fi
   fi
-fi
+} || error 'Failed to install SDDM'
 
 # ==== Backup exsisting config dirs ==== #
 
-if [[ -e $HOME/Scripts ]]; then
-  mv $HOME/Scripts $HOME/Scripts.bak
-fi
+backupItems=(Hyprland-Dots Scripts)
+backUp $HOME $backupItems
 
-if [[ -e $HOME/Hyprland-Dots ]]; then
-  mv $HOME/Hyprland-Dots $HOME/Hyprland-Dots.bak
-fi
-
-if [[ -e $HOME/.config/.backup ]]; then
-  mv $HOME/.config/.backup $HOME/.config/.backup.bak  # Backup backup :)
-fi
-
-backupItems=(cava hypr kitty Kvantum macchina nvim rofi starship swaync waybar starship.toml)
-
-for item in "${backupItems[@]}"; do
-  if [[ -e $HOME/.config/$item ]]; then
-    if [[ ! -e $HOME/.config/.backup ]]; then mkdir $HOME/.config/.backup; fi
-    echo "Backing up ~/.config/${item}..."
-    mv $HOME/.config/$item $HOME/.config/.backup/$item
-    backedUp=true
-  fi
-done
-
-if [[ "$backedUp" = true ]]; then
-  echo 'Backed up items have been stored in ~/.config/.backup'
-fi
+backupItems=(.backup cava hypr kitty Kvantum macchina nvim rofi swaync waybar starship.toml)
+backUp $HOME/.config $backupItems
 
 # ==== Install new config ==== #
 
-cd $HOME
-
 # Back up GTK themes
-if [[ ! -e $HOME/.themes ]]; then
-  mkdir $HOME/.themes
+if [[ -e $HOME/.themes ]]; then
+  themeDirs=(Everforest Everforest-hdpi Everforest-xhdpi \
+            CatMocha CatMocha-hdpi CatMocha-xhdpi \
+            Rose-Pine Rose-Pine-hdpi Rose-Pine-xhdpi)
+  backUp $HOME/.themes $themeDirs
 fi
 
-
-if [[ ! -e $HOME/.themes/.backup ]]; then mkdir $HOME/.themes/.backup; fi
-backedUp=false
-themeDirs=(Everforest Everforest-hdpi Everforest-xhdpi \
-           CatMocha CatMocha-hdpi CatMocha-xhdpi
-           Rose-Pine Rose-Pine-hdpi Rose-Pine-xhdpi)
-for item in "${themeDirs[@]}"; do
-  if [[ -e $HOME/.themes/$item ]]; then
-    echo "Backing up ~/.themes/$item"
-    mv $HOME/.themes/$item $HOME/.themes/.backup/$item
-    backedUp=true
-  fi
-done
-
-if [[ "$backedUp" = true ]]; then
-  echo 'Backed up items have been stored in ~/.themes/.backup'
-else
-  rm -d $HOME/.themes/.backup
-fi
-
-if [[ ! -e $HOME/.icons/.backup ]]; then mkdir $HOME/.icons/.backup; fi
-backedUp=false
-iconDirs=(Everfoest-Dark Papirus Papirus-Dark Papirus-Light Rose-Pine
-          catppuccin-cursors catppuccin-cursors-light everforest-cursors everforest-cursors-light rose-pine-cursors rose-pine-cursors-light)
-for item in "${iconDirs[@]}"; do
-  if [[ -e $HOME/.icons/$item ]]; then
-    echo "Backing up ~/.icons/$item"
-    mv $HOME/.icons/$item $HOME/.icons/.backup/$item
-    backedUp=true
-  fi
-done
-
-if [[ "$backedUp" = true ]]; then
-  echo 'Backed up items have been stored in ~/.icons/.backup'
-else
-  rm -d $HOME/.icons/.backup
+# Back up icons and cursors
+if [[ -e $HOME/.icons ]]; then
+  iconDirs=(Everfoest-Dark Papirus Papirus-Dark Papirus-Light Rose-Pine \
+            catppuccin-cursors catppuccin-cursors-light everforest-cursors everforest-cursors-light rose-pine-cursors rose-pine-cursors-light)
+  backUp $HOME/.icons $iconDirs
 fi
 
 # Clone repo and symlink with stow
-git clone https://github.com/SirEthanator/Hyprland-Dots.git $HOME/Hyprland-Dots
-if [[ $? -ne 0 ]]; then
-  echo 'Error cloning repo, quitting...'
-  exit 1
-fi
-cd $HOME/Hyprland-Dots
-stow .
-
-# Install cursors
-cd $HOME/.icons
+git clone https://github.com/SirEthanator/Hyprland-Dots.git $HOME/Hyprland-Dots || error 'Failed to clone repo'
+cd $HOME/Hyprland-Dots || error 'Failed to cd into repo'
+stow . || error 'Symlinking with Stow failed'
 
 # TODO: Create example .zshrc with starship enabled if .zshrc doesn't exsist
 
