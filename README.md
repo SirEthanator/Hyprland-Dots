@@ -17,7 +17,7 @@
 - My Neovim config is [LazyVim](https://github.com/LazyVim/LazyVim) with added plugin config and a tweaked init.lua.
 - Catppuccin GTK theme is from [here](https://github.com/catppuccin/gtk).
 - Other GTK themes can be found on [Fausto Korpsvart's github](https://github.com/Fausto-Korpsvart).
-- Cursors come from [Everforest Cursors](https://github.com/talwat/everforest-cursors), [Catppuccin Cursors](https://github.com/catppuccin/cursors), and (Rose Pine Cursors)[https://github.com/rose-pine/cursor].
+- Cursors come from [Everforest Cursors](https://github.com/talwat/everforest-cursors), [Catppuccin Cursors](https://github.com/catppuccin/cursors), and [Rose Pine Cursors](https://github.com/rose-pine/cursor).
 - Catppuccin icons come from [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) + [Catppuccin folders](https://github.com/catppuccin/papirus-folders).
 Everforest and Rose Pine icons come from the same repos as their GTK themes.
 - My Everforest and Rose Pine Kvantum themes are based on [Catppuccin Kvantum](https://github.com/catppuccin/Kvantum) which is also included in the repo.
