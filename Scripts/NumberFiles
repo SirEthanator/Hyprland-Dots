@@ -13,12 +13,20 @@ if [[ $# -lt 1 ]] || [[ $# -gt 5 ]]; then
   exit 1
 fi
 
+if [[ $1 == '-h' || $1 == '--help' ]]; then
+  help
+  exit 0
+fi
+
 if [[ ! -d "$1" ]]; then
   echo "Invalid directory: $1"
+  help
   exit 1
 fi
 
-if [[ ! "$2" =~ ^[+-]?[0-9]+$ ]] && [[ $# -ge 2 ]]; then
+path=$(realpath $1)
+
+if [[ ! "$2" =~ ^[+-]?[0-9]+$ ]] && [[ $# -ge 2 ]]; then  # Checks for number using regex
   echo 'Invalid start number'
   help
   exit 1
@@ -48,15 +56,16 @@ else
   suffix=''
 fi
 
-echo "RENAMING FILES IN $1"
+echo "RENAMING FILES IN $path"
 
 read -p 'Preview changes? [RECOMMENDED] (Y/n) ' preview
 preview=$(echo "$preview" | tr '[:lower:]' '[:upper:]')
 
 if [[ "$preview" == 'Y' ]] || [[ -z "$preview" ]]; then
-  for file in ${1}/$criteria; do
-    echo "${file##*/} -> ${prefix}${count}${suffix}"
-    count=$((count+1))
+  previewcount=$count
+  for file in ${path}/$criteria; do
+    echo "${file##*/} -> ${prefix}${previewcount}${suffix}"
+    previewcount=$((previewcount+1))
   done
 fi
 
@@ -64,7 +73,7 @@ read -p 'Continue? (Y/n) ' confirmation
 confirmation=$(echo "$confirmation" | tr '[:lower:]' '[:upper:]')
 
 if [[ "$confirmation" == 'Y' ]] || [[ -z "$confirmation" ]]; then
-  for file in ${1}/$criteria; do
+  for file in ${path}/$criteria; do
     mv "$file" "${prefix}${count}${suffix}"
     count=$((count+1))
   done
