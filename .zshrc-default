@@ -1,0 +1,85 @@
+export ZSH=$HOME/.oh-my-zsh
+
+if [ -f $ZSH/oh-my-zsh.sh ]; then
+  source $ZSH/oh-my-zsh.sh
+fi
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Add items to PATH
+if [ -d '~/.bin' ]; then
+  PATH="~/.bin:$PATH"
+fi
+
+if [ -d '~/.local/bin' ]; then
+  PATH="~/.local/bin:$PATH"
+fi
+
+if [ -d '~/.cargo/bin' ]; then
+  PATH="~/.cargo/bin:$PATH"
+fi
+
+# Misc
+setopt GLOB_DOTS
+
+# Transient prompt
+zle-line-init() {
+  emulate -L zsh
+
+  [[ $CONTEXT == start ]] || return 0
+
+  while true; do
+    zle .recursive-edit
+    local -i ret=$?
+    [[ $ret == 0 && $KEYS == $'\4' ]] || break
+    [[ -o ignore_eof ]] || exit 0
+  done
+
+  local saved_prompt=$PROMPT
+  local saved_rprompt=$RPROMPT
+  PROMPT='⬩⬥◆ '
+  RPROMPT=''
+  zle .reset-prompt
+  PROMPT=$saved_prompt
+  RPROMPT=$saved_rprompt
+
+  if (( ret )); then
+    zle .send-break
+  else
+    zle .accept-line
+  fi
+  return ret
+}
+
+zle -N zle-line-init
+
+# History
+HISTSIZE=2500
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+setopt appendhistory
+setopt sharehistory
+
+# Fetch
+~/Scripts/RandomMessage
+macchina
+
+# Aliases
+alias upd='sudo pacman -Syu'
+alias uninst='sudo pacman -Rs'
+alias inst='sudo pacman -S'
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
+
+alias zshrc='nvim ~/.zshrc'
+alias macchina='~/Scripts/RandomMessage; macchina'
+alias cppath='~/Scripts/CopyPath'
+alias applymouth='sudo plymouth-set-default-theme -R'
+
+# Prompt
+eval "$(starship init zsh)"
+
