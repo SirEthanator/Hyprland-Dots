@@ -44,8 +44,8 @@ backUp() {
   done
   if [[ "$backedUp" = true ]]; then
     echo "Backed up items have been stored in ${backupPath}/.backup"
-  else
-    rm -d ${backupPath}/.backup > /dev/null 2>&1 || true  # Don't show error if failed to delete. Will fail if not empty dir.
+  elif [[ -z $(ls ${backupPath}/.backup) ]]; then
+    rm -d ${backupPath}/.backup
   fi
 }
 
@@ -65,9 +65,11 @@ echo 'Installing packages...'
 } || error 'Failed to install required packages'
 
 if [[ ! -d $HOME/.oh-my-zsh ]]; then
+  export CHSH='yes'
+  export RUNZSH='no'
+  export KEEP_ZSHRC='yes'
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
-# TODO: Fully automate installation of omz
 
 {
   if [[ ! -e $HOME/.cargo/bin/macchina ]]; then
