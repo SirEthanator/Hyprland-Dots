@@ -133,5 +133,14 @@ git clone https://github.com/SirEthanator/Hyprland-Dots.git $HOME/Hyprland-Dots 
 cd $HOME/Hyprland-Dots || error 'Failed to cd into repo'
 stow . || error 'Symlinking with Stow failed'
 
-# TODO: Create example .zshrc with starship enabled if .zshrc doesn't exsist
+{
+read -p 'Change .zshrc? (y/N) ' modifyZshrc
+modifyZshrc=$(echo "$modifyZshrc" | tr '[:lower:]' '[:upper:]')
+if [[ "$modifyZshrc" == 'Y' ]]; then
+  backUp $HOME '.zshrc'
+  cp $HOME/Hyprland-Dots/.zshrc-default $HOME/.zshrc
+fi
+} || error 'Failed to install new .zshrc'
+
+echo 'Installation complete!'
 
