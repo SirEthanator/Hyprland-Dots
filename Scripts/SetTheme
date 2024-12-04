@@ -259,7 +259,7 @@ sleep 0.05
 
 # ==== Hyprland ==== #
 echo 'Setting Hyprland theme...'
-sed -i "s/.*col.active_border.*/    col.active_border = 0xff$accent/" ~/.config/hypr/hyprland/customisation.conf
+sed -i "s/.*col.active_border.*/    col.active_border = 0xff$accent 0x00000000 0x00000000 0x00000000 225deg/" ~/.config/hypr/hyprland/customisation.conf
 sleep 0.05
 
 
