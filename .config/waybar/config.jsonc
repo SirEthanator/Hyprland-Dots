@@ -34,25 +34,25 @@
     "custom/shutdown": {
       "format": "    ",
       "tooltip": false,
-      "on-click": "$HOME/Scripts/Power/Power -s"
+      "on-click": "$HOME/Scripts/Power -s"
     },
 
     "custom/reboot": {
       "format": "  ",
       "tooltip": false,
-      "on-click": "$HOME/Scripts/Power/Power -r"
+      "on-click": "$HOME/Scripts/Power -r"
     },
 
     "custom/logout": {
       "format": "  ",
       "tooltip": false,
-      "on-click": "$HOME/Scripts/Power/Power -l"
+      "on-click": "$HOME/Scripts/Power -l"
     },
 
     "custom/firmware": {
       "format": "  ",
       "tooltip": false,
-      "on-click": "$HOME/Scripts/Power/Power -f"
+      "on-click": "$HOME/Scripts/Power -f"
     },
 
     "custom/suspend": {
