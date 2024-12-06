@@ -123,7 +123,7 @@ fi
 backupItems=(Hyprland-Dots Scripts)
 backUp $HOME "${backupItems[@]}"
 
-backupItems=(.backup cava hypr kitty Kvantum macchina nvim rofi swaync waybar starship.toml)
+backupItems=(cava hypr kitty Kvantum macchina nvim rofi swaync waybar starship.toml)
 backUp $HOME/.config "${backupItems[@]}"
 
 # ==== Install new config ==== #
