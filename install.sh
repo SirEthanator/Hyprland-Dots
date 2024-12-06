@@ -72,7 +72,7 @@ echo 'Installing packages...'
     cargo base-devel fftw iniparser autoconf-archive pkgconf xdg-user-dirs wget unzip \
     pipewire-pulse pamixer ocean-sound-theme alsa-lib sox \
     ttf-cascadia-code ttf-cascadia-code-nerd ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
-  sudo pacman "${pacArgs[@]}" -Rs grml-zsh-config
+  if pacman -Q grml-zsh-config; then sudo pacman "${pacArgs[@]}" -Rs grml-zsh-config; fi
 } || error 'Failed to install required packages. Check error message(s) above for details. Enable confirmation of package operations if resolving conflicts.'
 
 if [[ ! -d $HOME/.oh-my-zsh ]]; then
