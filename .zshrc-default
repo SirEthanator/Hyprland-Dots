@@ -8,16 +8,16 @@ fi
 [[ $- != *i* ]] && return
 
 # Add items to PATH
-if [ -d '~/.bin' ]; then
-  PATH="~/.bin:$PATH"
+if [[ -d "$HOME/.bin" ]]; then
+  PATH="$HOME/.bin:$PATH"
 fi
 
-if [ -d '~/.local/bin' ]; then
-  PATH="~/.local/bin:$PATH"
+if [[ -d "$HOME/.local/bin" ]]; then
+  PATH="$HOME/.local/bin:$PATH"
 fi
 
-if [ -d '~/.cargo/bin' ]; then
-  PATH="~/.cargo/bin:$PATH"
+if [[ -d "$HOME/.cargo/bin" ]]; then
+  PATH="$HOME/.cargo/bin:$PATH"
 fi
 
 # Misc
