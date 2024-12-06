@@ -1,16 +1,20 @@
 #!/bin/bash
 
+# ==== Check if running Arch ==== #
+
 # Import OS info as variables
 . /etc/os-release
 
-# ==== Check if running Arch ==== #
-
-if [[ $ID != 'arch' ]] && [[ $1 != '-f' ]]; then
+if [[ $ID != 'arch' ]]; then
   echo 'Arch Linux not detected.'
   echo 'This script only works on Arch or Arch based distros.'
-  echo 'If you are on an Arch based distro or would just like to continue, run the script with the -f option.'
-  exit 1
+  read -p 'Continue anyways? (y/N) ' confirmation
+  confirmation=$(echo "$confirmation" | tr '[:lower:]' '[:upper:]')
+  if [[ "$confirmation" == 'N' ]] || [[ "$confirmation" == '' ]]; then
+    exit 1
+  fi
 fi
+
 
 printf '\033[1;33mWARNING:\033[0m Most of the script has undergone VERY minimal testing and some parts have recieved none at all.\n'
 printf '\033[1;33mWARNING:\033[0m The script is currently likely to cause issues and will NOT quite fully install the config.\n'
@@ -20,12 +24,12 @@ if [[ "$confirmation" == 'N' ]] || [[ "$confirmation" == '' ]]; then
   exit 0
 fi
 
-# ==== Back up function ==== #
-
 error() {
-  printf "\033[0;31mERROR: \033[0m $1"
+  printf "\033[0;31mERROR: \033[0m %s" "$1"
   exit 1
 }
+
+# ==== Back up function ==== #
 
 backUp() {
   # SYNTAX: Backup-path:string items:array
@@ -51,18 +55,25 @@ backUp() {
 
 # ==== Install packages ==== #
 
+read -p 'Confirm package operations? (y/N) ' pacConfirm
+pacConfirm=$(echo "$pacConfirm" | tr '[:lower:]' '[:upper:]')
+if [[ $pacConfirm == 'Y' ]]; then
+  pacArgs=('--noconfirm')  # An array in case I want to add more later
+fi
+
+
 echo 'Installing packages...'
 {
-  sudo pacman --needed --noconfirm -Syu rustup pipewire-jack
-  sudo pacman --needed --noconfirm -S \
+  sudo pacman --needed "${pacArgs[@]}" -Syu rustup pipewire-jack
+  sudo pacman --needed "${pacArgs[@]}" -S \
     hyprland hyprpaper hyprcursor hyprlock waybar rofi-wayland swaync yad mate-polkit \
     kitty zsh starship neovim luajit stow neofetch hypridle cliphist grim slurp \
     kvantum kvantum-qt5 qt5ct qt6ct gtk2 gtk3 gtk4 \
     cargo base-devel fftw iniparser autoconf-archive pkgconf xdg-user-dirs wget unzip \
-    pulseaudio pamixer ocean-sound-theme alsa-lib sox \
+    pipewire-pulse pamixer ocean-sound-theme alsa-lib sox \
     ttf-cascadia-code ttf-cascadia-code-nerd ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
-  sudo pacman --needed --noconfirm -Rs grml-zsh-config
-} || error 'Failed to install required packages'
+  sudo pacman "${pacArgs[@]}" -Rs grml-zsh-config
+} || error 'Failed to install required packages. Check error message(s) above for details. Enable confirmation of package operations if resolving conflicts.'
 
 if [[ ! -d $HOME/.oh-my-zsh ]]; then
   export CHSH='yes'
@@ -85,7 +96,7 @@ fi
     fi
     git clone https://aur.archlinux.org/syshud.git syshud
     cd syshud
-    makepkg -si --noconfirm --needed  # -s will install deps, -i installs automatically
+    makepkg -si "${pacArgs[@]}" --needed  # -s will install deps, -i installs automatically
     cd ..
     rm -rf ./syshud
   fi
@@ -99,7 +110,7 @@ fi
     instSDDM=$(echo "$instSDDM" | tr '[:lower:]' '[:upper:]')
     if [[ "$instSDDM" == 'Y' ]] || [[ "$instSDDM" == '' ]]; then
       echo 'Installing sddm...'
-      sudo pacman --noconfirm -S sddm
+      sudo pacman "${pacArgs[@]}" -S sddm
       sudo systemctl enable sddm.service
     fi
   fi
