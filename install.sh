@@ -57,7 +57,7 @@ backUp() {
 
 read -p 'Confirm package operations? (y/N) ' pacConfirm
 pacConfirm=$(echo "$pacConfirm" | tr '[:lower:]' '[:upper:]')
-if [[ $pacConfirm == 'Y' ]]; then
+if [[ ! $pacConfirm == 'Y' ]]; then
   pacArgs=('--noconfirm')  # An array in case I want to add more later
 fi
 
@@ -84,6 +84,7 @@ fi
 
 {
   if [[ ! -e $HOME/.cargo/bin/macchina ]]; then
+    echo 'Installing Macchina...'
     rustup default stable
     cargo install macchina
   fi
@@ -91,6 +92,7 @@ fi
 
 {
   if [[ ! -e /usr/bin/syshud ]]; then
+    echo 'Installing syshud...'
     if [[ -e ./syshud ]]; then
       mv ./syshud ./syshud.bak
     fi
