@@ -40,18 +40,21 @@ if [[ $1 -eq 1 ]]; then
   icons='Everforest-Dark'
   cursors='everforest-cursors'
   accent='A7C080'
+  accentDim='3C4841'
   wall="$HOME/Hyprland-Dots/Wallpapers/Everforest/Hard.jpg"
 elif [[ $1 -eq 2 ]]; then
   theme='CatMocha'
   icons='Papirus-Dark'
   cursors='catppuccin-cursors'
   accent='B4BEFE'
+  accentDim='5A5F7F'  # 50% dimmed accent by maketintsandshades.com (useful tool :D)
   wall="$HOME/Hyprland-Dots/Wallpapers/Catppuccin/Crust.jpg"
 elif [[ $1 -eq 3 ]]; then
   theme='Rose-Pine'
   icons='Rose-Pine'
   cursors='rose-pine-cursors'
-  accent='9ccfd8'
+  accent='9CCFD8'
+  accentDim='4E686C'  # 50% dimmed accent by maketintsandshades.com
   wall="$HOME/Hyprland-Dots/Wallpapers/Rose-Pine/Base.png"
 fi
 
@@ -259,7 +262,8 @@ sleep 0.05
 
 # ==== Hyprland ==== #
 echo 'Setting Hyprland theme...'
-sed -i "s/.*col.active_border.*/    col.active_border = 0xff$accent 0x00000000 0x00000000 0x00000000 225deg/" ~/.config/hypr/hyprland/customisation.conf
+sed -i "s/.*col.active_border.*/    col.active_border = 0xff$accent 0xff$accentDim 0xff$accentDim 0xff$accentDim 225deg/" ~/.config/hypr/hyprland/customisation.conf
+sed -i "s/.*col.inactive_border.*/    col.inactive_border = 0xff$accentDim/" ~/.config/hypr/hyprland/customisation.conf
 sleep 0.05
 
 
