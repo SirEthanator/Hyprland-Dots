@@ -30,7 +30,6 @@ common () {
     action
   else
     kill -SIGTERM $delayedPID
-    echo 'Cancelled'
     exit 0
   fi
 }
