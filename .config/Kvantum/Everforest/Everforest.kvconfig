@@ -1,6 +1,7 @@
 [%General]
-author=SirEthanator (Based on Catppuccin Kvantum)
-comment=Everforest-Green-Dark
+author=elkrien based on Arc Dark style
+comment=Catppuccin-Mocha-Lavender
+combo_focus_rect=true
 spread_menuitems=true
 left_tabs=true
 mirror_doc_tabs=true
@@ -74,7 +75,7 @@ transient_groove=false
 window.color=#272E33
 base.color=#1E2326
 alt.base.color=#1E2326
-button.color=#414B50
+button.color=#374145
 light.color=#495156
 mid.light.color=#495156
 dark.color=#1E2326
@@ -87,7 +88,7 @@ button.text.color=#D3C6AA
 disabled.text.color=#4F5B58
 tooltip.text.color=#D3C6AA
 highlight.text.color=#1E2326
-link.color=#7FBBB3
+link.color=#83C092
 link.visited.color=#D699B6
 
 [ItemView]

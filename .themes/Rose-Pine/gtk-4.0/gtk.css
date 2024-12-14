@@ -4880,7 +4880,7 @@ window.dialog.message .titlebar:backdrop {
 }
 
 window.dialog.message .dialog-action-area {
-  borde: none;
+  border: none;
   margin: 0;
   padding: 6px;
   border-spacing: 6px;
@@ -7935,7 +7935,7 @@ overlay-split-view > shadow.down {
 .sidebar-pane navigation-view-page stack > scrolledwindow, .sidebar-pane, .toolbar, filechooser paned > box, placessidebar > scrolledwindow, agenda-view list.background, .tweak-titlebar-left, .tweak-titlebar-left:backdrop, leaflet.unfolded > box > scrolledwindow, leaflet.unfolded .contacts-contact-list > scrolledwindow, .sidebar-pane toolbarview > stack > box > widget > widget > scrolledwindow {
   background-color: #111019;
   color: #faf4ed;
-  border-radius: none;
+  border-radius: 0;
   margin: 0;
 }
 
@@ -7948,7 +7948,7 @@ overlay-split-view > shadow.down {
 .nautilus-window placessidebar > scrolledwindow {
   background-color: #191724;
   color: #faf4ed;
-  border-radius: none;
+  border-radius: 0;
   margin: 0;
 }
 

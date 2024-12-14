@@ -1,6 +1,7 @@
 [%General]
 author=elkrien based on Arc Dark style
 comment=Catppuccin-Mocha-Lavender
+combo_focus_rect=true
 spread_menuitems=true
 left_tabs=true
 mirror_doc_tabs=true
@@ -97,7 +98,7 @@ interior.element=itemview
 frame=true
 interior=true
 text.iconspacing=3
-text.toggle.color=#181825 
+text.toggle.color=#181825
 
 [RadioButton]
 inherits=PanelButtonCommand
@@ -142,7 +143,7 @@ text.margin.left=5
 text.margin.right=5
 indicator.size=0
 
-[Dock] 
+[Dock]
 interior.element=toolbar
 frame.element=toolbar
 frame=true
