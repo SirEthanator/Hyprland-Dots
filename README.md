@@ -57,8 +57,6 @@ I will try to improve on my dotfiles to be easily usable for anyone!
 
 - [ ] Installation script
 
-- [ ] Update Kvantum themes (Everforest + Catppuccin)
-
 ## More screenshots
 
 ![Screenshot 1](/assets/Everforest1.png)
