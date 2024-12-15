@@ -15,8 +15,7 @@
 
 - Obviously thanks to [Sainnhe](https://github.com/sainnhe) for [this beautiful color scheme](https://github.com/sainnhe/everforest).
 - My Neovim config is [LazyVim](https://github.com/LazyVim/LazyVim) with added plugin config and a tweaked init.lua.
-- Catppuccin GTK theme is from [here](https://github.com/catppuccin/gtk).
-- Other GTK themes can be found on [Fausto Korpsvart's github](https://github.com/Fausto-Korpsvart).
+- GTK themes can be found on [Fausto Korpsvart's github](https://github.com/Fausto-Korpsvart).
 - Cursors come from [Everforest Cursors](https://github.com/talwat/everforest-cursors), [Catppuccin Cursors](https://github.com/catppuccin/cursors), and [Rose Pine Cursors](https://github.com/rose-pine/cursor).
 - Catppuccin icons come from [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) + [Catppuccin folders](https://github.com/catppuccin/papirus-folders).
 Everforest and Rose Pine icons come from the same repos as their GTK themes.
@@ -28,7 +27,6 @@ Everforest and Rose Pine icons come from the same repos as their GTK themes.
 
 - [My Arch Wallpaper](https://www.deviantart.com/deviantarchuser/art/Everforest-Wallpapers-for-Arch-Linux-1063548581)
 - [Ocean Sound Theme](https://invent.kde.org/plasma/ocean-sound-theme)
-- [FF Ultima Firefox CSS](https://github.com/soulhotel/FF-ULTIMA)
 - [Everforest Firefox Theme](https://addons.mozilla.org/en-US/firefox/addon/everforest-dark-hard/)
 - [syshud](https://github.com/system64fumo/syshud)
 
@@ -37,8 +35,8 @@ Everforest and Rose Pine icons come from the same repos as their GTK themes.
 This section isn't a complete install guide, but just some tips if you plan to install my dotfiles!
 
 - The SetTheme script doesn't change some things such as the Firefox theme. It must be set manually.
-- My config defaults to using gtklock now but can be modified to use hyprlock as themes are provided for it.
-- I will have missed things both here and in my list of things to install, so don't expect everything to work without installing extra packages.
+- My config defaults to using gtklock. If you use Hyprlock there are themes for it in this repo.
+- There are probably additional things to install for the best experience, so don't expect everything working out of the box.
 
 ### Install via script (NOT RECOMMENDED)
 
@@ -55,7 +53,7 @@ I will try to improve on my dotfiles to be easily usable for anyone!
 
 ## TODO
 
-- [ ] Installation script
+- [ ] Installation script (May be finished eventually. I don't work on it much since it's boring tbh.)
 
 ## More screenshots
 
