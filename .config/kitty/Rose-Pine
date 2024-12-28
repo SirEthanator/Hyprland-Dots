@@ -38,17 +38,17 @@ color8   #6e6a86
 color1   #eb6f92
 color9   #eb6f92
 
-# green
-color2   #31748f
-color10  #31748f
+# green (Taken from Catppuccin)
+color2   #a6da95
+color10  #a6da95
 
 # yellow
 color3   #f6c177
 color11  #f6c177
 
 # blue
-color4   #9ccfd8
-color12  #9ccfd8
+color4   #31748f
+color12  #31748f
 
 # magenta
 color5   #c4a7e7
