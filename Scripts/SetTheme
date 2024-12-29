@@ -37,21 +37,21 @@ fi
 
 if [[ $1 -eq 1 ]]; then
   theme='Everforest'
-  icons='Everforest-Dark'
+  icons='Colloid-Green-Everforest-Dark'
   cursors='everforest-cursors'
   accent='A7C080'
   accentDim='3C4841'
   wall="$HOME/Hyprland-Dots/Wallpapers/Everforest/Hard.jpg"
 elif [[ $1 -eq 2 ]]; then
   theme='CatMocha'
-  icons='Papirus-Dark'
+  icons='Colloid-Purple-Catppuccin-Dark'
   cursors='catppuccin-cursors'
   accent='B4BEFE'
   accentDim='5A5F7F'  # 50% dimmed accent by maketintsandshades.com (useful tool :D)
   wall="$HOME/Hyprland-Dots/Wallpapers/Catppuccin/Crust.jpg"
 elif [[ $1 -eq 3 ]]; then
   theme='Rose-Pine'
-  icons='Rose-Pine'
+  icons='Colloid-Teal-Rosepine-Dark'
   cursors='rose-pine-cursors'
   accent='9CCFD8'
   accentDim='4E686C'  # 50% dimmed accent by maketintsandshades.com

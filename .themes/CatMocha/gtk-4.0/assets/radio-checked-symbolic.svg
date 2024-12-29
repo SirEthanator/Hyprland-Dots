@@ -6,7 +6,7 @@
    viewBox="0 0 20 20"
    id="svg4"
    sodipodi:docname="radio-checked-symbolic.svg"
-   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,23 +23,20 @@
      inkscape:pagecheckerboard="0"
      showgrid="false"
      inkscape:zoom="29.833333"
-     inkscape:cx="9.6368716"
+     inkscape:cx="9.6201118"
      inkscape:cy="12"
-     inkscape:window-width="1280"
-     inkscape:window-height="652"
+     inkscape:window-width="1920"
+     inkscape:window-height="1012"
      inkscape:window-x="0"
      inkscape:window-y="32"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg4"
-     inkscape:showpageshadow="2"
-     inkscape:deskcolor="#d1d1d1">
+     inkscape:current-layer="svg4">
     <inkscape:grid
        type="xygrid"
        id="grid825" />
   </sodipodi:namedview>
   <path
      id="path2"
-     d="m 10,6 c 2.209138,0 4,1.790862 4,4 0,2.209138 -1.790862,4 -4,4 C 7.790862,14 6,12.209138 6,10 6,7.790862 7.790862,6 10,6 Z"
-     sodipodi:nodetypes="sssss"
-     style="stroke-width:2" />
+     d="m 10,8 c 1.104569,0 2,0.895431 2,2 0,1.104569 -0.895431,2 -2,2 C 8.895431,12 8,11.104569 8,10 8,8.895431 8.895431,8 10,8 Z"
+     sodipodi:nodetypes="sssss" />
 </svg>
