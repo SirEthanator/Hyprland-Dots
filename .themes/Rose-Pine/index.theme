@@ -1,12 +1,12 @@
-Type=X-GNOME-Metatheme
 [Desktop Entry]
-Name=Rose-Pine-Teal-Dark
+Type=X-GNOME-Metatheme
+Name=Colloid-Teal-Dark-Rosepine
 Comment=An Flat Gtk+ theme based on Elegant Design
 Encoding=UTF-8
 
 [X-GNOME-Metatheme]
-GtkTheme=Rose-Pine-Teal-Dark
-MetacityTheme=Rose-Pine-Teal-Dark
-IconTheme=Tela-circle-Dark
-CursorTheme=Rose-Pine-cursors
+GtkTheme=Colloid-Teal-Dark-Rosepine
+MetacityTheme=Colloid-Teal-Dark-Rosepine
+IconTheme=Colloid-Teal-Rosepine-Dark
+CursorTheme=Colloid-cursors
 ButtonLayout=close,minimize,maximize:menu

@@ -6,7 +6,7 @@
    viewBox="0 0 16 16"
    id="svg4"
    sodipodi:docname="small-checkbox-checked-symbolic.svg"
-   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -21,25 +21,23 @@
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     showgrid="true"
+     showgrid="false"
      inkscape:snap-global="false"
-     inkscape:zoom="31.643028"
-     inkscape:cx="9.1489348"
-     inkscape:cy="7.3001863"
-     inkscape:window-width="1280"
-     inkscape:window-height="652"
-     inkscape:window-x="0"
-     inkscape:window-y="32"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg4"
-     inkscape:showpageshadow="2"
-     inkscape:deskcolor="#d1d1d1">
+     inkscape:zoom="15.821514"
+     inkscape:cx="10.176017"
+     inkscape:cy="9.0383259"
+     inkscape:window-width="1486"
+     inkscape:window-height="974"
+     inkscape:window-x="128"
+     inkscape:window-y="69"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg4">
     <inkscape:grid
        type="xygrid"
        id="grid1068" />
   </sodipodi:namedview>
   <path
-     id="rect340"
-     d="m 12.596166,4.818375 c -0.391736,-0.3917359 -1.022477,-0.3917367 -1.414214,2e-7 L 6.9393399,9.0609886 4.8180203,6.9396678 c -0.3917368,-0.3917368 -1.0224772,-0.3917365 -1.4142136,0 -0.3917366,0.3917363 -0.3917373,1.0224777 0,1.4142138 l 2.8284271,2.8284274 c 0.02448,0.02448 0.049752,0.04622 0.075986,0.06764 0.3935135,0.321347 0.9710033,0.299582 1.3382562,-0.06767 l 4.949717,-4.949718 c 0.391738,-0.3917362 0.391736,-1.0224769 0,-1.4142136 z"
-     sodipodi:nodetypes="cscsscsccccc" />
+     id="path2"
+     d="m 11.943359,5.4550781 c 0.12781,0 0.255582,0.04855 0.353516,0.1464844 0.195869,0.1958686 0.195869,0.5111627 0,0.7070313 L 7.3457031,11.257812 c -0.1958686,0.19587 -0.5111626,0.19587 -0.7070312,0 L 3.8105469,8.4296875 c -0.1958686,-0.1958686 -0.1958686,-0.5111627 0,-0.7070313 0.1958686,-0.1958685 0.5111626,-0.1958685 0.7070312,0 L 6.9921875,10.197266 11.587891,5.6015625 c 0.09793,-0.097934 0.227659,-0.1464844 0.355468,-0.1464844 z"
+     sodipodi:nodetypes="sscccsssccs" />
 </svg>
