@@ -53,6 +53,8 @@ I will try to improve on my dotfiles to be easily usable for anyone!
 
 ## TODO
 
+- [ ] New shell to replace Waybar, Rofi, and Swaync (using quickshell).
+
 - [ ] Installation script (May be finished eventually. I don't work on it much since it's boring tbh.)
 
 ## More screenshots
