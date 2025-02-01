@@ -58,7 +58,7 @@ else
 fi
 
 if [[ -s "$dir/$file" ]]; then
-  notify-send -h string:x-canonical-private-synchronous:shot-notify -i camera -t 5000 -u low "Screenshot Saved." -p
+  notify-send -h string:x-canonical-private-synchronous:shot-notify -i camera -a 'Screenshot' -t 5000 -u low "Screenshot Saved." -p
 else
   rm ${dir}/${file}
 fi
