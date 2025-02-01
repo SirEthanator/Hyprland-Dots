@@ -9,23 +9,20 @@
 
 
 > [!WARNING]
-> This repo contains my personal configuration and it will not work well on all hardware.
+> This repo contains my personal configuration and it will not work well on all devices.
 
 ## Credits
 
-- Obviously thanks to [Sainnhe](https://github.com/sainnhe) for [this beautiful color scheme](https://github.com/sainnhe/everforest).
 - My Neovim config is [LazyVim](https://github.com/LazyVim/LazyVim) with added plugin config and a tweaked init.lua.
-- GTK themes can be found on [Fausto Korpsvart's github](https://github.com/Fausto-Korpsvart).
+- The GTK theme used is [Colloid](https://github.com/vinceliuice/Colloid-gtk-theme) ([this fork](https://github.com/SirEthanator/Colloid-gtk-theme)).
+- The icons are also [Colloid](https://github.com/vinceliuice/Colloid-icon-theme) ([this fork](https://github.com/SirEthanator/Colloid-icon-theme)).
 - Cursors come from [Everforest Cursors](https://github.com/talwat/everforest-cursors), [Catppuccin Cursors](https://github.com/catppuccin/cursors), and [Rose Pine Cursors](https://github.com/rose-pine/cursor).
-- Catppuccin icons come from [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) + [Catppuccin folders](https://github.com/catppuccin/papirus-folders).
-Everforest and Rose Pine icons come from the same repos as their GTK themes.
 - My Everforest and Rose Pine Kvantum themes are based on [Catppuccin Kvantum](https://github.com/catppuccin/Kvantum) which is also included in the repo.
-- My themes for Swaync is based on [Catppuccin swaync](https://github.com/catppuccin/swaync).
+- My themes for Swaync are based on [Catppuccin swaync](https://github.com/catppuccin/swaync).
 - My Rofi themes are from [this collection of Rofi themes](https://github.com/adi1090x/rofi).
 
 ## Use with
 
-- [My Arch Wallpaper](https://www.deviantart.com/deviantarchuser/art/Everforest-Wallpapers-for-Arch-Linux-1063548581)
 - [Ocean Sound Theme](https://invent.kde.org/plasma/ocean-sound-theme)
 - [Everforest Firefox Theme](https://addons.mozilla.org/en-US/firefox/addon/everforest-dark-hard/)
 - [syshud](https://github.com/system64fumo/syshud)
@@ -36,7 +33,7 @@ This section isn't a complete install guide, but just some tips if you plan to i
 
 - The SetTheme script doesn't change some things such as the Firefox theme. It must be set manually.
 - My config defaults to using gtklock. If you use Hyprlock there are themes for it in this repo.
-- There are probably additional things to install for the best experience, so don't expect everything working out of the box.
+- There are probably additional things to install/change for the best experience, so don't expect everything working out of the box.
 
 ### Install via script (NOT RECOMMENDED)
 
@@ -55,9 +52,9 @@ I will try to improve on my dotfiles to be easily usable for anyone!
 
 - [ ] New shell to replace Waybar, Rofi, and Swaync (using quickshell).
 
-- [ ] Installation script (May be finished eventually. I don't work on it much since it's boring tbh.)
+- [ ] Installation script (May be finished eventually. I don't work on it much since it's boring tbh).
 
-## More screenshots
+## Gallery
 
 ![Screenshot 1](/assets/Everforest1.png)
 ![Screenshot 2](/assets/Catppuccin1.png)
