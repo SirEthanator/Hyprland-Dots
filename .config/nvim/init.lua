@@ -4,8 +4,9 @@ require("config.lazy")
 -- Disable auto format
 vim.g.autoformat = false
 
--- Enable pyright
+-- Enable pyright + qmlls
 require'lspconfig'.pyright.setup{}
+require'lspconfig'.qmlls.setup{}
 
 -- Spell checking
 vim.opt.spelllang = 'en_us'
