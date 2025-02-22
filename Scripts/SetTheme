@@ -38,21 +38,24 @@ fi
 if [[ $1 -eq 1 ]]; then
   theme='Everforest'
   icons='Colloid-Green-Everforest-Dark'
-  cursors='everforest-cursors'
+  cursors='Bibata-Modern-Everforest'
+  cursorsLight='Bibata-Modern-Everforest-Light'
   accent='A7C080'
   accentDim='3C4841'
   wall="$HOME/Hyprland-Dots/Wallpapers/Everforest/Hard.jpg"
 elif [[ $1 -eq 2 ]]; then
   theme='CatMocha'
   icons='Colloid-Purple-Catppuccin-Dark'
-  cursors='catppuccin-cursors'
+  cursors='Bibata-Modern-CatMocha'
+  cursorsLight='Bibata-Modern-CatLatte'
   accent='B4BEFE'
   accentDim='5A5F7F'  # 50% dimmed accent by maketintsandshades.com (useful tool :D)
   wall="$HOME/Hyprland-Dots/Wallpapers/Catppuccin/Crust.jpg"
 elif [[ $1 -eq 3 ]]; then
   theme='Rose-Pine'
   icons='Colloid-Teal-Rosepine-Dark'
-  cursors='rose-pine-cursors'
+  cursors='Bibata-Modern-Rose-Pine'
+  cursorsLight='Bibata-Modern-Rose-Pine-Dawn'
   accent='9CCFD8'
   accentDim='4E686C'  # 50% dimmed accent by maketintsandshades.com
   wall="$HOME/Hyprland-Dots/Wallpapers/Rose-Pine/Base.png"
@@ -118,7 +121,7 @@ sleep 0.05
 
 # ==== GTK theme + icons ==== #
 if [[ "$lightCurs" == 'true' ]]; then
-  cursors=$(echo "${cursors}-light")
+  cursors="$cursorsLight"
 fi
 
 echo 'Setting GTK theme, icons & cursors...'
