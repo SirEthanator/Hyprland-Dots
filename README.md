@@ -16,7 +16,7 @@
 - My Neovim config is [LazyVim](https://github.com/LazyVim/LazyVim) with added plugin config and a tweaked init.lua.
 - The GTK theme used is [Colloid](https://github.com/vinceliuice/Colloid-gtk-theme) ([this fork](https://github.com/SirEthanator/Colloid-gtk-theme)).
 - The icons are also [Colloid](https://github.com/vinceliuice/Colloid-icon-theme) ([this fork](https://github.com/SirEthanator/Colloid-icon-theme)).
-- Cursors come from [Everforest Cursors](https://github.com/talwat/everforest-cursors), [Catppuccin Cursors](https://github.com/catppuccin/cursors), and [Rose Pine Cursors](https://github.com/rose-pine/cursor).
+- Cursors are [Bibata](https://github.com/ful1e5/Bibata_Cursor) ([this fork](https://github.com/SirEthanator/Bibata_Cursor)).
 - My Everforest and Rose Pine Kvantum themes are based on [Catppuccin Kvantum](https://github.com/catppuccin/Kvantum) which is also included in the repo.
 - My themes for Swaync are based on [Catppuccin swaync](https://github.com/catppuccin/swaync).
 - My Rofi themes are from [this collection of Rofi themes](https://github.com/adi1090x/rofi).
