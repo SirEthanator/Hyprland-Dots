@@ -19,7 +19,7 @@ configuration {
 
 /*****----- Global Properties -----*****/
 * {
-    font:                        "CaskaydiaCove Nerd Font 10";
+    font:                        "0xProto Nerd Font 10";
     background:                  #272E33;
     background-alt:              #2E383C;
     foreground:                  #D3C6AA;
