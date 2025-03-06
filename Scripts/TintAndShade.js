@@ -27,6 +27,18 @@ function shade(value) {
 function tint(value) {
     return Math.round(value + ((255 - value) * tintFactor));
 }
+function deciToHex(value) {
+    let hex = value.toString(16).toUpperCase();
+    if (hex.length === 1) {
+        if (!!parseInt(hex)) {
+            hex = `0${hex}`;
+        }
+        else {
+            hex = hex.repeat(2);
+        }
+    }
+    return hex;
+}
 let rgbs = [];
 let hexs = '#';
 let rgbt = [];
@@ -36,12 +48,10 @@ for (let i = 0; i < rgb.length; i++) {
     const tinted = tint(rgb[i]);
     rgbs.push(shaded);
     rgbt.push(tinted);
-    let hs = shaded.toString(16).toUpperCase();
-    let ht = tinted.toString(16).toUpperCase();
-    const hsCount = (hs.length === 1) ? 2 : 1;
-    const htCount = (ht.length === 1) ? 2 : 1;
-    hexs += hs.repeat(hsCount);
-    hext += ht.repeat(htCount);
+    let hs = deciToHex(shaded);
+    let ht = deciToHex(tinted);
+    hexs += hs;
+    hext += ht;
 }
 let rgbsStr = `rgb(${rgbs[0]}, ${rgbs[1]}, ${rgbs[2]})`;
 let rgbtStr = `rgb(${rgbt[0]}, ${rgbt[1]}, ${rgbt[2]})`;

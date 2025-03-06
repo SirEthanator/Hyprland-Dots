@@ -33,6 +33,18 @@ function tint(value:number) {
   return Math.round(value + ((255 - value) * tintFactor));
 }
 
+function deciToHex(value:number) {
+  let hex = value.toString(16).toUpperCase();
+  if (hex.length === 1) {
+    if (!!parseInt(hex)) {
+      hex=`0${hex}`;
+    } else {
+      hex=hex.repeat(2);
+    }
+  }
+  return hex
+}
+
 let rgbs = []; let hexs = '#';
 let rgbt = []; let hext = '#';
 
@@ -45,10 +57,8 @@ for (let i=0; i<rgb.length; i++) {
   rgbs.push(shaded); rgbt.push(tinted);
 
   // HEX
-  let hs = shaded.toString(16).toUpperCase(); let ht = tinted.toString(16).toUpperCase();
-  const hsCount = (hs.length === 1) ? 2 : 1;
-  const htCount = (ht.length === 1) ? 2 : 1;
-  hexs+=hs.repeat(hsCount); hext+=ht.repeat(htCount);
+  let hs = deciToHex(shaded); let ht = deciToHex(tinted);
+  hexs+=hs; hext+=ht;
 }
 
 let rgbsStr = `rgb(${rgbs[0]}, ${rgbs[1]}, ${rgbs[2]})`;
