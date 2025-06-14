@@ -22,7 +22,7 @@ ssh_only = false
 
 [directory]
 style = "fg:black bg:green"
-format = "[ ◆  ](fg:white)[](fg:green)[ $path ]($style)[](fg:green)"
+format = "[ ◆ ](fg:white)[](fg:green)[ $path ]($style)[](fg:green)"
 truncation_length = 5
 truncate_to_repo = false
 truncation_symbol = "…/"
@@ -30,7 +30,7 @@ read_only = ""
 
 [git_branch]
 style = "fg:black bg:yellow"
-format = '[ ◆  ](fg:white)[](fg:yellow)[  $branch]($style)'
+format = '[ ◆ ](fg:white)[](fg:yellow)[  $branch]($style)'
 
 [git_status]
 style = "fg:black bg:yellow"
