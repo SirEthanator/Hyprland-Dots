@@ -80,43 +80,12 @@ prompt() {
   echo "$output"
 }
 
-changeWall=$(prompt 'Change wallpaper? (y/N) ' 'n')
+# changeWall=$(prompt 'Change wallpaper? (y/N) ' 'n')
 lightCurs=$(prompt 'Enable light cursors? (y/N) ' 'n')
-colourful=$(prompt 'Enable colourful Waybar? (y/N) ' 'n')
-floating=$(prompt 'Enable floating Waybar? (Y/n) ' 'y')
 
 
-# ==== Hyprpaper ==== #
-if [[ "$changeWall" == 'true' ]]; then
-  echo 'Setting wallpaper...'
-  echo "preload = $wall"     > $HOME/.config/hypr/hyprpaper.conf
-  echo "wallpaper = ,$wall" >> $HOME/.config/hypr/hyprpaper.conf
-  echo "splash = false"     >> $HOME/.config/hypr/hyprpaper.conf
-  echo ''                   >> $HOME/.config/hypr/hyprpaper.conf
-fi
-sleep 0.05
-
-
-# ==== Waybar ==== #
-echo 'Setting Waybar theme...'
-
-echo '/* --- Import main styles --- */'  > $HOME/.config/waybar/style.css
-echo "@import 'styles/main.css';"       >> $HOME/.config/waybar/style.css
-echo ''                                 >> $HOME/.config/waybar/style.css
-echo '/* --- Colour selection --- */'   >> $HOME/.config/waybar/style.css
-echo "@import 'colours/$theme.css';"    >> $HOME/.config/waybar/style.css
-echo ''                                 >> $HOME/.config/waybar/style.css
-echo '/* --- Style selection --- */'    >> $HOME/.config/waybar/style.css
-
-if [[ "$floating" == 'true' ]]; then
-  echo "@import 'styles/floating.css';" >> $HOME/.config/waybar/style.css
-fi
-
-if [[ "$colourful" == 'true' ]]; then
-  echo "@import 'styles/colourful.css';" >> $HOME/.config/waybar/style.css
-fi
-
-sleep 0.05
+# === Quickshell === #
+# TODO - Handle with quickshell using ipc calls
 
 
 # ==== GTK theme + icons ==== #
@@ -225,16 +194,6 @@ sed -i "s/.*foreground.*/foreground = '#$accent'/" ~/.config/cava/config
 sleep 0.05
 
 
-# ==== Swaync ==== #
-echo 'Setting Swaync theme...'
-cd $HOME/.config/swaync  # So that symlink can use ./
-if [[ -e ./style.css ]]; then  # -e checks if file exsists
-  rm ./style.css
-fi
-ln -s ./$theme.css ./style.css
-sleep 0.05
-
-
 # ==== Rofi ==== #
 echo 'Setting Rofi theme...'
 echo "@theme \"~/.config/rofi/$theme.rasi\"" > $HOME/.config/rofi/config.rasi
@@ -271,19 +230,12 @@ sleep 0.05
 
 
 # ==== Finish up ==== #
-echo 'Reloading Waybar...'
-killall waybar > /dev/null 2>&1  # Output gets deleted
-nohup waybar > /dev/null 2>&1 &  # & will stop script from waiting
-sleep 0.05
-echo 'Reloading Swaync...'
-swaync-client -rs > /dev/null 2>&1 &
+echo 'Reloading Quickshell...'
+killall quickshell > /dev/null 2>&1  # Output gets deleted
+nohup quickshell --daemonize > /dev/null 2>&1 &  # & will stop script from waiting
 sleep 0.05
 echo 'Reloading Hyprland...'
 hyprctl reload > /dev/null 2>&1 &
-sleep 0.05
-echo 'Reloading Hyprpaper...'
-killall hyprpaper > /dev/null 2>&1
-nohup hyprpaper > /dev/null 2>&1 &
 sleep 0.05
 echo 'Reloading Kitty...'
 for pid in $(pidof kitty); do

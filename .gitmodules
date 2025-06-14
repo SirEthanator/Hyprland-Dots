@@ -1,0 +1,3 @@
+[submodule ".config/quickshell"]
+	path = .config/quickshell
+	url = https://github.com/SirEthanator/Quickshell-WIP
