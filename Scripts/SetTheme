@@ -16,7 +16,6 @@
 
 # ==== Check for valid arguments ==== #
 
-echo ''
 if [[ ! $1 -gt 0 ]] || [[ ! $1 -lt 4 ]]; then  # True if arg is not an int between 0 and 4
   echo 'Syntax: SetTheme <option>'
   echo 'Options:'
@@ -86,9 +85,14 @@ lightCurs=$(prompt 'Enable light cursors? (y/N) ' 'n')
 
 
 # === Quickshell === #
-quickshell ipc call config colours "$quickshell" false
+echo 'Setting Quickshell theme...'
+if [[ $(quickshell list --all) == "No running instances." ]]; then
+  echo "No instances of Quickshell found, launching..."
+  quickshell --daemonize > /dev/null 2>&1
+fi
+quickshell ipc call config colours "$quickshell" false > /dev/null 2>&1
 if [[ "$changeWall" == 'true' ]]; then
-  quickshell ipc call config wallpaper "$wall" false
+  quickshell ipc call config wallpaper "$wall" false > /dev/null 2>&1
 fi
 
 
