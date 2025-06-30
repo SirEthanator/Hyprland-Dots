@@ -252,9 +252,7 @@ echo 'Reloading Hyprland...'
 hyprctl reload > /dev/null 2>&1
 
 echo 'Reloading Quickshell...'
-quickshell kill > /dev/null 2>&1
-killall quickshell > /dev/null 2>&1  # In case quickshell kill fails
-quickshell --daemonize > /dev/null 2>&1
+quickshell ipc call config reload
 
 echo 'Done! Reboot may be required for some changes to take effect.'
 exit 0
