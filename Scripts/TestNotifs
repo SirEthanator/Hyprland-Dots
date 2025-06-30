@@ -1,8 +1,10 @@
 #!/bin/bash
 
-notify-send -a 'Application' 'Hello' 'World' -i dialog-info &
-sleep 1
-notify-send -a 'Really looooooooooooooong application name for testing purposes' 'Helloooooooooooooooooooooooooooooooooooooooooo Wooooooooooooooooooooooooooooooooooorld AHHHHHHHHHHHHHHHHHHHHHHHHHHHHH' 'Mooooooooooooooooooooooooooooooooooooooore Infoooooooooooooooooooooooooooooooooooooooooooooormation' &
-sleep 1
-notify-send -a 'IMPORTANT' 'SOMETHING MUST BE DONE!' 'PANIC!' -A 'DO IT' -A 'Screw yourself' -u critical -i dialog-error &
+{
+  notify-send -a 'Application' 'Hello' 'World' -i dialog-info
+  sleep 1
+  notify-send -a 'Really looooooooooooooong application name for testing purposes' 'Helloooooooooooooooooooooooooooooooooooooooooo Wooooooooooooooooooooooooooooooooooorld AHHHHHHHHHHHHHHHHHHHHHHHHHHHHH' 'Mooooooooooooooooooooooooooooooooooooooore Infoooooooooooooooooooooooooooooooooooooooooooooormation'
+  sleep 1
+  notify-send -a 'IMPORTANT' 'SOMETHING MUST BE DONE!' 'PANIC!' -A 'DO IT' -A 'AHHHH' -u critical -i dialog-error
+} &
 
