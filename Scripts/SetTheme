@@ -42,7 +42,7 @@ if [[ "$selected" -eq 1 || "$selected" == "everforest" ]]; then
   cursorsLight='Bibata-Modern-Everforest-Light'
   accent='A7C080'
   accentDim='3C4841'
-  wall="$HOME/Hyprland-Dots/Wallpapers/Everforest/Hard.png"
+  wall="$HOME/Hyprland-Dots/Wallpapers/Everforest/Accent.png"
 elif [[ "$selected" -eq 2 || "$selected" == "catmocha" ]]; then
   theme='CatMocha'
   quickshell='catMocha'
@@ -51,7 +51,7 @@ elif [[ "$selected" -eq 2 || "$selected" == "catmocha" ]]; then
   cursorsLight='Bibata-Modern-CatLatte'
   accent='B4BEFE'
   accentDim='5A5F7F'  # 50% dimmed accent
-  wall="$HOME/Hyprland-Dots/Wallpapers/Catppuccin/Crust.png"
+  wall="$HOME/Hyprland-Dots/Wallpapers/Catppuccin/Accent.png"
 elif [[ "$selected" -eq 3 || "$selected" == "rosepine" ]]; then
   theme='Rose-Pine'
   quickshell='rosePine'
@@ -60,7 +60,7 @@ elif [[ "$selected" -eq 3 || "$selected" == "rosepine" ]]; then
   cursorsLight='Bibata-Modern-Rose-Pine-Dawn'
   accent='9CCFD8'
   accentDim='4E686C'  # 50% dimmed accent
-  wall="$HOME/Hyprland-Dots/Wallpapers/Rose-Pine/Base.png"
+  wall="$HOME/Hyprland-Dots/Wallpapers/Rose-Pine/Accent.png"
 else
   help 1
 fi
