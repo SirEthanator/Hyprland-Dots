@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Colloid-Green-Everforest
+Comment=An Flat Gtk+ theme based on Elegant Design
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Colloid-Green-Everforest
+MetacityTheme=Colloid-Green-Everforest
+IconTheme=Colloid-Green-Everforest
+CursorTheme=Colloid-cursors
+ButtonLayout=close,minimize,maximize:menu
