@@ -35,6 +35,7 @@ fi
 selected=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 if [[ "$selected" -eq 1 || "$selected" == "everforest" ]]; then
   theme='Everforest'
+  gtk='Colloid-Green-Everforest'
   quickshell='everforest'
   icons='Colloid-Green-Everforest-Dark'
   cursors='Bibata-Modern-Everforest'
@@ -44,6 +45,7 @@ if [[ "$selected" -eq 1 || "$selected" == "everforest" ]]; then
   wall="$HOME/Hyprland-Dots/Wallpapers/Everforest/Accent.png"
 elif [[ "$selected" -eq 2 || "$selected" == "catmocha" ]]; then
   theme='CatMocha'
+  gtk='Colloid-Purple-Catppuccin'
   quickshell='catMocha'
   icons='Colloid-Purple-Catppuccin-Dark'
   cursors='Bibata-Modern-CatMocha'
@@ -53,6 +55,7 @@ elif [[ "$selected" -eq 2 || "$selected" == "catmocha" ]]; then
   wall="$HOME/Hyprland-Dots/Wallpapers/Catppuccin/Accent.png"
 elif [[ "$selected" -eq 3 || "$selected" == "rosepine" ]]; then
   theme='Rose-Pine'
+  gtk='Colloid-Teal-Rosepine'
   quickshell='rosePine'
   icons='Colloid-Teal-Rosepine-Dark'
   cursors='Bibata-Modern-Rose-Pine'
@@ -126,12 +129,12 @@ fi
 
 echo 'Setting GTK theme, icons & cursors...'
 if [[ -e $HOME/.config/gtk-3.0/settings.ini ]]; then
-  sed -i "s/.*gtk-theme-name.*/gtk-theme-name=$theme/" $HOME/.config/gtk-3.0/settings.ini
+  sed -i "s/.*gtk-theme-name.*/gtk-theme-name=$gtk/" $HOME/.config/gtk-3.0/settings.ini
   sed -i "s/.*gtk-icon-theme-name.*/gtk-icon-theme-name=$icons/" $HOME/.config/gtk-3.0/settings.ini
   sed -i "s/.*gtk-cursor-theme-name.*/gtk-cursor-theme-name=$cursors/" $HOME/.config/gtk-3.0/settings.ini
 fi
 if [[ -e $HOME/.config/gtk-4.0/settings.ini ]]; then
-  sed -i "s/.*gtk-theme-name.*/gtk-theme-name=$theme/" $HOME/.config/gtk-4.0/settings.ini
+  sed -i "s/.*gtk-theme-name.*/gtk-theme-name=$gtk/" $HOME/.config/gtk-4.0/settings.ini
   sed -i "s/.*gtk-icon-theme-name.*/gtk-icon-theme-name=$icons/" $HOME/.config/gtk-4.0/settings.ini
   sed -i "s/.*gtk-cursor-theme-name.*/gtk-cursor-theme-name=$cursors/" $HOME/.config/gtk-4.0/settings.ini
 fi
@@ -147,18 +150,18 @@ echo ''                  >> $HOME/.icons/default/index.theme
 
 hyprctl setcursor $cursors 32 > /dev/null 2>&1
 gsettings set org.gnome.desktop.interface cursor-theme "$cursors"
-gsettings set org.gnome.desktop.interface gtk-theme "$theme"
+gsettings set org.gnome.desktop.interface gtk-theme "$gtk"
 gsettings set org.gnome.desktop.interface icon-theme "$icons"
 
 # Libadwaita
-if [[ -e $HOME/.config/gtk-4.0/gtk.css ]]; then
-  rm $HOME/.config/gtk-4.0/gtk.css
+if [[ -e "$HOME/.config/gtk-4.0/gtk.css" || -L "$HOME/.config/gtk-4.0/gtk.css" ]]; then
+  rm -f "$HOME/.config/gtk-4.0/gtk.css"
 fi
-if [[ -e $HOME/.config/gtk-4.0/gtk-dark.css ]]; then
-  rm $HOME/.config/gtk-4.0/gtk-dark.css
+if [[ -e "$HOME/.config/gtk-4.0/gtk-dark.css" || -L "$HOME/.config/gtk-4.0/gtk-dark.css" ]]; then
+  rm -f "$HOME/.config/gtk-4.0/gtk-dark.css"
 fi
-if [[ -e $HOME/.config/gtk-4.0/assets ]]; then
-  rm -r $HOME/.config/gtk-4.0/assets  # -r is just in case it's not a symlink already (is a directory)
+if [[ -e "$HOME/.config/gtk-4.0/assets" || -L "$HOME/.config/gtk-4.0/assets" ]]; then
+  rm -rf "$HOME/.config/gtk-4.0/assets"  # -r is in case it's not a symlink already (is a directory)
 fi
 
 ln -s $HOME/.themes/$theme/gtk-4.0/gtk-dark.css $HOME/.config/gtk-4.0
@@ -168,9 +171,9 @@ ln -s $HOME/.themes/$theme/gtk-4.0/assets $HOME/.config/gtk-4.0
 # Envvars
 if [[ -e $HOME/.config/hypr/envvars.conf ]]; then
   if grep -q GTK_THEME $HOME/.config/hypr/envvars.conf; then
-    sed -i "s/.*GTK_THEME.*/env = GTK_THEME,$theme:dark/" $HOME/.config/hypr/envvars.conf
+    sed -i "s/.*GTK_THEME.*/env = GTK_THEME,$gtk:dark/" $HOME/.config/hypr/envvars.conf
   else
-    echo "env = GTK_THEME,$theme:dark" >> $HOME/.config/hypr/envvars.conf
+    echo "env = GTK_THEME,$gtk:dark" >> $HOME/.config/hypr/envvars.conf
   fi
 
   if grep -q HYPRCURSOR_THEME $HOME/.config/hypr/envvars.conf; then
