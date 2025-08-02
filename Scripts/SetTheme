@@ -9,7 +9,6 @@
 # Add gtk and kvantum themes
 # Add icon and cursor themes
 # Add kitty colour file
-# Add Hyprlock theme
 # Add neovim theme
 # Add macchina messages
 
@@ -230,15 +229,6 @@ if [[ -d $HOME/.config/nvim/lua/plugins ]]; then
 else
   echo 'lazy.nvim not found, please set Neovim theme manually.'
 fi
-
-
-# ==== Hyprlock ==== #
-echo 'Setting Hyprlock theme...'
-cd $HOME/.config/hypr
-if [[ -e ./hyprlock.conf ]]; then
-  rm ./hyprlock.conf
-fi
-ln -s ./hyprlock/$theme.conf ./hyprlock.conf
 
 
 # ==== Hyprland ==== #
