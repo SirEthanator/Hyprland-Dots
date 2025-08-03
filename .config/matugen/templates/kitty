@@ -1,0 +1,64 @@
+# Colors
+
+# Basic colors
+foreground              {{colors.on_surface.dark.hex}}
+background              {{colors.surface.dark.hex}}
+selection_foreground    {{colors.on_secondary.dark.hex}}
+selection_background    {{colors.secondary_fixed_dim.dark.hex}}
+
+# Cursor colors
+cursor                  {{colors.on_surface.dark.hex}}
+cursor_text_color       {{colors.surface.dark.hex}}
+
+# URL underline hover
+url_color               {{colors.primary.dark.hex}}
+
+# Tab bar colors
+active_tab_foreground   {{colors.surface.dark.hex}}
+active_tab_background   {{colors.primary.dark.hex}}
+inactive_tab_foreground {{colors.on_surface.dark.hex}}
+inactive_tab_background {{colors.surface_bright.dark.hex}}
+tab_bar_background      {{colors.surface.dark.hex}}
+
+# Colors for marks (marked text in the terminal)
+mark1_foreground        {{colors.on_primary.dark.hex}}
+mark1_background        {{colors.primary.dark.hex}}
+mark2_foreground        {{colors.on_secondary.dark.hex}}
+mark2_background        {{colors.secondary.dark.hex}}
+mark3_foreground        {{colors.tertiary.dark.hex}}
+mark3_background        {{colors.on_tertiary.dark.hex}}
+
+# The Almighty 16 Colours
+
+# black
+color0    {{colors.surface.dark.hex}}
+color8    {{colors.surface_bright.dark.hex}}
+
+# red
+color1    {{colors.red.dark.hex}}
+color9    {{colors.red.dark.hex | set_lightness: 5.0}}
+
+# green
+color2    {{colors.green.dark.hex}}
+color10   {{colors.green.dark.hex | set_lightness: 5.0}}
+
+# yellow
+color3    {{colors.yellow.dark.hex}}
+color11   {{colors.yellow.dark.hex | set_lightness: 5.0}}
+
+# blue
+color4    {{colors.blue.dark.hex}}
+color12   {{colors.blue.dark.hex | set_lightness: 5.0}}
+
+# magenta
+color5    {{colors.magenta.dark.hex}}
+color13   {{colors.magenta.dark.hex | set_lightness: 5.0}}
+
+# cyan
+color6    {{colors.cyan.dark.hex}}
+color14   {{colors.cyan.dark.hex | set_lightness: 5.0}}
+
+# white
+color7    {{colors.on_surface.dark.hex}}
+color15   {{colors.on_surface.dark.hex | set_lightness: 5.0}}
+

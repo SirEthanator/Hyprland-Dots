@@ -1,0 +1,32 @@
+Scheme {
+  title: "Material";
+
+  accent: "{{colors.primary.dark.hex}}";
+  accentDark: "{{colors.primary.dark.hex | set_lightness: -10.0}}";
+  accentLight: "{{colors.primary.dark.hex | set_lightness: 5.0}}";
+  fg: "{{colors.on_surface.dark.hex}}";
+  bg: "{{colors.surface.dark.hex}}";
+  bgLight: "{{colors.surface_container.dark.hex}}";
+  bgHover: "{{colors.surface_container_highest.dark.hex}}";
+  bgAccent: "{{colors.primary_container.dark.hex}}";
+  bgRed: "{{colors.error_container.dark.hex}}";
+  outline: "{{colors.outline_variant.dark.hex}}";
+  grey: "{{colors.on_surface.dark.hex | set_lightness: -40.0}}";
+  wsInactive: "{{colors.surface_container_highest.dark.hex}}";
+  red: "{{colors.error.dark.hex}}";
+  warning: "{{colors.yellow.dark.hex}}";
+  redHover: "{{colors.error.dark.hex | set_lightness: 5.0}}";
+  redPress: "{{colors.error.dark.hex | set_lightness: -5.0}}";
+
+  workspaces: "{{colors.primary.dark.hex}}";
+  activeWindow: "{{colors.secondary.dark.hex}}";
+  dateAndTime: "{{colors.tertiary.dark.hex}}";
+  volume: "{{colors.primary.dark.hex}}";
+  network: "{{colors.secondary.dark.hex}}";
+  media: "{{colors.tertiary.dark.hex}}";
+
+  battery: "{{colors.primary.dark.hex}}";
+  batteryCharging: "{{colors.primary.dark.hex}}";
+  batteryMed: "{{colors.primary.dark.hex}}";
+  batteryLow: "{{colors.error.dark.hex}}";
+}

@@ -32,6 +32,30 @@ if [[ "$1" == '-h' || "$1" == '--help' ]]; then
   help 0
 fi
 
+prompt() {
+  # Syntax: prompt-text default
+
+  local prompt default input output
+  prompt=$1
+  default=$(echo "$2" | tr '[:upper:]' '[:lower:]')
+
+  if [[ "$noconfirm" -eq 1 ]]; then
+    echo "$default"
+  else
+    read -p "$prompt" input
+    input=$(echo "$input" | tr '[:upper:]' '[:lower:]')
+
+    if [[ $input == 'y' || ( -z $input && $default == 'y' ) ]]; then
+      output=1
+    elif [[ $input == 'n' || ( -z $input && $default == 'n' ) ]]; then
+      output=0
+    else
+      if [[ $default == 'y' ]]; then output=1; else output=0; fi
+    fi
+    echo "$output"
+  fi
+}
+
 selected=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 if [[ "$selected" -eq 1 || "$selected" == "everforest" ]]; then
   theme='Everforest'
@@ -63,6 +87,20 @@ elif [[ "$selected" -eq 3 || "$selected" == "rosepine" ]]; then
   accent='9CCFD8'
   accentDim='4E686C'  # 50% dimmed accent
   wall="$HOME/Hyprland-Dots/Wallpapers/Rose-Pine/Accent.png"
+elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
+  matugen image "$(quickshell ipc call config get desktop wallpaper)" || exit 1
+
+  theme='Material'
+  # gtk='Colloid-Teal-Rosepine'
+  quickshell='material'
+  # icons='Colloid-Teal-Rosepine-Dark'
+  # cursors='Bibata-Modern-Rose-Pine'
+  # cursorsLight='Bibata-Modern-Rose-Pine-Dawn'
+  # accent='9CCFD8'
+  # accentDim='4E686C'  # 50% dimmed accent
+  wall=""
+
+  exit  # Temporary - not ready yet
 else
   help 1
 fi
@@ -82,31 +120,9 @@ for arg in "$@"; do
   esac
 done
 
-prompt() {
-  # Syntax: prompt-text default
-
-  local prompt default input output
-  prompt=$1
-  default=$(echo "$2" | tr '[:upper:]' '[:lower:]')
-
-  if [[ "$noconfirm" -eq 1 ]]; then
-    echo "$default"
-  else
-    read -p "$prompt" input
-    input=$(echo "$input" | tr '[:upper:]' '[:lower:]')
-
-    if [[ $input == 'y' || ( -z $input && $default == 'y' ) ]]; then
-      output=1
-    elif [[ $input == 'n' || ( -z $input && $default == 'n' ) ]]; then
-      output=0
-    else
-      if [[ $default == 'y' ]]; then output=1; else output=0; fi
-    fi
-    echo "$output"
-  fi
-}
-
-changeWall=$(prompt 'Change wallpaper? (y/N) ' 'n')
+if [[ ! "$theme" == 'Material' ]]; then
+  changeWall=$(prompt 'Change wallpaper? (y/N) ' 'n')
+fi
 lightCurs=$(prompt 'Enable light cursors? (y/N) ' 'n')
 
 
@@ -205,8 +221,8 @@ sed -i "s/.*icon_theme.*/icon_theme=$icons/" $HOME/.config/qt6ct/qt6ct.conf
 # ==== Kitty ==== #
 echo 'Setting Kitty theme...'
 
-cat < $HOME/.config/kitty/main    > $HOME/.config/kitty/kitty.conf  # > overwrites whole file
-cat < $HOME/.config/kitty/$theme >> $HOME/.config/kitty/kitty.conf  # >> appends to file
+cd "$HOME"/.config/kitty
+ln -s ./"$theme".conf ./Colours.conf
 
 
 # ==== Macchina ==== #
@@ -242,14 +258,10 @@ sed -i "s/.*col.inactive_border.*/    col.inactive_border = 0xff$accentDim/" ~/.
 
 # ==== Finish up ==== #
 echo 'Reloading Kitty...'
-for pid in $(pidof kitty); do
-  kill -SIGUSR1 $pid > /dev/null 2>&1  # Output gets deleted
-done
+killall -SIGUSR1 kitty > /dev/null 2>&1  # Output gets deleted
 
 echo 'Reloading Cava...'
-for pid in $(pidof cava); do
-  kill -SIGUSR1 $pid > /dev/null 2>&1
-done
+killall -SIGUSR1 cava > /dev/null 2>&1
 
 echo 'Reloading Hyprland...'
 hyprctl reload > /dev/null 2>&1

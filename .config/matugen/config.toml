@@ -1,0 +1,16 @@
+[config.custom_colors]
+
+# Blended to match palette
+red            = "#FF0000"
+green          = "#00FF00"
+yellow         = "#FFFF00"
+blue           = "#0000FF"
+magenta        = "#FF00FF"
+cyan           = "#00FFFF"
+white          = "#FFFFFF"
+
+[templates]
+quickshell = { input_path = 'templates/quickshell', output_path = '~/.config/quickshell/components/Material.qml' }
+kitty = { input_path = 'templates/kitty', output_path = '~/Hyprland-Dots/.config/kitty/Material.conf' }
+neovim = { input_path = 'templates/neovim', output_path = '~/.cache/wal/colors-wal.vim' }
+
