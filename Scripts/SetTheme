@@ -88,6 +88,9 @@ elif [[ "$selected" -eq 3 || "$selected" == "rosepine" ]]; then
   wall="$HOME/Hyprland-Dots/Wallpapers/Rose-Pine/Accent.png"
 elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
   matugen image "$(quickshell ipc call config get desktop wallpaper)" > /dev/null 2>&1 || exit 1
+  "$HOME"/Hyprland-Dots/theme_srcs/gtk/install-personal.sh material
+
+  . /tmp/set_theme_colours
 
   theme='Material'
   gtk='Colloid-Material'
@@ -95,8 +98,8 @@ elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
   # icons='Colloid-Teal-Rosepine-Dark'
   # cursors='Bibata-Modern-Rose-Pine'
   # cursorsLight='Bibata-Modern-Rose-Pine-Dawn'
-  accent=$(awk 'NR==1' < /tmp/set_theme_colours)
-  accentDim=$(awk 'NR==2' < /tmp/set_theme_colours)
+  accent="$material_accent"
+  accentDim="$material_outline"
   wall=""
 
   echo "$theme"

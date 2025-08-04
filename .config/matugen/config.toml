@@ -11,13 +11,35 @@ white          = "#FFFFFF"
 purple         = "#800080"
 orange         = "#FF8000"
 
-[templates]
-quickshell = { input_path = 'templates/quickshell', output_path = '~/.config/quickshell/components/Material.qml' }
-kitty = { input_path = 'templates/kitty', output_path = '~/Hyprland-Dots/.config/kitty/Material.conf' }
-neovim = { input_path = 'templates/neovim', output_path = '~/.cache/wal/colors-wal.vim' }
-gtk = { input_path = 'templates/gtk', output_path = '~/Hyprland-Dots/theme_srcs/gtk/src/sass/_color-palette-material.scss' }
-gtk2 = { input_path = 'templates/gtk2', output_path = '~/Hyprland-Dots/theme_srcs/gtk/src/assets/gtk-2.0/material-colours' }
-kvantum_kvconfig = { input_path = 'templates/kvantum.kvconfig', output_path = '~/.config/Kvantum/Material/Material.kvconfig' }
-kvantum_svg = { input_path = 'templates/kvantum.svg', output_path = '~/.config/Kvantum/Material/Material.svg' }
-set_theme_tmp = { input_path = 'templates/set_theme_tmp', output_path = '/tmp/set_theme_colours' }
+[templates.quickshell]
+input_path = 'templates/quickshell'
+output_path = '~/.config/quickshell/components/Material.qml'
+
+[templates.kitty]
+input_path = 'templates/kitty'
+output_path = '~/Hyprland-Dots/.config/kitty/Material.conf'
+
+[templates.neovim]
+input_path = 'templates/neovim'
+output_path = '~/.cache/wal/colors-wal.vim'
+
+[templates.gtk]
+input_path = 'templates/gtk'
+output_path = '~/Hyprland-Dots/theme_srcs/gtk/src/sass/_color-palette-material.scss'
+
+[templates.gtk2]
+input_path = 'templates/gtk2'
+output_path = '~/Hyprland-Dots/theme_srcs/gtk/src/assets/gtk-2.0/material-colours'
+
+[templates.kvantum_kvconfig]
+input_path = 'templates/kvantum.kvconfig'
+output_path = '~/.config/Kvantum/Material/Material.kvconfig'
+
+[templates.kvantum_svg]
+input_path = 'templates/kvantum.svg'
+output_path = '~/.config/Kvantum/Material/Material.svg'
+
+[templates.set_theme_tmp]
+input_path = 'templates/set_theme_tmp'
+output_path = '/tmp/set_theme_colours'
 
