@@ -2,7 +2,6 @@
 
 # ==== Adding a theme ==== #
 
-# Modify argument check
 # Define theme variables
 # Add wallpaper
 # Add quickshell theme
@@ -10,7 +9,7 @@
 # Add icon and cursor themes
 # Add kitty colour file
 # Add neovim theme
-# Add macchina messages
+# Add macchina theme & messages
 
 
 # ==== Common ==== #
@@ -88,17 +87,22 @@ elif [[ "$selected" -eq 3 || "$selected" == "rosepine" ]]; then
   accentDim='4E686C'  # 50% dimmed accent
   wall="$HOME/Hyprland-Dots/Wallpapers/Rose-Pine/Accent.png"
 elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
-  matugen image "$(quickshell ipc call config get desktop wallpaper)" || exit 1
+  matugen image "$(quickshell ipc call config get desktop wallpaper)" > /dev/null 2>&1 || exit 1
 
   theme='Material'
-  # gtk='Colloid-Teal-Rosepine'
+  gtk='Colloid-Material'
   quickshell='material'
   # icons='Colloid-Teal-Rosepine-Dark'
   # cursors='Bibata-Modern-Rose-Pine'
   # cursorsLight='Bibata-Modern-Rose-Pine-Dawn'
-  # accent='9CCFD8'
-  # accentDim='4E686C'  # 50% dimmed accent
+  accent=$(awk 'NR==1' < /tmp/set_theme_colours)
+  accentDim=$(awk 'NR==2' < /tmp/set_theme_colours)
   wall=""
+
+  echo "$theme"
+  echo "$gtk"
+  echo "$accent"
+  echo "$accentDim"
 
   exit  # Temporary - not ready yet
 else
@@ -145,14 +149,14 @@ fi
 
 echo 'Setting GTK theme, icons & cursors...'
 if [[ -e $HOME/.config/gtk-3.0/settings.ini ]]; then
-  sed -i "s/.*gtk-theme-name.*/gtk-theme-name=$gtk/" $HOME/.config/gtk-3.0/settings.ini
-  sed -i "s/.*gtk-icon-theme-name.*/gtk-icon-theme-name=$icons/" $HOME/.config/gtk-3.0/settings.ini
-  sed -i "s/.*gtk-cursor-theme-name.*/gtk-cursor-theme-name=$cursors/" $HOME/.config/gtk-3.0/settings.ini
+  sed -i "s/.*gtk-theme-name.*/gtk-theme-name=$gtk/" "$HOME"/.config/gtk-3.0/settings.ini
+  sed -i "s/.*gtk-icon-theme-name.*/gtk-icon-theme-name=$icons/" "$HOME"/.config/gtk-3.0/settings.ini
+  sed -i "s/.*gtk-cursor-theme-name.*/gtk-cursor-theme-name=$cursors/" "$HOME"/.config/gtk-3.0/settings.ini
 fi
 if [[ -e $HOME/.config/gtk-4.0/settings.ini ]]; then
-  sed -i "s/.*gtk-theme-name.*/gtk-theme-name=$gtk/" $HOME/.config/gtk-4.0/settings.ini
-  sed -i "s/.*gtk-icon-theme-name.*/gtk-icon-theme-name=$icons/" $HOME/.config/gtk-4.0/settings.ini
-  sed -i "s/.*gtk-cursor-theme-name.*/gtk-cursor-theme-name=$cursors/" $HOME/.config/gtk-4.0/settings.ini
+  sed -i "s/.*gtk-theme-name.*/gtk-theme-name=$gtk/" "$HOME"/.config/gtk-4.0/settings.ini
+  sed -i "s/.*gtk-icon-theme-name.*/gtk-icon-theme-name=$icons/" "$HOME"/.config/gtk-4.0/settings.ini
+  sed -i "s/.*gtk-cursor-theme-name.*/gtk-cursor-theme-name=$cursors/" "$HOME"/.config/gtk-4.0/settings.ini
 fi
 
 if [[ ! -d $HOME/.icons ]]; then

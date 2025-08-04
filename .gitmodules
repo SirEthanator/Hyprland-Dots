@@ -2,3 +2,6 @@
 	path = .config/quickshell
 	url = https://github.com/SirEthanator/Quickshell-WIP
   ignore = dirty
+[submodule "theme_srcs/gtk"]
+	path = theme_srcs/gtk
+	url = https://github.com/SirEthanator/Colloid-gtk-theme

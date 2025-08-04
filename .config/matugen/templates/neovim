@@ -4,7 +4,7 @@ let foreground = "{{colors.on_surface.dark.hex}}"
 let cursor = "{{colors.on_surface.dark.hex}}"
 
 let color0   = "{{colors.surface.dark.hex}}"
-let color8   = "{{colors.surface_bright.dark.hex | set_lightness: 10.0}}"
+let color8   = "{{colors.on_surface.dark.hex | set_lightness: -40.0}}"
 
 let color1   = "{{colors.red.dark.hex}}"
 let color9   = "{{colors.red.dark.hex | set_lightness: 5.0}}"

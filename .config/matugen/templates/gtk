@@ -1,0 +1,63 @@
+$red-light: {{colors.red.dark.hex}};
+$red-dark: {{colors.red.light.hex}};
+
+$pink-light: {{colors.magenta.dark.hex}};
+$pink-dark: {{colors.magenta.light.hex}};
+
+$purple-light: {{colors.purple.dark.hex}};
+$purple-dark: {{colors.purple.light.hex}};
+
+$blue-light: {{colors.blue.dark.hex}};
+$blue-dark: {{colors.blue.light.hex}};
+
+$teal-light: {{colors.cyan.dark.hex}};
+$teal-dark: {{colors.cyan.light.hex}};
+
+$green-light: {{colors.green.dark.hex}};
+$green-dark: {{colors.green.light.hex}};
+
+$yellow-light: {{colors.yellow.dark.hex}};
+$yellow-dark: {{colors.yellow.light.hex}};
+
+$orange-light: {{colors.orange.dark.hex}};
+$orange-dark: {{colors.orange.light.hex}};
+
+// Greys
+$grey-050: {{colors.surface_container_highest.dark.hex | set_lightness: 72.0}};
+$grey-100: {{colors.surface_container_highest.dark.hex | set_lightness: 66.0}};
+$grey-150: {{colors.surface_container_highest.dark.hex | set_lightness: 60.0}};
+$grey-200: {{colors.surface_container_highest.dark.hex | set_lightness: 54.0}};
+$grey-250: {{colors.surface_container_highest.dark.hex | set_lightness: 48.0}};
+$grey-300: {{colors.surface_container_highest.dark.hex | set_lightness: 42.0}};
+$grey-350: {{colors.surface_container_highest.dark.hex | set_lightness: 36.0}};
+$grey-400: {{colors.surface_container_highest.dark.hex | set_lightness: 30.0}};
+$grey-450: {{colors.surface_container_highest.dark.hex | set_lightness: 24.0}};
+$grey-500: {{colors.surface_container_highest.dark.hex | set_lightness: 18.0}};
+$grey-550: {{colors.surface_container_highest.dark.hex | set_lightness: 12.0}};
+$grey-600: {{colors.surface_container_highest.dark.hex | set_lightness: 6.0}};
+$grey-650: {{colors.surface_container_high.dark.hex}};
+$grey-700: {{colors.surface_container.dark.hex}};
+$grey-750: {{colors.surface_container_low.dark.hex}};
+$grey-800: {{colors.surface.dark.hex}};
+$grey-850: {{colors.surface.dark.hex | set_lightness: -2.5}};
+$grey-900: {{colors.surface.dark.hex | set_lightness: -5.0}};
+$grey-950: {{colors.surface.dark.hex | set_lightness: -7.5}};
+
+// White
+$white: {{colors.on_surface.dark.hex}};
+
+// Black
+$black: {{colors.surface.dark.hex}};
+
+// Button
+$button-close: if($variant == 'light', $red-dark, $red-light);
+$button-max: if($variant == 'light', $green-dark, $green-light);
+$button-min: if($variant == 'light', $yellow-dark, $yellow-light);
+
+// Link
+$links: $blue-dark;
+
+// Theme
+$default-light: {{colors.primary.dark.hex}};
+$default-dark: {{colors.primary.light.hex}};
+
