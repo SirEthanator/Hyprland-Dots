@@ -27,10 +27,6 @@ output_path = '~/.cache/wal/colors-wal.vim'
 input_path = 'templates/gtk'
 output_path = '~/Hyprland-Dots/theme_srcs/gtk/src/sass/_color-palette-material.scss'
 
-[templates.gtk2]
-input_path = 'templates/gtk2'
-output_path = '~/Hyprland-Dots/theme_srcs/gtk/src/assets/gtk-2.0/material-colours'
-
 [templates.kvantum_kvconfig]
 input_path = 'templates/kvantum.kvconfig'
 output_path = '~/.config/Kvantum/Material/Material.kvconfig'
@@ -39,7 +35,7 @@ output_path = '~/.config/Kvantum/Material/Material.kvconfig'
 input_path = 'templates/kvantum.svg'
 output_path = '~/.config/Kvantum/Material/Material.svg'
 
-[templates.set_theme_tmp]
-input_path = 'templates/set_theme_tmp'
-output_path = '/tmp/set_theme_colours'
+[templates.script_vars]
+input_path = 'templates/script_vars'
+output_path = '~/material_colours'
 

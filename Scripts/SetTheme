@@ -7,7 +7,7 @@
 # Add quickshell theme
 # Add gtk and kvantum themes
 # Add icon and cursor themes
-# Add kitty colour file
+# Add kitty theme
 # Add neovim theme
 # Add macchina theme & messages
 
@@ -90,7 +90,7 @@ elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
   matugen image "$(quickshell ipc call config get desktop wallpaper)" > /dev/null 2>&1 || exit 1
   "$HOME"/Hyprland-Dots/theme_srcs/gtk/install-personal.sh material
 
-  . /tmp/set_theme_colours
+  . "$HOME/material_colours"
 
   theme='Material'
   gtk='Colloid-Material'
@@ -98,8 +98,8 @@ elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
   # icons='Colloid-Teal-Rosepine-Dark'
   # cursors='Bibata-Modern-Rose-Pine'
   # cursorsLight='Bibata-Modern-Rose-Pine-Dawn'
-  accent="$material_accent"
-  accentDim="$material_outline"
+  accent="$material_d_primary"
+  accentDim="$material_d_outline_var"
   wall=""
 
   echo "$theme"
