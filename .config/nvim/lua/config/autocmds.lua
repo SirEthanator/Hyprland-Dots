@@ -24,6 +24,26 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       undercurl = false,
       sp = vim.api.nvim_get_hl(0, { name = "DiagnosticHint" }).fg
     })
+
+    vim.api.nvim_set_hl(0, "SpellBad", {
+      underline = true,
+      undercurl = false,
+      sp = vim.api.nvim_get_hl(0, { name = "SpellBad" }).fg
+    })
+    vim.api.nvim_set_hl(0, "SpellCap", {
+      underline = true,
+      undercurl = false,
+      sp = vim.api.nvim_get_hl(0, { name = "SpellCap" }).fg
+    })
+    vim.api.nvim_set_hl(0, "SpellLocal", {
+      underline = false,
+      undercurl = false,
+    })
+    vim.api.nvim_set_hl(0, "SpellRare", {
+      underline = true,
+      undercurl = false,
+      sp = vim.api.nvim_get_hl(0, { name = "SpellRare" }).fg
+    })
   end,
 })
 
