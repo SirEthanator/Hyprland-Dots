@@ -95,7 +95,7 @@ elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
   theme='Material'
   gtk='Colloid-Material'
   quickshell='material'
-  # icons='Colloid-Teal-Rosepine-Dark'
+  icons='Colloid-Material-Dark'
   # cursors='Bibata-Modern-Rose-Pine'
   # cursorsLight='Bibata-Modern-Rose-Pine-Dawn'
   accent="$material_d_primary"
