@@ -88,7 +88,8 @@ elif [[ "$selected" -eq 3 || "$selected" == "rosepine" ]]; then
   wall="$HOME/Hyprland-Dots/Wallpapers/Rose-Pine/Accent.png"
 elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
   matugen image "$(quickshell ipc call config get desktop wallpaper)" > /dev/null 2>&1 || exit 1
-  "$HOME"/Hyprland-Dots/theme_srcs/gtk/install-personal.sh material
+  "$HOME"/Hyprland-Dots/theme_srcs/install-gtk.sh material
+  "$HOME"/Hyprland-Dots/theme_srcs/install-icons.sh material
 
   . "$HOME/material_colours"
 
@@ -96,18 +97,11 @@ elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
   gtk='Colloid-Material'
   quickshell='material'
   icons='Colloid-Material-Dark'
-  # cursors='Bibata-Modern-Rose-Pine'
-  # cursorsLight='Bibata-Modern-Rose-Pine-Dawn'
-  accent="$material_d_primary"
-  accentDim="$material_d_outline_var"
+  cursors='Bibata-Modern-Material'
+  cursorsLight='Bibata-Modern-Material-Light'
+  accent="${material_d_primary:1}"
+  accentDim="${material_d_outline_var:1}"
   wall=""
-
-  echo "$theme"
-  echo "$gtk"
-  echo "$accent"
-  echo "$accentDim"
-
-  exit  # Temporary - not ready yet
 else
   help 1
 fi
@@ -233,10 +227,10 @@ ln -s ./"$theme".conf ./Colours.conf
 
 
 # ==== Macchina ==== #
-echo 'Setting Macchina theme...'
-sed -i "s/.*key_color.*/key_color = \"#$accent\"/" $HOME/.config/macchina/themes/Theme.toml
-sed -i "s/.*separator_color.*/separator_color = \"#$accent\"/" $HOME/.config/macchina/themes/Theme.toml
-sed -i "s/.*msgFile=.*/msgFile=~\/Scripts\/Messages\/$theme/" $HOME/Scripts/RandomMessage
+# echo 'Setting Macchina theme...'
+# sed -i "s/.*key_color.*/key_color = \"#$accent\"/" $HOME/.config/macchina/themes/Theme.toml
+# sed -i "s/.*separator_color.*/separator_color = \"#$accent\"/" $HOME/.config/macchina/themes/Theme.toml
+# sed -i "s/.*msgFile=.*/msgFile=~\/Scripts\/Messages\/$theme/" $HOME/Scripts/RandomMessage
 # The above replace the entire line that contains the first string with the second string
 
 

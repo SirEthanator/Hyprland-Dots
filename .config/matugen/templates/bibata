@@ -1,0 +1,62 @@
+{
+  "Bibata-Modern-Material": {
+    "dir": "svg/modern",
+    "out": "bitmaps/Bibata-Modern-Material",
+    "colors": [
+      { "match": "#00FF00", "replace": "{{colors.surface.dark.hex}}" },
+      { "match": "#0000FF", "replace": "{{colors.on_surface.dark.hex}}" },
+      { "match": "#FF0000", "replace": "{{colors.surface.dark.hex}}" },
+
+      { "match": "#32A0DA", "replace": "{{colors.blue.dark.hex}}" },
+      { "match": "#F05024", "replace": "{{colors.orange.dark.hex}}" },
+      { "match": "#7EBA41", "replace": "{{colors.green.dark.hex}}" },
+      { "match": "#FCB813", "replace": "{{colors.yellow.dark.hex}}" },
+
+      { "match": "#96C865", "replace": "{{colors.surface.dark.hex}}" },
+      { "match": "#FDBE2A", "replace": "{{colors.surface.dark.hex}}" },
+      { "match": "#4FADDF", "replace": "{{colors.surface.dark.hex}}" },
+      { "match": "#F1613A", "replace": "{{colors.surface.dark.hex}}" },
+
+      { "match": "white",   "replace": "{{colors.surface.dark.hex}}" },
+      { "match": "#FFFFFF", "replace": "{{colors.surface.dark.hex}}" },
+      { "match": "#FE0000", "replace": "{{colors.red.dark.hex}}" },
+      { "match": "#5F3BE4", "replace": "{{colors.purple.dark.hex}}" },
+      { "match": "#06B231", "replace": "{{colors.green.dark.hex}}" },
+      { "match": "#F27400", "replace": "{{colors.orange.dark.hex}}" },
+      { "match": "#606060", "replace": "{{colors.yellow.dark.hex}}" },
+      { "match": "#2C2C2C", "replace": "{{colors.yellow.dark.hex}}" },
+      { "match": "#0A6857", "replace": "{{colors.cyan.dark.hex}}" },
+      { "match": "#179DD8", "replace": "{{colors.blue.dark.hex}}" }
+    ]
+  },
+  "Bibata-Modern-Material-Light": {
+    "dir": "svg/modern",
+    "out": "bitmaps/Bibata-Modern-Material-Light",
+    "colors": [
+      { "match": "#00FF00", "replace": "{{colors.surface.light.hex}}" },
+      { "match": "#0000FF", "replace": "{{colors.on_surface.light.hex}}" },
+      { "match": "#FF0000", "replace": "{{colors.surface.light.hex}}" },
+
+      { "match": "#32A0DA", "replace": "{{colors.blue.light.hex}}" },
+      { "match": "#F05024", "replace": "{{colors.orange.light.hex}}" },
+      { "match": "#7EBA41", "replace": "{{colors.green.light.hex}}" },
+      { "match": "#FCB813", "replace": "{{colors.yellow.light.hex}}" },
+
+      { "match": "#96C865", "replace": "{{colors.surface.light.hex}}" },
+      { "match": "#FDBE2A", "replace": "{{colors.surface.light.hex}}" },
+      { "match": "#4FADDF", "replace": "{{colors.surface.light.hex}}" },
+      { "match": "#F1613A", "replace": "{{colors.surface.light.hex}}" },
+
+      { "match": "white",   "replace": "{{colors.surface.light.hex}}" },
+      { "match": "#FFFFFF", "replace": "{{colors.surface.light.hex}}" },
+      { "match": "#FE0000", "replace": "{{colors.red.light.hex}}" },
+      { "match": "#5F3BE4", "replace": "{{colors.purple.light.hex}}" },
+      { "match": "#06B231", "replace": "{{colors.green.light.hex}}" },
+      { "match": "#F27400", "replace": "{{colors.orange.light.hex}}" },
+      { "match": "#606060", "replace": "{{colors.yellow.light.hex}}" },
+      { "match": "#2C2C2C", "replace": "{{colors.yellow.light.hex}}" },
+      { "match": "#0A6857", "replace": "{{colors.cyan.light.hex}}" },
+      { "match": "#179DD8", "replace": "{{colors.blue.light.hex}}" }
+    ]
+  }
+}

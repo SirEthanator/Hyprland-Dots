@@ -1610,11 +1610,13 @@ columnview > header > button, treeview.view > header > button, window.print tree
   line-height: 100%;
   border-left: 1px solid alpha(currentColor,0.12);
   border-bottom: 1px solid alpha(currentColor,0.12);
+  border-top: none;
+  border-right: none;
   background-clip: padding-box;
 }
 
 columnview > header > button:first-child, treeview.view > header > button:first-child, window.print treeview.dialog-action-box > header > button:first-child {
-  border-left-width: 0;
+  border-left: none;
 }
 
 columnview > header > button > box, treeview.view > header > button > box, window.print treeview.dialog-action-box > header > button > box {
@@ -3037,6 +3039,10 @@ label:disabled {
   filter: opacity(0.45);
 }
 
+.dimmed, dialog.shortcuts .shortcut-row .title-box > .subtitle {
+  opacity: 0.55;
+}
+
 .dim-label, scale > value, progressbar > text, row.expander image.expander-row-arrow, row.property > box.header > box.title > .title, row.expander.property box > list > row > box.header > box.title > .title, row label.subtitle, spinbutton > text > placeholder,
 entry > text > placeholder, headerbar .subtitle,
 windowtitle .subtitle, label.separator {
@@ -3064,42 +3070,40 @@ windowtitle .subtitle, label.separator {
  **********************/
 .title-1 {
   font-weight: 800;
-  font-size: 20pt;
+  font-size: 181%;
 }
 
 .title-2 {
   font-weight: 800;
-  font-size: 15pt;
+  font-size: 136%;
 }
 
 .title-3 {
   font-weight: 700;
-  font-size: 15pt;
+  font-size: 136%;
 }
 
 .title-4 {
   font-weight: 700;
-  font-size: 13pt;
+  font-size: 118%;
 }
 
 .heading, row.button .title, listview > header {
   font-weight: 700;
-  font-size: 11pt;
 }
 
 .body {
   font-weight: 400;
-  font-size: 11pt;
 }
 
 .caption-heading {
   font-weight: 700;
-  font-size: 9pt;
+  font-size: 82%;
 }
 
-.caption {
+.caption, dialog.shortcuts .shortcut-row .title-box > .subtitle {
   font-weight: 400;
-  font-size: 9pt;
+  font-size: 82%;
 }
 
 .monospace {
@@ -3703,23 +3707,57 @@ row.entry:disabled text {
   opacity: 0.45;
 }
 
-row.entry:disabled .dim-label, row.entry:disabled scale > value, row.entry:disabled progressbar > text, row.entry:disabled row.expander image.expander-row-arrow, row.expander row.entry:disabled image.expander-row-arrow, row.entry:disabled spinbutton > text > placeholder,
+row.entry:disabled .dimmed, row.entry:disabled dialog.shortcuts .shortcut-row .title-box > .subtitle, dialog.shortcuts .shortcut-row row.entry:disabled .title-box > .subtitle, row.entry:disabled .dim-label, row.entry:disabled scale > value, row.entry:disabled progressbar > text, row.entry:disabled row.expander image.expander-row-arrow, row.expander row.entry:disabled image.expander-row-arrow, row.entry:disabled spinbutton > text > placeholder,
 row.entry:disabled entry > text > placeholder, row.entry:disabled label.separator, row.entry:disabled row.property > box.header > box.title > .title, row.entry:disabled row.expander.property box > list > row > box.header > box.title > .title, row.expander.property row.entry:disabled box > list > row > box.header > box.title > .title, row.entry:disabled .subtitle {
   opacity: 1;
 }
 
-row.entry .edit-icon, row.entry .indicator {
-  min-width: 22px;
-  min-height: 22px;
-  padding: 6px;
+row.entry > box.header {
+  border-spacing: 0;
+  margin-left: 6px;
+  margin-right: 6px;
 }
 
-row.entry .edit-icon:disabled {
+row.entry > box.header > .editable-area {
+  padding: 0 6px;
+}
+
+row.entry > box.header > .editable-area > .edit-icon, row.entry > box.header > .editable-area > .indicator {
+  min-width: 24px;
+  min-height: 24px;
+  padding: 5px;
+}
+
+row.entry > box.header > .editable-area > .edit-icon:dir(ltr), row.entry > box.header > .editable-area > .indicator:dir(ltr), row.entry > box.header > .editable-area > .apply-button:dir(ltr) {
+  margin-left: 6px;
+}
+
+row.entry > box.header > .editable-area > .edit-icon:dir(rtl), row.entry > box.header > .editable-area > .indicator:dir(rtl), row.entry > box.header > .editable-area > .apply-button:dir(rtl) {
+  margin-right: 6px;
+}
+
+row.entry > box.header > .editable-area > .edit-icon:disabled {
   opacity: 0.3;
 }
 
-row.entry .indicator {
+row.entry > box.header > .editable-area > .indicator {
   opacity: 0.3;
+}
+
+row.entry > box.header > .prefixes:dir(ltr) {
+  margin-left: 6px;
+}
+
+row.entry > box.header > .prefixes:dir(rtl) {
+  margin-right: 6px;
+}
+
+row.entry > box.header > .suffixes:dir(ltr) {
+  margin-right: 6px;
+}
+
+row.entry > box.header > .suffixes:dir(rtl) {
+  margin-left: 6px;
 }
 
 row.entry.monospace {
@@ -4052,6 +4090,10 @@ row.button > box {
   margin-right: 12px;
   border-spacing: 6px;
   min-height: 48px;
+}
+
+row.button > box > .icon:disabled {
+  filter: Opacity(0.45);
 }
 
 row.button.suggested-action {
@@ -5863,6 +5905,39 @@ window.shortcuts searchbar {
   background: none;
 }
 
+dialog.shortcuts preferencespage > scrolledwindow > viewport > clamp > box {
+  border-spacing: 18px;
+}
+
+dialog.shortcuts preferencespage > scrolledwindow > viewport > clamp > box preferencesgroup + preferencesgroup box.header {
+  margin-top: 6px;
+}
+
+dialog.shortcuts .shortcut-row {
+  padding: 9px 12px;
+  min-height: 36px;
+}
+
+dialog.shortcuts .shortcut-row .title-box {
+  border-spacing: 3px;
+}
+
+shortcut-label, shortcut-label > box {
+  border-spacing: 6px;
+}
+
+shortcut-label .keycap {
+  background: alpha(currentColor,0.1);
+  box-shadow: inset 0 -2px alpha(currentColor,0.12);
+  border-radius: 6px;
+  padding: 6px;
+  min-width: 20px;
+}
+
+shortcut-label > .dimmed, dialog.shortcuts .shortcut-row shortcut-label.title-box > .subtitle {
+  padding: 6px 0;
+}
+
 .sidebar-pane {
   background-color: @sidebar_bg_color;
   color: @sidebar_fg_color;
@@ -7243,7 +7318,7 @@ toolbarview > .bottom-bar.raised searchbar > revealer > box,
 toolbarview > .bottom-bar.raised actionbar > revealer > box {
   background-color: @headerbar_backdrop_color;
   color: @headerbar_fg_color;
-  box-shadow: inset 0 1px alpha(@headerbar_border_color,0.12);
+  box-shadow: none;
 }
 
 toolbarview > .top-bar.raised searchbar > revealer > box:backdrop, toolbarview > .top-bar.raised actionbar > revealer > box:backdrop,
@@ -7253,12 +7328,12 @@ toolbarview > .bottom-bar.raised actionbar > revealer > box:backdrop {
 }
 
 toolbarview.undershoot-top scrolledwindow > undershoot.top {
-  box-shadow: none;
+  box-shadow: inset 0 1px alpha(currentColor,0.12);
   background: linear-gradient(to bottom, alpha(@shade_color,0.75), transparent 6px);
 }
 
 toolbarview.undershoot-bottom scrolledwindow > undershoot.bottom {
-  box-shadow: none;
+  box-shadow: inset 0 -1px alpha(currentColor,0.12);
   background: linear-gradient(to top, alpha(@shade_color,0.75), transparent 6px);
 }
 
@@ -8313,6 +8388,7 @@ preferencesgroup > box .cutout-button {
   background-color: @dialog_bg_color;
 }
 
+preferencesgroup > box button.accent,
 preferencesgroup > box button.accent-button {
   min-height: 24px;
   min-width: 24px;
@@ -8324,50 +8400,70 @@ preferencesgroup > box button.accent-button {
   box-shadow: none;
 }
 
+preferencesgroup > box button.accent:hover,
 preferencesgroup > box button.accent-button:hover {
   box-shadow: 0 0 0 3px alpha(currentColor,0.07);
 }
 
+preferencesgroup > box button.accent:checked,
 preferencesgroup > box button.accent-button:checked {
   box-shadow: 0 0 0 3px @accent_color;
 }
 
-preferencesgroup > box button.accent-button.blue, preferencesgroup > box button.accent-button.teal, preferencesgroup > box button.accent-button.green, preferencesgroup > box button.accent-button.yellow, preferencesgroup > box button.accent-button.orange, preferencesgroup > box button.accent-button.red, preferencesgroup > box button.accent-button.pink, preferencesgroup > box button.accent-button.purple, preferencesgroup > box button.accent-button.slate {
+preferencesgroup > box button.accent.blue, preferencesgroup > box button.accent.teal, preferencesgroup > box button.accent.green, preferencesgroup > box button.accent.yellow, preferencesgroup > box button.accent.orange, preferencesgroup > box button.accent.red, preferencesgroup > box button.accent.pink, preferencesgroup > box button.accent.purple, preferencesgroup > box button.accent.slate,
+preferencesgroup > box button.accent-button.blue,
+preferencesgroup > box button.accent-button.teal,
+preferencesgroup > box button.accent-button.green,
+preferencesgroup > box button.accent-button.yellow,
+preferencesgroup > box button.accent-button.orange,
+preferencesgroup > box button.accent-button.red,
+preferencesgroup > box button.accent-button.pink,
+preferencesgroup > box button.accent-button.purple,
+preferencesgroup > box button.accent-button.slate {
   --accent-color: oklab(from var(--accent-bg-color) var(--standalone-color-oklab));
 }
 
+preferencesgroup > box button.accent.blue,
 preferencesgroup > box button.accent-button.blue {
   --accent-bg-color: var(--accent-blue);
 }
 
+preferencesgroup > box button.accent.teal,
 preferencesgroup > box button.accent-button.teal {
   --accent-bg-color: var(--accent-teal);
 }
 
+preferencesgroup > box button.accent.green,
 preferencesgroup > box button.accent-button.green {
   --accent-bg-color: var(--accent-green);
 }
 
+preferencesgroup > box button.accent.yellow,
 preferencesgroup > box button.accent-button.yellow {
   --accent-bg-color: var(--accent-yellow);
 }
 
+preferencesgroup > box button.accent.orange,
 preferencesgroup > box button.accent-button.orange {
   --accent-bg-color: var(--accent-orange);
 }
 
+preferencesgroup > box button.accent.red,
 preferencesgroup > box button.accent-button.red {
   --accent-bg-color: var(--accent-red);
 }
 
+preferencesgroup > box button.accent.pink,
 preferencesgroup > box button.accent-button.pink {
   --accent-bg-color: var(--accent-pink);
 }
 
+preferencesgroup > box button.accent.purple,
 preferencesgroup > box button.accent-button.purple {
   --accent-bg-color: var(--accent-purple);
 }
 
+preferencesgroup > box button.accent.slate,
 preferencesgroup > box button.accent-button.slate {
   --accent-bg-color: var(--accent-slate);
 }
@@ -8398,10 +8494,6 @@ window.org-gnome-TextEditor popover.open-popover > contents {
 
 .nautilus-list-view columnview.view, .nautilus-list-view treeview.view, .nautilus-list-view window.print columnview.dialog-action-box, window.print .nautilus-list-view columnview.dialog-action-box, .nautilus-list-view window.print treeview.dialog-action-box, window.print .nautilus-list-view treeview.dialog-action-box {
   padding: 0;
-}
-
-.nautilus-list-view columnview.view > header > button, .nautilus-list-view treeview.view > header > button, .nautilus-list-view window.print columnview.dialog-action-box > header > button, window.print .nautilus-list-view columnview.dialog-action-box > header > button, .nautilus-list-view window.print treeview.dialog-action-box > header > button, window.print .nautilus-list-view treeview.dialog-action-box > header > button {
-  border-top: 1px solid alpha(currentColor,0.12);
 }
 
 .nautilus-list-view columnview.view > header > button:last-child, .nautilus-list-view treeview.view > header > button:last-child, .nautilus-list-view window.print columnview.dialog-action-box > header > button:last-child, window.print .nautilus-list-view columnview.dialog-action-box > header > button:last-child, .nautilus-list-view window.print treeview.dialog-action-box > header > button:last-child, window.print .nautilus-list-view treeview.dialog-action-box > header > button:last-child {

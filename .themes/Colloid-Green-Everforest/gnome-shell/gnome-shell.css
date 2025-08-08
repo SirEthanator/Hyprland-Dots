@@ -1288,7 +1288,6 @@ StEntry StLabel.hint-text, .popup-menu .search-entry StLabel.hint-text {
   transition-duration: 250ms;
   box-shadow: none;
   border: none;
-  font-size: 0.909em;
   background-color: #1e2326;
   height: 34px;
 }
@@ -1512,11 +1511,9 @@ StEntry StLabel.hint-text, .popup-menu .search-entry StLabel.hint-text {
   min-width: 12em;
   color: rgba(30, 35, 38, 0.6) !important;
   padding: 0;
-  font-weight: normal;
   border-radius: 24px;
   box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.1);
   margin: 6px 6px 8px;
-  font-size: 0.909em;
 }
 
 .popup-menu .popup-menu-content {
@@ -1524,7 +1521,6 @@ StEntry StLabel.hint-text, .popup-menu .search-entry StLabel.hint-text {
   background-color: #D3C6AA;
   border-radius: 12px;
   margin: 0;
-  font-weight: normal;
   border: 1px solid rgba(30, 35, 38, 0.12);
   box-shadow: inset 0 0 0 1px rgba(211, 198, 170, 0.2);
 }
@@ -1536,12 +1532,10 @@ StEntry StLabel.hint-text, .popup-menu .search-entry StLabel.hint-text {
   border-radius: 6px;
   margin: 0;
   transition-duration: 100ms;
-  font-weight: normal;
   background-color: transparent;
 }
 
 .popup-menu .popup-menu-item:checked {
-  font-weight: normal;
   border: none;
   box-shadow: none;
   color: rgba(30, 35, 38, 0.87) !important;

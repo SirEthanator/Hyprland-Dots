@@ -35,6 +35,10 @@ output_path = '~/.config/Kvantum/Material/Material.kvconfig'
 input_path = 'templates/kvantum.svg'
 output_path = '~/.config/Kvantum/Material/Material.svg'
 
+[templates.bibata]
+input_path = 'templates/bibata'
+output_path = '~/Hyprland-Dots/theme_srcs/cursors/schemes/Bibata-Modern-Material.json'
+
 [templates.script_vars]
 input_path = 'templates/script_vars'
 output_path = '~/material_colours'

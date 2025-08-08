@@ -8,3 +8,6 @@
 [submodule "theme_srcs/icons"]
 	path = theme_srcs/icons
 	url = https://github.com/SirEthanator/Colloid-icon-theme
+[submodule "theme_srcs/cursors"]
+	path = theme_srcs/cursors
+	url = https://github.com/SirEthanator/Bibata_Cursor.git
