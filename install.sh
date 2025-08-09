@@ -161,7 +161,14 @@ git clone https://github.com/SirEthanator/Hyprland-Dots.git "$HOME"/Hyprland-Dot
   cd "$HOME"/Hyprland-Dots || error 'Failed to cd into repo'
   stow . || error 'Symlinking with Stow failed'
 
-  ./Scripts/SetTheme everforest || error 'Failed to set up theming'
+  {
+    echo 'Installing GTK themes...'
+    ./theme_srcs/install-gtk.sh --script
+    echo 'Installing Icon themes...'
+    ./theme_srcs/install-icons.sh --script
+    echo 'Applying Everforest...'
+    ./Scripts/SetTheme everforest
+  } || error 'Failed to set up theming'
 )
 
 {
