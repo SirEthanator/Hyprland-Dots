@@ -1,5 +1,3 @@
-# Colors
-
 # Basic colors
 foreground              {{colors.on_surface.dark.hex}}
 background              {{colors.surface.dark.hex}}
