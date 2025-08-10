@@ -110,46 +110,15 @@ elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
 
   pid=$$
   {
-    LOCKFILE="$HOME/.cache/themegen.lck"
-    PENDING='1'
-
-    # If the lockfile exists, we check if another job is already pending
-    # If there is no pending job then we make one
-    # If there is no lockfile, we create one
-
-    # This system prevents two from running at once.
-    # If the script is run 1 or more times while a job is running
-    # that job will complete then one new job will be started.
-
-    if [[ -e "$LOCKFILE" ]]; then
-      if [[ ! $(cat "$LOCKFILE") == "$PENDING" ]]; then
-        echo "$PENDING" > "$LOCKFILE"
-        inotifywait "$LOCKFILE" -e delete > /dev/null 2>&1
-      else
-        exit 0
-      fi
-    fi
-
-    if [[ ! -e "$LOCKFILE" ]]; then
-      touch "$LOCKFILE"
-    fi
-
     parent_pid="$pid"
-    "$HOME"/Hyprland-Dots/theme_srcs/install-gtk.sh material --script > /dev/null 2>&1
-    "$HOME"/Hyprland-Dots/theme_srcs/install-icons.sh material --script > /dev/null 2>&1
 
-    if [[ "$lightCurs" -eq 1 ]]; then
-      curs='material-light'
-    else
-      curs='material'
-    fi
-    "$HOME/Hyprland-Dots/theme_srcs/install-cursors.sh" "$curs" --script --regenerate > /dev/null 2>&1
+    args=(--noMatugen)
+    if [[ "$lightCurs" -eq 1 ]]; then args+=(--lightCurs); fi
+    ./GenerateMaterial "${args[@]}"
 
     if ! kill -0 "$parent_pid" > /dev/null 2>&1; then
-      notify-send -a 'Set Theme' 'Generation complete' 'GTK theme, icon, and cursor generation has finished. Reboot may be required for all changes to take effect.'
+      notify-send -a 'Set Theme' 'Generation complete' 'GTK theme, icon, and cursor generation has finished.'
     fi
-
-    rm "$LOCKFILE"
   } &
 
   generation_pid=$!
