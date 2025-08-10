@@ -23,12 +23,10 @@ function help() {
   echo ''
   echo 'Flags:'
   echo '--noconfirm'
-  echo '--noqsreload'
   exit "$1"
 }
 
 noconfirm=0
-noqsreload=0
 
 selected=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 
@@ -38,9 +36,6 @@ for arg in "$@"; do
   case "$arg" in
     --noconfirm)
       noconfirm=1
-      ;;
-    --noqsreload)
-      noqsreload=1
       ;;
     --help)
       help 0
@@ -297,11 +292,6 @@ killall -SIGUSR1 cava > /dev/null 2>&1
 
 echo 'Reloading Hyprland...'
 hyprctl reload > /dev/null 2>&1
-
-if [[ "$noqsreload" -eq 0 ]]; then
-  echo 'Reloading Quickshell...'
-  quickshell ipc call config reload
-fi
 
 if [[ -n "$generation_pid" ]] && kill -0 "$generation_pid" > /dev/null 2>&1; then
   notify-send -a 'Set Theme' 'Background tasks running' 'Theme has been applied, but either gtk, icon, or cursor themes are still generating.'
