@@ -2,6 +2,7 @@
 
 noMatugen=0
 lightCurs=0
+noNotify=0
 
 for arg in "$@"; do
   case "$arg" in
@@ -10,6 +11,10 @@ for arg in "$@"; do
       ;;
     --lightCurs)
       lightCurs=1
+      ;;
+    --noNotify)
+      noNotify=1
+      ;;
   esac
 done
 
@@ -24,7 +29,7 @@ PENDING='1'
 # If there is no pending job then we make one
 # If there is no lockfile, we create one
 
-# This system prevents two from running at once.
+# This system prevents two jobs from running at once.
 # If the script is run 1 or more times while a job is running
 # that job will complete then one new job will be started.
 
@@ -41,6 +46,10 @@ if [[ ! -e "$LOCKFILE" ]]; then
   touch "$LOCKFILE"
 fi
 
+if [[ ! "$noNotify" -eq 1 ]]; then
+  notify-send -a 'Material Theme Generation' 'Starting generation' 'Generating material GTK, icon, and cursor themes.'
+fi
+
 "$HOME"/Hyprland-Dots/theme_srcs/install-gtk.sh material --script > /dev/null 2>&1
 "$HOME"/Hyprland-Dots/theme_srcs/install-icons.sh material --script > /dev/null 2>&1
 
@@ -52,4 +61,8 @@ fi
 "$HOME/Hyprland-Dots/theme_srcs/install-cursors.sh" "$curs" --script --regenerate > /dev/null 2>&1
 
 rm "$LOCKFILE"
+
+if [[ ! "$noNotify" -eq 1 ]]; then
+  notify-send -a 'Material Theme Generation' 'Generation complete' 'GTK, icon, and cursor theme generation has finished.'
+fi
 

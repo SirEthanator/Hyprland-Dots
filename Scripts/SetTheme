@@ -112,12 +112,12 @@ elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
   {
     parent_pid="$pid"
 
-    args=(--noMatugen)
+    args=(--noMatugen --noNotify)
     if [[ "$lightCurs" -eq 1 ]]; then args+=(--lightCurs); fi
     ./GenerateMaterial "${args[@]}"
 
     if ! kill -0 "$parent_pid" > /dev/null 2>&1; then
-      notify-send -a 'Set Theme' 'Generation complete' 'GTK theme, icon, and cursor generation has finished.'
+      notify-send -a 'Set Theme' 'Generation complete' 'GTK, icon, and cursor theme generation has finished.'
     fi
   } &
 
