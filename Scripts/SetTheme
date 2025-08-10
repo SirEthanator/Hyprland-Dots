@@ -233,27 +233,6 @@ ln -s $HOME/.themes/$theme/gtk-4.0/gtk-dark.css $HOME/.config/gtk-4.0
 ln -s $HOME/.themes/$theme/gtk-4.0/gtk.css $HOME/.config/gtk-4.0
 ln -s $HOME/.themes/$theme/gtk-4.0/assets $HOME/.config/gtk-4.0
 
-# Envvars
-if [[ -e $HOME/.config/hypr/envvars.conf ]]; then
-  if grep -q GTK_THEME $HOME/.config/hypr/envvars.conf; then
-    sed -i "s/.*GTK_THEME.*/env = GTK_THEME,$gtk:dark/" $HOME/.config/hypr/envvars.conf
-  else
-    echo "env = GTK_THEME,$gtk:dark" >> $HOME/.config/hypr/envvars.conf
-  fi
-
-  if grep -q HYPRCURSOR_THEME $HOME/.config/hypr/envvars.conf; then
-    sed -i "s/.*HYPRCURSOR_THEME.*/env = HYPRCURSOR_THEME,$cursors/" $HOME/.config/hypr/envvars.conf
-  else
-    echo "env = HYPRCURSOR_THEME,$cursors" >> $HOME/.config/hypr/envvars.conf
-  fi
-
-  if grep -q XCURSOR_THEME $HOME/.config/hypr/envvars.conf; then
-    sed -i "s/.*XCURSOR_THEME.*/env = XCURSOR_THEME,$cursors/" $HOME/.config/hypr/envvars.conf
-  else
-    echo "env = XCURSOR_THEME,$cursors" >> $HOME/.config/hypr/envvars.conf
-  fi
-fi
-
 
 # ==== Kvantum ==== #
 echo 'Setting Kvantum theme...'
