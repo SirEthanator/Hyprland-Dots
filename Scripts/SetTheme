@@ -142,7 +142,13 @@ elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
     parent_pid="$pid"
     "$HOME"/Hyprland-Dots/theme_srcs/install-gtk.sh material --script > /dev/null 2>&1
     "$HOME"/Hyprland-Dots/theme_srcs/install-icons.sh material --script > /dev/null 2>&1
-    "$HOME/Hyprland-Dots/theme_srcs/install-cursors.sh" material --script --regenerate > /dev/null 2>&1
+
+    if [[ "$lightCurs" -eq 1 ]]; then
+      curs='material-light'
+    else
+      curs='material'
+    fi
+    "$HOME/Hyprland-Dots/theme_srcs/install-cursors.sh" "$curs" --script --regenerate > /dev/null 2>&1
 
     if ! kill -0 "$parent_pid" > /dev/null 2>&1; then
       notify-send -a 'Set Theme' 'Generation complete' 'GTK theme, icon, and cursor generation has finished. Reboot may be required for all changes to take effect.'
