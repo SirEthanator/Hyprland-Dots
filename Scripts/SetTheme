@@ -27,9 +27,29 @@ function help() {
   exit "$1"
 }
 
-if [[ "$1" == '-h' || "$1" == '--help' ]]; then
-  help 0
-fi
+noconfirm=0
+noqsreload=0
+
+selected=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+
+shift
+for arg in "$@"; do
+  notify-send "$arg"
+  case "$arg" in
+    --noconfirm)
+      noconfirm=1
+      ;;
+    --noqsreload)
+      noqsreload=1
+      ;;
+    --help)
+      help 0
+      ;;
+    *)
+      help 1
+      ;;
+  esac
+done
 
 prompt() {
   # Syntax: prompt-text default
@@ -41,7 +61,7 @@ prompt() {
   if [[ "$noconfirm" -eq 1 ]]; then
     echo "$default"
   else
-    read -p "$prompt" input
+    read -rp "$prompt" input
     input=$(echo "$input" | tr '[:upper:]' '[:lower:]')
 
     if [[ $input == 'y' || ( -z $input && $default == 'y' ) ]]; then
@@ -55,7 +75,11 @@ prompt() {
   fi
 }
 
-selected=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+if [[ ! "$selected" == 'material' ]]; then
+  changeWall=$(prompt 'Change wallpaper? (y/N) ' 'n')
+fi
+lightCurs=$(prompt 'Enable light cursors? (y/N) ' 'n')
+
 if [[ "$selected" -eq 1 || "$selected" == "everforest" ]]; then
   theme='Everforest'
   gtk='Colloid-Green-Everforest'
@@ -88,8 +112,46 @@ elif [[ "$selected" -eq 3 || "$selected" == "rosepine" ]]; then
   wall="$HOME/Hyprland-Dots/Wallpapers/Rose-Pine/Accent.png"
 elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
   matugen image "$(quickshell ipc call config get desktop wallpaper)" > /dev/null 2>&1 || exit 1
-  "$HOME"/Hyprland-Dots/theme_srcs/install-gtk.sh material --script
-  "$HOME"/Hyprland-Dots/theme_srcs/install-icons.sh material --script
+
+  pid=$$
+  {
+    LOCKFILE="$HOME/.cache/themegen.lck"
+    PENDING='1'
+
+    # If the lockfile exists, we check if another job is already pending
+    # If there is no pending job then we make one
+    # If there is no lockfile, we create one
+
+    # This system prevents two from running at once.
+    # If the script is run 1 or more times while a job is running
+    # that job will complete then one new job will be started.
+
+    if [[ -e "$LOCKFILE" ]]; then
+      if [[ ! $(cat "$LOCKFILE") == "$PENDING" ]]; then
+        echo "$PENDING" > "$LOCKFILE"
+        inotifywait "$LOCKFILE" -e delete > /dev/null 2>&1
+      else
+        exit 0
+      fi
+    fi
+
+    if [[ ! -e "$LOCKFILE" ]]; then
+      touch "$LOCKFILE"
+    fi
+
+    parent_pid="$pid"
+    "$HOME"/Hyprland-Dots/theme_srcs/install-gtk.sh material --script > /dev/null 2>&1
+    "$HOME"/Hyprland-Dots/theme_srcs/install-icons.sh material --script > /dev/null 2>&1
+    "$HOME/Hyprland-Dots/theme_srcs/install-cursors.sh" material --script --regenerate > /dev/null 2>&1
+
+    if ! kill -0 "$parent_pid" > /dev/null 2>&1; then
+      notify-send -a 'Set Theme' 'Generation complete' 'GTK theme, icon, and cursor generation has finished. Reboot may be required for all changes to take effect.'
+    fi
+
+    rm "$LOCKFILE"
+  } &
+
+  generation_pid=$!
 
   . "$HOME/material_colours"
 
@@ -106,26 +168,6 @@ else
   help 1
 fi
 
-noconfirm=0
-noqsreload=0
-
-shift
-for arg in "$@"; do
-  case "$arg" in
-    --noconfirm)
-      noconfirm=1
-      ;;
-    --noqsreload)
-      noqsreload=1
-      ;;
-  esac
-done
-
-if [[ ! "$theme" == 'Material' ]]; then
-  changeWall=$(prompt 'Change wallpaper? (y/N) ' 'n')
-fi
-lightCurs=$(prompt 'Enable light cursors? (y/N) ' 'n')
-
 
 # === Quickshell === #
 echo 'Setting Quickshell theme...'
@@ -133,9 +175,9 @@ if [[ $(quickshell list --all) == "No running instances." ]]; then
   echo "No instances of Quickshell found, launching..."
   quickshell --daemonize > /dev/null 2>&1
 fi
-quickshell ipc call config colours "$quickshell" false > /dev/null 2>&1
+quickshell ipc call config colours "$quickshell" > /dev/null 2>&1
 if [[ "$changeWall" -eq 1 ]]; then
-  quickshell ipc call config wallpaper "$wall" false > /dev/null 2>&1
+  quickshell ipc call config wallpaper "$wall" > /dev/null 2>&1
 fi
 
 
@@ -221,9 +263,13 @@ sed -i "s/.*icon_theme.*/icon_theme=$icons/" $HOME/.config/qt6ct/qt6ct.conf
 
 # ==== Kitty ==== #
 echo 'Setting Kitty theme...'
-
-cd "$HOME"/.config/kitty
-ln -s ./"$theme".conf ./Colours.conf
+(
+  cd "$HOME"/.config/kitty || exit 1
+  if [[ -e ./Colours.conf || -L ./Colours.conf ]]; then
+    rm ./Colours.conf
+  fi
+  ln -s ./"$theme".conf ./Colours.conf
+)
 
 
 # ==== Macchina ==== #
@@ -272,6 +318,11 @@ if [[ "$noqsreload" -eq 0 ]]; then
   quickshell ipc call config reload
 fi
 
-echo 'Done! Reboot may be required for some changes to take effect.'
-exit 0
+if [[ -n "$generation_pid" ]] && kill -0 "$generation_pid" > /dev/null 2>&1; then
+  notify-send -a 'Set Theme' 'Background tasks running' 'Theme has been applied, but either gtk, icon, or cursor themes are still generating.'
+else
+  notify-send -a 'Set Theme' 'Done!' 'Theme has been applied.'
+fi
+
+echo 'Done!'
 

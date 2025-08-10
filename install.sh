@@ -164,8 +164,10 @@ git clone https://github.com/SirEthanator/Hyprland-Dots.git "$HOME"/Hyprland-Dot
   {
     echo 'Installing GTK themes...'
     ./theme_srcs/install-gtk.sh --script
-    echo 'Installing Icon themes...'
+    echo 'Installing icon themes...'
     ./theme_srcs/install-icons.sh --script
+    echo 'Installing cursor themes...'
+    ./theme_srcs/install-cursors.sh --script --regenerate
     echo 'Applying Everforest...'
     ./Scripts/SetTheme everforest
   } || error 'Failed to set up theming'

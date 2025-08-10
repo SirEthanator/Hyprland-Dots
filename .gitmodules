@@ -5,9 +5,12 @@
 [submodule "theme_srcs/gtk"]
 	path = theme_srcs/gtk
 	url = https://github.com/SirEthanator/Colloid-gtk-theme
+  ignore = dirty
 [submodule "theme_srcs/icons"]
 	path = theme_srcs/icons
 	url = https://github.com/SirEthanator/Colloid-icon-theme
+  ignore = dirty
 [submodule "theme_srcs/cursors"]
 	path = theme_srcs/cursors
 	url = https://github.com/SirEthanator/Bibata_Cursor.git
+  ignore = dirty
