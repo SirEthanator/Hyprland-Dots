@@ -31,19 +31,26 @@ noconfirm=0
 selected=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 
 shift
-for arg in "$@"; do
-  notify-send "$arg"
-  case "$arg" in
+while [[ "$#" -gt 0 ]]; do
+  case "$1" in
     --noconfirm)
       noconfirm=1
       ;;
-    --help)
+    -h | --help)
       help 0
+      ;;
+    -w | --wallpaper)
+      shift
+      if [[ -z "$1" ]]; then
+        help 1
+      fi
+      customWall="$1"
       ;;
     *)
       help 1
       ;;
   esac
+  shift
 done
 
 prompt() {
@@ -70,7 +77,7 @@ prompt() {
   fi
 }
 
-if [[ ! "$selected" == 'material' ]]; then
+if [[ ! "$selected" == 'material' && ! "$customWall" ]]; then
   changeWall=$(prompt 'Change wallpaper? (y/N) ' 'n')
 fi
 lightCurs=$(prompt 'Enable light cursors? (y/N) ' 'n')
@@ -106,7 +113,13 @@ elif [[ "$selected" -eq 3 || "$selected" == "rosepine" ]]; then
   accentDim='4E686C'  # 50% dimmed accent
   wall="$HOME/Hyprland-Dots/Wallpapers/Rose-Pine/Accent.png"
 elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
-  matugen image "$(quickshell ipc call config get desktop wallpaper)" > /dev/null 2>&1 || exit 1
+  if [[ -n "$customWall" ]]; then
+    wall="$customWall"
+  else
+    wall="$(quickshell ipc call config get desktop wallpaper)"
+  fi
+
+  matugen image "$wall" > /dev/null 2>&1 || exit 1
 
   pid=$$
   {
@@ -114,7 +127,7 @@ elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
 
     args=(--noMatugen --noNotify)
     if [[ "$lightCurs" -eq 1 ]]; then args+=(--lightCurs); fi
-    ./GenerateMaterial "${args[@]}"
+    "$HOME"/Scripts/GenerateMaterial "${args[@]}"
 
     if ! kill -0 "$parent_pid" > /dev/null 2>&1; then
       notify-send -a 'Set Theme' 'Generation complete' 'GTK, icon, and cursor theme generation has finished.'
@@ -133,7 +146,6 @@ elif [[ "$selected" -eq 3 || "$selected" == "material" ]]; then
   cursorsLight='Bibata-Modern-Material-Light'
   accent="${material_d_primary:1}"
   accentDim="${material_d_outline_var:1}"
-  wall=""
 else
   help 1
 fi
@@ -172,10 +184,10 @@ if [[ ! -d $HOME/.icons ]]; then
   mkdir $HOME/.icons
 fi
 
-echo '[Icon Theme]'       > $HOME/.icons/default/index.theme
-echo 'Name=Default'      >> $HOME/.icons/default/index.theme
-echo "Inherits=$cursors" >> $HOME/.icons/default/index.theme
-echo ''                  >> $HOME/.icons/default/index.theme
+echo '[Icon Theme]'       > "$HOME/.icons/default/index.theme"
+echo 'Name=Default'      >> "$HOME/.icons/default/index.theme"
+echo "Inherits=$cursors" >> "$HOME/.icons/default/index.theme"
+echo ''                  >> "$HOME/.icons/default/index.theme"
 
 hyprctl setcursor $cursors 32 > /dev/null 2>&1
 gsettings set org.gnome.desktop.interface cursor-theme "$cursors"
@@ -193,21 +205,21 @@ if [[ -e "$HOME/.config/gtk-4.0/assets" || -L "$HOME/.config/gtk-4.0/assets" ]];
   rm -rf "$HOME/.config/gtk-4.0/assets"  # -r is in case it's not a symlink already (is a directory)
 fi
 
-ln -s $HOME/.themes/$theme/gtk-4.0/gtk-dark.css $HOME/.config/gtk-4.0
-ln -s $HOME/.themes/$theme/gtk-4.0/gtk.css $HOME/.config/gtk-4.0
-ln -s $HOME/.themes/$theme/gtk-4.0/assets $HOME/.config/gtk-4.0
+ln -s "$HOME/.themes/$theme/gtk-4.0/gtk-dark.css" "$HOME/.config/gtk-4.0"
+ln -s "$HOME/.themes/$theme/gtk-4.0/gtk.css"      "$HOME/.config/gtk-4.0"
+ln -s "$HOME/.themes/$theme/gtk-4.0/assets"       "$HOME/.config/gtk-4.0"
 
 
 # ==== Kvantum ==== #
 echo 'Setting Kvantum theme...'
-echo '[General]'     > $HOME/.config/Kvantum/kvantum.kvconfig
-echo "theme=$theme" >> $HOME/.config/Kvantum/kvantum.kvconfig
+echo '[General]'     > "$HOME/.config/Kvantum/kvantum.kvconfig"
+echo "theme=$theme" >> "$HOME/.config/Kvantum/kvantum.kvconfig"
 
 
 # ==== Qt icons ==== #
 echo 'Setting QT icon theme...'
-sed -i "s/.*icon_theme.*/icon_theme=$icons/" $HOME/.config/qt5ct/qt5ct.conf
-sed -i "s/.*icon_theme.*/icon_theme=$icons/" $HOME/.config/qt6ct/qt6ct.conf
+sed -i "s/.*icon_theme.*/icon_theme=$icons/" "$HOME/.config/qt5ct/qt5ct.conf"
+sed -i "s/.*icon_theme.*/icon_theme=$icons/" "$HOME/.config/qt6ct/qt6ct.conf"
 
 
 # ==== Kitty ==== #
@@ -236,7 +248,7 @@ sed -i "s/.*foreground.*/foreground = '#$accent'/" ~/.config/cava/config
 
 # ==== Neovim ==== #
 if [[ -d $HOME/.config/nvim/lua/plugins ]]; then
-  cd $HOME/.config/nvim/lua/plugins
+  cd "$HOME"/.config/nvim/lua/plugins || exit 1
   if [[ -e ./Theme.lua ]]; then
     rm ./Theme.lua
   fi
@@ -255,6 +267,10 @@ sed -i "s/.*col.inactive_border.*/    col.inactive_border = 0xff$accentDim/" ~/.
 # ==== Finish up ==== #
 echo 'Reloading Kitty...'
 killall -SIGUSR1 kitty > /dev/null 2>&1  # Output gets deleted
+
+echo 'Reloading Quickshell...'
+sleep 0.1  # Gives Quickshell some time to set wallpaper properly
+quickshell ipc call config reload
 
 echo 'Reloading Cava...'
 killall -SIGUSR1 cava > /dev/null 2>&1
