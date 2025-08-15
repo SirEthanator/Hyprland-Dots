@@ -1,4 +1,7 @@
 .config/hypr/hyprland/theming.conf
+.config/hypr/envvars.conf
+.config/hypr/hyprland/custom.conf
+.config/hypr/hyprland/display.conf
 
 .config/cava/shaders
 

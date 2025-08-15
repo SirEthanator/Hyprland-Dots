@@ -171,6 +171,12 @@ git clone https://github.com/SirEthanator/Hyprland-Dots.git "$HOME"/Hyprland-Dot
     echo 'Applying Everforest...'
     ./Scripts/SetTheme everforest
   } || error 'Failed to set up theming'
+
+  cd ./.config/hypr || error 'Failed to cd into .config/hypr'
+  echo '# Place your environment variables in here' > ./envvars.conf
+  cd ./hyprland || error 'Failed to cd into .config/hypr/hyprland'
+  echo '# Place your display configuration in here' > ./display.conf
+  echo '# Place custom configuration in here' > ./custom.conf
 )
 
 {
