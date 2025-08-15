@@ -4,6 +4,7 @@
 .config/hypr/hyprland/display.conf
 
 .config/cava/shaders
+.config/cava/config
 
 .config/nvim/lazy-lock.json
 .config/nvim/lazyvim.json
