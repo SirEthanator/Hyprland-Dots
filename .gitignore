@@ -1,0 +1,11 @@
+.config/cava/shaders
+
+.config/nvim/lazy-lock.json
+.config/nvim/lazyvim.json
+.config/nvim/lua/plugins/Theme.lua
+
+.config/kitty/Material.conf
+.config/kitty/Colours.conf
+
+**/*bak
+
