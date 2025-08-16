@@ -277,10 +277,6 @@ EOL
 echo 'Reloading Kitty...'
 killall -SIGUSR1 kitty > /dev/null 2>&1  # Output gets deleted
 
-echo 'Reloading Quickshell...'
-sleep 0.1  # Gives Quickshell some time to set wallpaper properly
-quickshell ipc call config reload
-
 echo 'Reloading Cava...'
 killall -SIGUSR1 cava > /dev/null 2>&1
 

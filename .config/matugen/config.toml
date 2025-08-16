@@ -13,7 +13,7 @@ orange         = "#FF8000"
 
 [templates.quickshell]
 input_path = 'templates/quickshell'
-output_path = '~/.config/quickshell/components/Material.qml'
+output_path = '~/.config/quickshell/utils/material.json'
 
 [templates.kitty]
 input_path = 'templates/kitty'
