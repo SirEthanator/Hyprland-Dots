@@ -2,6 +2,7 @@ assets
 README.md
 .git
 .gitignore
+theme_srcs
 Wallpapers
 LICENSE
 install.sh
