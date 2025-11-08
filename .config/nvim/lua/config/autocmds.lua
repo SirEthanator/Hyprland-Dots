@@ -44,6 +44,16 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       undercurl = false,
       sp = vim.api.nvim_get_hl(0, { name = "SpellRare" }).fg
     })
+
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"mdx"},
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.breakindent = true
   end,
 })
 

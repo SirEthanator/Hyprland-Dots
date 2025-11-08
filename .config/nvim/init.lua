@@ -4,7 +4,7 @@ require("config.lazy")
 -- Disable auto format
 vim.g.autoformat = false
 
--- Enable pyright + qmlls
+-- Enable LSPs
 vim.lsp.enable('pyright')
 vim.lsp.enable('qmlls')
 
