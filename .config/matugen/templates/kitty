@@ -34,29 +34,29 @@ color8    {{colors.surface_bright.dark.hex}}
 
 # red
 color1    {{colors.red.dark.hex}}
-color9    {{colors.red.dark.hex | set_lightness: 5.0}}
+color9    {{colors.red.dark.hex | lighten: 5.0}}
 
 # green
 color2    {{colors.green.dark.hex}}
-color10   {{colors.green.dark.hex | set_lightness: 5.0}}
+color10   {{colors.green.dark.hex | lighten: 5.0}}
 
 # yellow
 color3    {{colors.yellow.dark.hex}}
-color11   {{colors.yellow.dark.hex | set_lightness: 5.0}}
+color11   {{colors.yellow.dark.hex | lighten: 5.0}}
 
 # blue
 color4    {{colors.blue.dark.hex}}
-color12   {{colors.blue.dark.hex | set_lightness: 5.0}}
+color12   {{colors.blue.dark.hex | lighten: 5.0}}
 
 # magenta
 color5    {{colors.magenta.dark.hex}}
-color13   {{colors.magenta.dark.hex | set_lightness: 5.0}}
+color13   {{colors.magenta.dark.hex | lighten: 5.0}}
 
 # cyan
 color6    {{colors.cyan.dark.hex}}
-color14   {{colors.cyan.dark.hex | set_lightness: 5.0}}
+color14   {{colors.cyan.dark.hex | lighten: 5.0}}
 
 # white
 color7    {{colors.on_surface.dark.hex}}
-color15   {{colors.on_surface.dark.hex | set_lightness: 5.0}}
+color15   {{colors.on_surface.dark.hex | lighten: 5.0}}
 
