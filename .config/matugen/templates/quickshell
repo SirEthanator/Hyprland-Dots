@@ -11,7 +11,7 @@
   "bgAccent": "{{colors.primary_container.dark.hex}}",
   "bgRed": "{{colors.error_container.dark.hex}}",
   "outline": "{{colors.outline_variant.dark.hex}}",
-  "grey": "{{colors.on_surface.dark.hex | lighten: -40.0}}",
+  "grey": "{{colors.on_surface.dark.hex | lighten: -35.0}}",
   "wsInactive": "{{colors.surface_container_highest.dark.hex}}",
   "red": "{{colors.error.dark.hex}}",
   "warning": "{{colors.yellow.dark.hex}}",
