@@ -1,29 +1,39 @@
 #!/bin/bash
 
+LOCKFILE="$HOME/.cache/themegen.lck"
+PENDING='1' # Contents of lockfile if another job is pending
+
 noMatugen=0
 lightCurs=0
 noNotify=0
 
 for arg in "$@"; do
   case "$arg" in
-    --nomatugen)
-      noMatugen=1
-      ;;
-    --lightCurs)
-      lightCurs=1
-      ;;
-    --noNotify)
-      noNotify=1
-      ;;
+  --noMatugen)
+    noMatugen=1
+    ;;
+  --lightCurs)
+    lightCurs=1
+    ;;
+  --noNotify)
+    noNotify=1
+    ;;
   esac
 done
 
-if [[ ! "$noMatugen" == 1 ]]; then
-  matugen image "$(quickshell ipc call config get desktop wallpaper)" > /dev/null 2>&1 || exit 1
-fi
+cleanup() {
+  if [[ -n "$LOCKFILE" ]] && [[ -f "$LOCKFILE" ]]; then
+    if [[ "$isWaiting" -eq 1 ]]; then
+      echo "" >"$LOCKFILE"
+    else
+      rm "$LOCKFILE"
+    fi
+  fi
+}
 
-LOCKFILE="$HOME/.cache/themegen.lck"
-PENDING='1'
+trap cleanup EXIT
+
+isWaiting=0
 
 # If the lockfile exists, we check if another job is already pending
 # If there is no pending job then we make one
@@ -34,9 +44,12 @@ PENDING='1'
 # that job will complete then one new job will be started.
 
 if [[ -e "$LOCKFILE" ]]; then
-  if [[ ! $(cat "$LOCKFILE") == "$PENDING" ]]; then
-    echo "$PENDING" > "$LOCKFILE"
-    inotifywait "$LOCKFILE" -e delete > /dev/null 2>&1
+  if [[ $(cat "$LOCKFILE") != "$PENDING" ]]; then
+    echo "$PENDING" >"$LOCKFILE"
+    isWaiting=1
+    echo "Another instance is already running, waiting for it to finish..."
+    inotifywait "$LOCKFILE" -e delete >/dev/null 2>&1
+    isWaiting=0
   else
     exit 0
   fi
@@ -46,23 +59,30 @@ if [[ ! -e "$LOCKFILE" ]]; then
   touch "$LOCKFILE"
 fi
 
-if [[ ! "$noNotify" -eq 1 ]]; then
+if [[ "$noNotify" -eq 0 ]]; then
   notify-send -a 'Material Theme Generation' 'Starting generation' 'Generating material GTK, icon, and cursor themes.'
 fi
 
-"$HOME"/Hyprland-Dots/theme_srcs/install-gtk.sh material --script > /dev/null 2>&1
-"$HOME"/Hyprland-Dots/theme_srcs/install-icons.sh material --script > /dev/null 2>&1
+echo "Starting generation..."
+
+if [[ "$noMatugen" -eq 0 ]]; then
+  "$HOME"/Scripts/RunMatugen "$(quickshell ipc call config get desktop wallpaper)"
+fi
+
+"$HOME"/Hyprland-Dots/theme_srcs/install-gtk.sh material --script >/dev/null 2>&1
+"$HOME"/Hyprland-Dots/theme_srcs/install-icons.sh material --script >/dev/null 2>&1
 
 if [[ "$lightCurs" -eq 1 ]]; then
   curs='material-light'
 else
   curs='material'
 fi
-"$HOME/Hyprland-Dots/theme_srcs/install-cursors.sh" "$curs" --script --regenerate > /dev/null 2>&1
+"$HOME/Hyprland-Dots/theme_srcs/install-cursors.sh" "$curs" --script --regenerate >/dev/null 2>&1
 
-rm "$LOCKFILE"
-
-if [[ ! "$noNotify" -eq 1 ]]; then
+# If there is a pending job, do not send to notification, as the new one
+# will instantly send another, which is annoying.
+if [[ $(cat "$LOCKFILE") != "$PENDING" ]] && [[ "$noNotify" -eq 0 ]]; then
   notify-send -a 'Material Theme Generation' 'Generation complete' 'GTK, icon, and cursor theme generation has finished.'
 fi
 
+echo "Done!"

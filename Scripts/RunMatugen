@@ -1,0 +1,43 @@
+#!/bin/bash
+
+cleanup() {
+  if [[ -n "$tmpImage" ]] && [[ -f "$tmpImage" ]]; then
+    rm "$tmpImage"
+  fi
+}
+
+trap cleanup EXIT
+
+error() {
+  printf "\033[0;31mERROR: \033[0m%s\n" "$1"
+  exit 1
+}
+
+warn() {
+  printf "\033[0;33mWARN: \033[0m%s\n" "$1"
+}
+
+wall="$1"
+
+if [[ -z "$wall" ]]; then
+  echo "Syntax: RunMatugen <wallpaper_path>"
+  error "Please provide a wallpaper"
+fi
+
+wallMIME=$(file --brief --mime-type "$wall")
+
+if [[ "$wallMIME" == video/* ]]; then
+  warn "Detected a video wallpaper. The first frame will be used to generate material colours."
+
+  tmpImage=$(mktemp /tmp/wallpaper_frame_XXXXXX.png)
+
+  if ffmpeg -y -i "$wall" -vframes 1 -f image2 "$tmpImage" >/dev/null 2>&1; then
+    matugenImg="$tmpImage"
+  else
+    error "Failed to extract first frame of wallpaper."
+  fi
+else
+  matugenImg="$wall"
+fi
+
+matugen image "$matugenImg" >/dev/null 2>&1 || error "Failed to generate material colours"
