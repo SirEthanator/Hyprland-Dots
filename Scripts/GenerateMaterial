@@ -69,8 +69,8 @@ if [[ "$noMatugen" -eq 0 ]]; then
   "$HOME"/Scripts/RunMatugen "$(quickshell ipc call config get desktop wallpaper)"
 fi
 
-"$HOME"/Hyprland-Dots/theme_srcs/install-gtk.sh material --script >/dev/null 2>&1
 "$HOME"/Hyprland-Dots/theme_srcs/install-icons.sh material --script >/dev/null 2>&1
+"$HOME"/Hyprland-Dots/theme_srcs/install-gtk.sh material --script >/dev/null 2>&1
 
 if [[ "$lightCurs" -eq 1 ]]; then
   curs='material-light'
