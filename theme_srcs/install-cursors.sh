@@ -26,19 +26,20 @@ regen=0
 
 for arg in "$@"; do
   case "$arg" in
-    --script)
-      noprompts=1
-      ;;
-    --regenerate)
-      regen=1
-      ;;
-    *)
-      echo "Invalid argument: $arg"
-      exit 1
+  --script | --noprompts)
+    noprompts=1
+    ;;
+  --regenerate)
+    regen=1
+    ;;
+  *)
+    echo "Invalid argument: $arg"
+    exit 1
+    ;;
   esac
 done
 
-if [[ ! "$noprompts" -eq 1 ]]; then
+if [[ "$noprompts" -eq 0 ]]; then
   read -rp "Backup existing cursors? This will overwrite any existing backups. (y/N) " backup
   backup=$(echo "$backup" | tr '[:upper:]' '[:lower:]')
 else
@@ -46,7 +47,6 @@ else
 fi
 
 echo "Installing..."
-cd "$ROOT/themes" || exit 1
 
 if [[ "$backup" == 'y' ]]; then
   rm -rf "$BACKUP_DIR"
@@ -54,7 +54,6 @@ if [[ "$backup" == 'y' ]]; then
 fi
 
 for key in "${iter[@]}"; do
-  pwd
   if [[ "$regen" -eq 1 ]]; then
     "$ROOT"/generate.sh "${themes[$key]}"
   fi
@@ -64,11 +63,10 @@ for key in "${iter[@]}"; do
     if [[ "$backup" == 'y' ]]; then
       mv "${DEST_DIR}/${name}" "$BACKUP_DIR" || exit 1
     else
-      rm -rf "${DEST_DIR:?}/${name:?}"
+      rm -rf "${DEST_DIR}/${name:?}"
     fi
   fi
-  cp -r "$name" "$DEST_DIR"
+  cp -r "${ROOT}/themes/${name}" "$DEST_DIR"
 done
 
 echo 'Installation complete!'
-
